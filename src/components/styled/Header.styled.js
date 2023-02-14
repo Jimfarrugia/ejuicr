@@ -3,7 +3,7 @@ import { colors } from "../../constants";
 
 export const HeaderStyled = styled.header`
   background: ${colors.black};
-  padding: 1em 0.5em;
+  padding: 1em 1em;
 
   & > .container {
     display: flex;
