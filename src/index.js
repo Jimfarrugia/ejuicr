@@ -1,8 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
 import App from "./App";
+import Layout from "./components/Layout";
+import About from "./components/About";
+import Help from "./components/Help";
+import Contribute from "./components/Contribute";
 import GlobalStyles from "./styles/GlobalStyles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -13,6 +16,9 @@ root.render(
       <Layout>
         <Routes>
           <Route exact path="/" element={<App />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/contribute" element={<Contribute />} />
         </Routes>
       </Layout>
     </Router>
