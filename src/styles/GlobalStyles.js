@@ -9,6 +9,15 @@ const GlobalStyles = createGlobalStyle`
     background: ${colors.grayDark};
     font-family: sans-serif;
   }
+
+  main {
+    padding: 1em;
+  }
+
+  a {
+    text-decoration: none;
+    color: ${colors.cyan}
+  }
 `;
 
 export default GlobalStyles;
