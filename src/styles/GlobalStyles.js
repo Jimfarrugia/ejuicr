@@ -34,10 +34,19 @@ const GlobalStyles = createGlobalStyle`
   h3 {
     font-family: "Bebas Neue";
     font-size: 2rem;
-    margin: 0;
+    margin: 0 auto;
+    width: fit-content;
     background: ${colors.yellowPink};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  h5 {
+    font-size: 1.125rem;
+    color: ${colors.blue};
+    margin: 0;
+    line-height: 35px;
+    vertical-align: middle;
   }
 
   button {
@@ -55,11 +64,91 @@ const GlobalStyles = createGlobalStyle`
     &:active {
       background: ${colors.pink};
     }
+
     &.red {
       background: ${colors.red};
     }
     &.green {
       background: ${colors.cyanGreen};
+    }
+  }
+
+  /* hide default up/down buttons (Chrome, Safari, Edge, Opera) */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .input-border {
+    display: inline-block;
+    background: ${colors.purpleCyan};
+    border-radius: 3px;
+    padding: 2px;
+
+    &:focus-within {
+      background: ${colors.pinkPurple};
+    }
+  }
+
+  input {
+    background: ${colors.black};
+    color: ${colors.white};
+    border: none;
+    border-radius: 3px;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield; /* hide default up/down buttons */
+    width: 33px;
+    height: 29px;
+    padding: 1px;
+    text-align: center;
+
+    &.wide {
+      width: 43px;
+    }
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5em;
+
+    & span {
+      line-height: 35px;
+
+      &.base-ingredient {
+        padding-left: 42px;
+      }
+    }
+
+    & > div {
+      width: fit-content;
+    }
+
+    & .label-left {
+      margin: 0 7px 0 0;
+    }
+
+    & .label-right {
+      margin: 0 0 0 7px;
+    }
+
+    & .label-between {
+      margin: 0 7px;
+    }
+  }
+
+  .calculator {
+    & h3 {
+      margin-top: 1em;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
   }
 `;

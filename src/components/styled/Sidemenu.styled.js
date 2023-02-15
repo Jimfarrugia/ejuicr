@@ -44,7 +44,6 @@ export const SidemenuStyled = styled.nav`
 
   & h3 {
     margin: 0.5em auto;
-    width: fit-content;
   }
 
   & p {

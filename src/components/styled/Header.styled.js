@@ -4,6 +4,7 @@ import { colors } from "../../constants";
 export const HeaderStyled = styled.header`
   background: ${colors.black};
   padding: 1em 1em;
+  margin-bottom: 1em;
 
   & > .container {
     display: flex;
