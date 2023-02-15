@@ -1,16 +1,16 @@
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import { HeaderStyled, MenuButton } from "./styled/Header.styled";
 
-const Header = () => {
+const Header = ({ toggleMenu }) => {
   return (
-    <HeaderStyled data-testid="Header">
+    <HeaderStyled>
       <div className="container">
         <Link to="/">
           <img src="logo.svg" alt="ejuicr logo" />
         </Link>
-        <MenuButton type="button" title="menu">
+        <MenuButton type="button" title="menu" onClick={toggleMenu}>
           <FontAwesomeIcon icon={faBars} />
         </MenuButton>
       </div>
