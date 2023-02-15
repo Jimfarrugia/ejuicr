@@ -22,7 +22,7 @@ export const FooterStyled = styled.footer`
   }
 
   & li {
-    margin-bottom: 0.75em;
+    margin-bottom: 1em;
 
     &:last-child {
       margin: 0;

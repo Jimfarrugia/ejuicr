@@ -18,6 +18,14 @@ const GlobalStyles = createGlobalStyle`
     text-decoration: none;
     color: ${colors.cyan}
   }
+
+  hr {
+    margin: 1em 0;
+    border-top: 0.125rem dotted ${colors.gray};
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
 `;
 
 export default GlobalStyles;

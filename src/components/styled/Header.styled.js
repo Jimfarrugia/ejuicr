@@ -18,4 +18,5 @@ export const MenuButton = styled.button`
   margin: 0;
   background: none;
   border: none;
+  cursor: pointer;
 `;
