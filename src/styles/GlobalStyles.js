@@ -26,6 +26,16 @@ const GlobalStyles = createGlobalStyle`
     border-left: none;
     border-right: none;
   }
+
+  h3 {
+    font-family: "Bebas Neue";
+    font-size: 2rem;
+    margin: 0;
+    background: ${colors.yellowPink};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+  }
 `;
 
 export default GlobalStyles;

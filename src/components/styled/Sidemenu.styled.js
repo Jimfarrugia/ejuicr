@@ -40,4 +40,12 @@ export const SidemenuStyled = styled.nav`
   & li {
     margin-bottom: 1em;
   }
+
+  h3 {
+    margin: 0.5em 0;
+  }
+
+  & p {
+    margin: 0 0 1em;
+  }
 `;
