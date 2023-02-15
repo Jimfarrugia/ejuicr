@@ -8,7 +8,9 @@ export const SidemenuStyled = styled.nav`
   height: calc(100% - 2em);
   text-align: center;
 
-  & .align-right {
+  & .controls {
+    display: flex;
+    justify-content: space-between;
     text-align: right;
 
     & svg {
