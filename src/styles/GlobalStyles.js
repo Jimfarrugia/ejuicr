@@ -14,9 +14,13 @@ const GlobalStyles = createGlobalStyle`
     padding: 1em;
   }
 
-  a {
+  a:link, a:visited {
     text-decoration: none;
-    color: ${colors.cyan}
+    color: ${colors.cyan};
+  }
+
+  a:active, a:hover {
+    color: ${colors.pink};
   }
 
   hr {
@@ -34,7 +38,29 @@ const GlobalStyles = createGlobalStyle`
     background: ${colors.yellowPink};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
 
+  button {
+    background: ${colors.purpleCyan};
+    color: ${colors.black};
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    padding: 0.5em 0.75em;
+    cursor: pointer;
+    
+    &:hover {
+      background: ${colors.pinkPurple};
+    }
+    &:active {
+      background: ${colors.pink};
+    }
+    &.red {
+      background: ${colors.red};
+    }
+    &.green {
+      background: ${colors.cyanGreen};
+    }
   }
 `;
 

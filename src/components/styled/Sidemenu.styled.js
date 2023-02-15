@@ -13,10 +13,11 @@ export const SidemenuStyled = styled.nav`
     justify-content: space-between;
     text-align: right;
 
-    & svg {
+    & button {
       font-size: 1.35rem;
       color: ${colors.cyan};
-      cursor: pointer;
+      background: none;
+      padding: 0;
     }
   }
 
@@ -26,7 +27,7 @@ export const SidemenuStyled = styled.nav`
     width: fit-content;
   }
 
-  hr {
+  & hr {
     margin: 2em 0;
   }
 
@@ -41,12 +42,18 @@ export const SidemenuStyled = styled.nav`
     margin-bottom: 1em;
   }
 
-  h3 {
+  & h3 {
     margin: 0.5em auto;
     width: fit-content;
   }
 
   & p {
-    margin: 0 0 1em;
+    margin: 0 0 1.5em;
+
+    & button > svg {
+      margin-right: 0.5em;
+      margin-bottom: -0.0725em;
+      font-size: 1rem;
+    }
   }
 `;
