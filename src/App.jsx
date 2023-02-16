@@ -1,5 +1,8 @@
 import NumberControls from "./components/NumberControls";
 import ConfigButton from "./components/ConfigButton";
+import DeleteButton from "./components/DeleteButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   return (
@@ -48,7 +51,7 @@ function App() {
       <div className="row">
         <div>
           <ConfigButton />
-          <span className="label-right">Nic. (50mg, 0/100)</span>
+          <span>Nic. (50mg, 0/100)</span>
         </div>
         <div>
           <span>10%</span>
@@ -89,6 +92,42 @@ function App() {
         <div>
           <span>249.48g</span>
         </div>
+      </div>
+      <hr />
+      <div className="row">
+        <div>
+          <span>66%</span>
+        </div>
+        <div>
+          <span>198mL</span>
+        </div>
+      </div>
+      <div className="row">
+        <div>
+          <ConfigButton />
+          <div className="input-border">
+            <input type="text" />
+          </div>
+        </div>
+        <div>
+          <div className="input-border">
+            <input type="number" />
+          </div>
+          <span className="label-right">%</span>
+        </div>
+        <div>
+          <NumberControls />
+        </div>
+        <div>
+          <DeleteButton />
+        </div>
+      </div>
+      <hr />
+      <div className="row">
+        <button type="button">
+          <FontAwesomeIcon icon={faPlus} />
+          <span>Add Ingredient</span>
+        </button>
       </div>
       <hr />
     </div>

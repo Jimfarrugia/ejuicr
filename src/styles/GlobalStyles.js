@@ -71,6 +71,10 @@ const GlobalStyles = createGlobalStyle`
     &.green {
       background: ${colors.cyanGreen};
     }
+
+    & > span {
+      margin-left: 0.5em;
+    }
   }
 
   /* hide default up/down buttons (Chrome, Safari, Edge, Opera) */
@@ -100,6 +104,13 @@ const GlobalStyles = createGlobalStyle`
     outline: none;
   }
 
+  input[type="text"] {
+    height: 28px;
+    width: 150px;
+    padding: 2px 6px;
+    text-align: left;
+  }
+
   input[type="number"] {
     -moz-appearance: textfield; /* hide default up/down buttons */
     width: 33px;
@@ -117,7 +128,11 @@ const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     padding: 0 0.5em;
 
-    & span {
+    & button {
+      height: 35px;
+    }
+
+    & > div > span {
       line-height: 35px;
 
       &.base-ingredient {
