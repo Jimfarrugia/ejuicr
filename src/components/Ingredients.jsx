@@ -13,6 +13,69 @@ const Ingredients = () => {
   const toggleNicConfigOpen = () => setNicConfigOpen(!nicConfigOpen);
   const toggleFlavorConfigOpen = () => setFlavorConfigOpen(!flavorConfigOpen);
 
+  const NicConfig = () => {
+    return (
+      <div className="config-wrapper">
+        <div className="row">
+          <div>
+            <span>PG/VG ratio</span>
+          </div>
+          <div>
+            <div className="input-border">
+              <input type="number" value="0" />
+            </div>
+            <span className="label-between">/</span>
+            <div className="input-border">
+              <input type="number" value="100" />
+            </div>
+          </div>
+          <div>
+            <NumberControls />
+          </div>
+        </div>
+        <hr />
+        <div className="row">
+          <div>
+            <span>Strength</span>
+          </div>
+          <div>
+            <div className="input-border">
+              <input type="number" value="50" />
+            </div>
+            <span className="label-right">mg/mL</span>
+          </div>
+          <div>
+            <NumberControls />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const FlavorConfig = () => {
+    return (
+      <div className="config-wrapper">
+        <div className="row">
+          <div>
+            <span>PG/VG ratio</span>
+          </div>
+          <div>
+            <div className="input-border">
+              <input type="number" value="0" />
+            </div>
+            <span className="label-between">/</span>
+            <div className="input-border">
+              <input type="number" value="100" />
+            </div>
+          </div>
+          <div>
+            <NumberControls />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <IngredientsStyled>
       <h3>Ingredients</h3>
@@ -32,42 +95,7 @@ const Ingredients = () => {
           <span>12.48g</span>
         </div>
       </div>
-      {nicConfigOpen && (
-        <div className="config-wrapper">
-          <div className="row">
-            <div>
-              <span>PG/VG ratio</span>
-            </div>
-            <div>
-              <div className="input-border">
-                <input type="number" value="0" />
-              </div>
-              <span className="label-between">/</span>
-              <div className="input-border">
-                <input type="number" value="100" />
-              </div>
-            </div>
-            <div>
-              <NumberControls />
-            </div>
-          </div>
-          <hr />
-          <div className="row">
-            <div>
-              <span>Strength</span>
-            </div>
-            <div>
-              <div className="input-border">
-                <input type="number" value="50" />
-              </div>
-              <span className="label-right">mg/mL</span>
-            </div>
-            <div>
-              <NumberControls />
-            </div>
-          </div>
-        </div>
-      )}
+      {nicConfigOpen && <NicConfig />}
       <hr />
       <div className="row">
         <div>
@@ -125,27 +153,7 @@ const Ingredients = () => {
           <DeleteButton />
         </div>
       </div>
-      {flavorConfigOpen && (
-        <div className="config-wrapper">
-          <div className="row">
-            <div>
-              <span>PG/VG ratio</span>
-            </div>
-            <div>
-              <div className="input-border">
-                <input type="number" value="0" />
-              </div>
-              <span className="label-between">/</span>
-              <div className="input-border">
-                <input type="number" value="100" />
-              </div>
-            </div>
-            <div>
-              <NumberControls />
-            </div>
-          </div>
-        </div>
-      )}
+      {flavorConfigOpen && <FlavorConfig />}
       <hr />
       <button type="button" className="add-ingredient-btn">
         <FontAwesomeIcon icon={faPlus} />
