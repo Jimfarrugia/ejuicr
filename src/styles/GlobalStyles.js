@@ -157,16 +157,6 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  .calculator {
-    & h3 {
-      margin-top: 1em;
-
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-  }
-
   .config-wrapper {
     background: ${colors.black};
     margin: 1em 0.5em 0;
