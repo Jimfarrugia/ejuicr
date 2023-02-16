@@ -42,7 +42,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h5 {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: ${colors.blue};
     margin: 0;
     line-height: 35px;
@@ -105,8 +105,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   input[type="text"] {
-    height: 28px;
-    width: 150px;
+    height: 27px;
+    width: calc(100% - 12px);
     padding: 2px 6px;
     text-align: left;
   }
@@ -127,10 +127,6 @@ const GlobalStyles = createGlobalStyle`
     display: flex;
     justify-content: space-between;
     padding: 0 0.5em;
-
-    & button {
-      height: 35px;
-    }
 
     & > div > span {
       line-height: 35px;

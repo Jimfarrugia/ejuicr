@@ -107,23 +107,21 @@ const Ingredients = () => {
           <span>15.62g</span>
         </div>
       </div>
-      <div className="row">
+      <div className="row flavor">
         <div>
           <ConfigButton toggle={toggleFlavorConfigOpen} />
           <div className="input-border">
-            <input type="text" />
+            <input type="text" value="Flavor 1" />
           </div>
         </div>
         <div>
           <div className="input-border">
-            <input type="number" />
+            <input type="number" value="10" />
           </div>
           <span className="label-right">%</span>
         </div>
         <div>
           <NumberControls />
-        </div>
-        <div>
           <DeleteButton />
         </div>
       </div>
@@ -149,12 +147,10 @@ const Ingredients = () => {
         </div>
       )}
       <hr />
-      <div className="row">
-        <button type="button">
-          <FontAwesomeIcon icon={faPlus} />
-          <span>Add Ingredient</span>
-        </button>
-      </div>
+      <button type="button" className="add-ingredient-btn">
+        <FontAwesomeIcon icon={faPlus} />
+        <span>Add Ingredient</span>
+      </button>
       <hr />
     </IngredientsStyled>
   );
