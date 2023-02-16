@@ -166,6 +166,26 @@ const GlobalStyles = createGlobalStyle`
       }
     }
   }
+
+  .config-wrapper {
+    background: ${colors.black};
+    margin: 1em 0.5em 0;
+    border-radius: 3px;
+
+
+    & input {
+      background: ${colors.grayDark};
+    }
+
+    & .row {
+      padding: 1em 2em;
+    }
+
+    & hr {
+      margin: 0 1em;
+    }
+
+  }
 `;
 
 export default GlobalStyles;
