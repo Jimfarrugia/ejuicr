@@ -28,7 +28,8 @@ export const IngredientsStyled = styled.div`
   }
 
   & .row.flavor {
-    grid-template-columns: 4fr 1fr 1fr;
+    grid-template-columns: 4fr 1fr 2fr;
+    grid-gap: 0.5em;
 
     & > div {
       display: flex;
