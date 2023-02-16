@@ -4,14 +4,17 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import ConfigButton from "./ConfigButton";
 import DeleteButton from "./DeleteButton";
 import NumberControls from "./NumberControls";
+import { IngredientsStyled } from "./styled/IngredientsStyled";
 
 const Ingredients = () => {
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
+  const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
 
   const toggleNicConfigOpen = () => setNicConfigOpen(!nicConfigOpen);
+  const toggleFlavorConfigOpen = () => setFlavorConfigOpen(!flavorConfigOpen);
 
   return (
-    <>
+    <IngredientsStyled>
       <h3>Ingredients</h3>
       <hr />
       <div className="row">
@@ -37,11 +40,11 @@ const Ingredients = () => {
             </div>
             <div>
               <div className="input-border">
-                <input type="number" value="30" />
+                <input type="number" value="0" />
               </div>
               <span className="label-between">/</span>
               <div className="input-border">
-                <input type="number" value="70" />
+                <input type="number" value="100" />
               </div>
             </div>
             <div>
@@ -96,17 +99,17 @@ const Ingredients = () => {
         </div>
       </div>
       <hr />
-      <div className="row">
+      <div className="row flavor-results">
         <div>
-          <span>66%</span>
+          <span>15mL</span>
         </div>
         <div>
-          <span>198mL</span>
+          <span>15.62g</span>
         </div>
       </div>
       <div className="row">
         <div>
-          <ConfigButton />
+          <ConfigButton toggle={toggleFlavorConfigOpen} />
           <div className="input-border">
             <input type="text" />
           </div>
@@ -124,6 +127,27 @@ const Ingredients = () => {
           <DeleteButton />
         </div>
       </div>
+      {flavorConfigOpen && (
+        <div className="config-wrapper">
+          <div className="row">
+            <div>
+              <span>PG/VG ratio</span>
+            </div>
+            <div>
+              <div className="input-border">
+                <input type="number" value="0" />
+              </div>
+              <span className="label-between">/</span>
+              <div className="input-border">
+                <input type="number" value="100" />
+              </div>
+            </div>
+            <div>
+              <NumberControls />
+            </div>
+          </div>
+        </div>
+      )}
       <hr />
       <div className="row">
         <button type="button">
@@ -132,7 +156,7 @@ const Ingredients = () => {
         </button>
       </div>
       <hr />
-    </>
+    </IngredientsStyled>
   );
 };
 
