@@ -22,11 +22,11 @@ const Ingredients = () => {
           </div>
           <div>
             <div className="input-border">
-              <input type="number" value="0" />
+              <input type="number" defaultValue="0" />
             </div>
             <span className="label-between">/</span>
             <div className="input-border">
-              <input type="number" value="100" />
+              <input type="number" defaultValue="100" />
             </div>
           </div>
           <div>
@@ -40,7 +40,7 @@ const Ingredients = () => {
           </div>
           <div>
             <div className="input-border">
-              <input type="number" value="50" />
+              <input type="number" defaultValue="50" />
             </div>
             <span className="label-right">mg/mL</span>
           </div>
@@ -61,11 +61,11 @@ const Ingredients = () => {
           </div>
           <div>
             <div className="input-border">
-              <input type="number" value="0" />
+              <input type="number" defaultValue="0" />
             </div>
             <span className="label-between">/</span>
             <div className="input-border">
-              <input type="number" value="100" />
+              <input type="number" defaultValue="100" />
             </div>
           </div>
           <div>
@@ -139,12 +139,12 @@ const Ingredients = () => {
         <div>
           <ConfigButton toggle={toggleFlavorConfigOpen} />
           <div className="input-border">
-            <input type="text" value="Flavor 1" />
+            <input type="text" defaultValue="Flavor 1" />
           </div>
         </div>
         <div>
           <div className="input-border">
-            <input type="number" value="10" />
+            <input type="number" defaultValue="10" />
           </div>
           <span className="label-right">%</span>
         </div>
