@@ -9,6 +9,7 @@ const TargetEjuice = ({
   handleChangeTargetNicStrength,
   targetAmount,
   setTargetAmount,
+  handleChangeTargetAmount,
 }) => {
   return (
     <>
@@ -73,9 +74,9 @@ const TargetEjuice = ({
             <input
               type="number"
               className="wide"
-              value={targetAmount}
+              value={targetAmount.toString()}
               min="0"
-              onChange={(e) => setTargetAmount(e.target.value)}
+              onChange={(e) => handleChangeTargetAmount(e.target.value)}
             />
           </div>
           <span className="label-right">mL</span>
@@ -84,6 +85,7 @@ const TargetEjuice = ({
           value={targetAmount}
           handler={setTargetAmount}
           step={10}
+          min={0}
         />
       </div>
       <hr />

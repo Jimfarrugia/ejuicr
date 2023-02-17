@@ -29,11 +29,23 @@ function App() {
     // Remove leading zeros to allow valid inputs like 0.5
     const strippedValue = value.replace(/^0+(?=\d)/, "");
     // Use parseFloat to validate and normalize the input value
-    const parsedValue = parseFloat(strippedValue);
+    const parsedValue = parseFloat(strippedValue, 10);
     // Check if the parsed value is NaN and update the state accordingly
     isNaN(parsedValue)
       ? setTargetNicStrength(0)
       : setTargetNicStrength(roundToTwoDecimalPlaces(parsedValue));
+  };
+
+  const handleChangeTargetAmount = (value) => {
+    if (value === "" || value < 0) return setTargetAmount(0);
+    // Remove leading zeros to allow valid inputs like 0.5
+    const strippedValue = value.replace(/^0+(?=\d)/, "");
+    // Use parseFloat to validate and normalize the input value
+    const parsedValue = parseFloat(strippedValue, 10);
+    // Check if the parsed value is NaN and update the state accordingly
+    isNaN(parsedValue)
+      ? setTargetAmount(0)
+      : setTargetAmount(roundToTwoDecimalPlaces(parsedValue));
   };
 
   return (
@@ -47,6 +59,7 @@ function App() {
         handleChangeTargetNicStrength={handleChangeTargetNicStrength}
         targetAmount={targetAmount}
         setTargetAmount={setTargetAmount}
+        handleChangeTargetAmount={handleChangeTargetAmount}
       />
       <Ingredients />
     </div>
