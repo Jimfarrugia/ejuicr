@@ -7,6 +7,31 @@ const TargetEjuice = () => {
   const [targetNicStrength, setTargetNicStrength] = useState(6);
   const [targetAmount, setTargetAmount] = useState(150);
 
+  const handleChangeTargetPgVg = (input, ingredient = "pg") => {
+    // enforce min of 0 and max of 100
+    // and change "" to 0 (this can cause a leading zero later)
+    const newValue = +(input > 100
+      ? 100
+      : input < 0
+      ? 0
+      : input === ""
+      ? 0
+      : input);
+
+    //! remove leading zeros from newValue
+    // tried +newValue
+    // tried parseInt(newValue, 10);
+    // tried parseInt(newValue.toString());
+
+    if (ingredient === "vg") {
+      setTargetVg(newValue);
+      setTargetPg(100 - newValue);
+    } else {
+      setTargetPg(newValue);
+      setTargetVg(100 - newValue);
+    }
+  };
+
   return (
     <>
       <h3>Target Ejuice</h3>
@@ -19,7 +44,9 @@ const TargetEjuice = () => {
             <input
               type="number"
               value={targetPg}
-              onChange={(e) => setTargetPg(e.target.value)}
+              min="0"
+              max="100"
+              onChange={(e) => handleChangeTargetPgVg(e.target.value, "pg")}
             />
           </div>
           <span className="label-between">/</span>
@@ -27,11 +54,17 @@ const TargetEjuice = () => {
             <input
               type="number"
               value={targetVg}
-              onChange={(e) => setTargetVg(e.target.value)}
+              min="0"
+              max="100"
+              onChange={(e) => handleChangeTargetPgVg(e.target.value, "vg")}
             />
           </div>
         </div>
-        <NumberControls />
+        <NumberControls
+          value={targetPg}
+          handler={handleChangeTargetPgVg}
+          step={5}
+        />
       </div>
       <hr />
       <div className="row">
@@ -41,6 +74,7 @@ const TargetEjuice = () => {
             <input
               type="number"
               value={targetNicStrength}
+              min="0"
               onChange={(e) => setTargetNicStrength(e.target.value)}
             />
           </div>
@@ -61,6 +95,7 @@ const TargetEjuice = () => {
               type="number"
               className="wide"
               value={targetAmount}
+              min="0"
               onChange={(e) => setTargetAmount(e.target.value)}
             />
           </div>
