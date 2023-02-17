@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
+import { roundToTwoDecimalPlaces } from "./helpers";
 
 function App() {
   const [targetPg, setTargetPg] = useState(30);
@@ -34,7 +35,7 @@ function App() {
     // Check if the parsed value is NaN and update the state accordingly
     isNaN(parsedValue)
       ? setTargetNicStrength(0)
-      : setTargetNicStrength(parsedValue);
+      : setTargetNicStrength(roundToTwoDecimalPlaces(parsedValue));
   };
 
   return (
