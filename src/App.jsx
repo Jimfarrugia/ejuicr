@@ -33,8 +33,8 @@ function App() {
     const parsedValue = parseFloat(strippedValue);
     // Check if the parsed value is NaN and update the state accordingly
     isNaN(parsedValue)
-      ? setTargetNicStrength("0")
-      : setTargetNicStrength(parsedValue.toString());
+      ? setTargetNicStrength(0)
+      : setTargetNicStrength(parsedValue);
   };
 
   return (

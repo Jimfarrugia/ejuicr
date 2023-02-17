@@ -51,7 +51,7 @@ const TargetEjuice = ({
           <div className="input-border">
             <input
               type="number"
-              value={targetNicStrength}
+              value={targetNicStrength.toString()}
               min="0"
               onChange={(e) => handleChangeTargetNicStrength(e.target.value)}
             />
