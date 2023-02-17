@@ -7,11 +7,6 @@ const TargetEjuice = () => {
   const [targetNicStrength, setTargetNicStrength] = useState(6);
   const [targetAmount, setTargetAmount] = useState(150);
 
-  const onChangeTargetPg = (e) => setTargetPg(e.target.value);
-  const onChangeTargetVg = (e) => setTargetVg(e.target.value);
-  const onChangeTargetNicStrength = (e) => setTargetNicStrength(e.target.value);
-  const onChangeTargetAmount = (e) => setTargetAmount(e.target.value);
-
   return (
     <>
       <h3>Target Ejuice</h3>
@@ -21,11 +16,19 @@ const TargetEjuice = () => {
         <div>
           <span className="label-left">PG/VG</span>
           <div className="input-border">
-            <input type="number" value={targetPg} onChange={onChangeTargetPg} />
+            <input
+              type="number"
+              value={targetPg}
+              onChange={(e) => setTargetPg(e.target.value)}
+            />
           </div>
           <span className="label-between">/</span>
           <div className="input-border">
-            <input type="number" value={targetVg} onChange={onChangeTargetVg} />
+            <input
+              type="number"
+              value={targetVg}
+              onChange={(e) => setTargetVg(e.target.value)}
+            />
           </div>
         </div>
         <NumberControls />
@@ -38,12 +41,16 @@ const TargetEjuice = () => {
             <input
               type="number"
               value={targetNicStrength}
-              onChange={onChangeTargetNicStrength}
+              onChange={(e) => setTargetNicStrength(e.target.value)}
             />
           </div>
           <span className="label-right">mg/mL</span>
         </div>
-        <NumberControls />
+        <NumberControls
+          value={targetNicStrength}
+          handler={setTargetNicStrength}
+          step={1}
+        />
       </div>
       <hr />
       <div className="row">
@@ -54,12 +61,16 @@ const TargetEjuice = () => {
               type="number"
               className="wide"
               value={targetAmount}
-              onChange={onChangeTargetAmount}
+              onChange={(e) => setTargetAmount(e.target.value)}
             />
           </div>
           <span className="label-right">mL</span>
         </div>
-        <NumberControls />
+        <NumberControls
+          value={targetAmount}
+          handler={setTargetAmount}
+          step={10}
+        />
       </div>
       <hr />
     </>
