@@ -1,31 +1,15 @@
-import { useState } from "react";
 import NumberControls from "./NumberControls";
 
-const TargetEjuice = () => {
-  const [targetPg, setTargetPg] = useState(30);
-  const [targetVg, setTargetVg] = useState(70);
-  const [targetNicStrength, setTargetNicStrength] = useState(6);
-  const [targetAmount, setTargetAmount] = useState(150);
-
-  const handleChangeTargetPgVg = (input, ingredient = "pg") => {
-    // enforce min 0 / max 100 and change "" to 0
-    const newValue = +(input > 100
-      ? 100
-      : input < 0
-      ? 0
-      : input === ""
-      ? 0
-      : input);
-
-    if (ingredient === "vg") {
-      setTargetVg(newValue);
-      setTargetPg(100 - newValue);
-    } else {
-      setTargetPg(newValue);
-      setTargetVg(100 - newValue);
-    }
-  };
-
+const TargetEjuice = ({
+  targetPg,
+  targetVg,
+  handleChangeTargetPgVg,
+  targetNicStrength,
+  setTargetNicStrength,
+  handleChangeTargetNicStrength,
+  targetAmount,
+  setTargetAmount,
+}) => {
   return (
     <>
       <h3>Target Ejuice</h3>
@@ -69,7 +53,7 @@ const TargetEjuice = () => {
               type="number"
               value={targetNicStrength}
               min="0"
-              onChange={(e) => setTargetNicStrength(e.target.value)}
+              onChange={(e) => handleChangeTargetNicStrength(e.target.value)}
             />
           </div>
           <span className="label-right">mg/mL</span>
@@ -78,6 +62,7 @@ const TargetEjuice = () => {
           value={targetNicStrength}
           handler={setTargetNicStrength}
           step={1}
+          min={0}
         />
       </div>
       <hr />
