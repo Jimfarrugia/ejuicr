@@ -10,12 +10,10 @@ function App() {
   const [targetAmount, setTargetAmount] = useState(150);
 
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
-    // enforce min 0 / max 100 and change "" to 0
-    const newValue = +(value > 100
-      ? 100
-      : value < 0 || value === ""
-      ? 0
-      : value);
+    // enforce min 0 / max 100, change "" to 0 and force integer values
+    const newValue = Math.round(
+      value > 100 ? 100 : value < 0 || value === "" ? 0 : value
+    );
 
     if (ingredient === "vg") {
       setTargetVg(newValue);
