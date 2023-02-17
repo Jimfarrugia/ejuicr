@@ -8,8 +8,7 @@ const TargetEjuice = () => {
   const [targetAmount, setTargetAmount] = useState(150);
 
   const handleChangeTargetPgVg = (input, ingredient = "pg") => {
-    // enforce min of 0 and max of 100
-    // and change "" to 0 (this can cause a leading zero later)
+    // enforce min 0 / max 100 and change "" to 0
     const newValue = +(input > 100
       ? 100
       : input < 0
@@ -17,11 +16,6 @@ const TargetEjuice = () => {
       : input === ""
       ? 0
       : input);
-
-    //! remove leading zeros from newValue
-    // tried +newValue
-    // tried parseInt(newValue, 10);
-    // tried parseInt(newValue.toString());
 
     if (ingredient === "vg") {
       setTargetVg(newValue);
@@ -43,7 +37,7 @@ const TargetEjuice = () => {
           <div className="input-border">
             <input
               type="number"
-              value={targetPg}
+              value={parseFloat(targetPg, 10).toString()}
               min="0"
               max="100"
               onChange={(e) => handleChangeTargetPgVg(e.target.value, "pg")}
@@ -53,7 +47,7 @@ const TargetEjuice = () => {
           <div className="input-border">
             <input
               type="number"
-              value={targetVg}
+              value={parseFloat(targetVg, 10).toString()}
               min="0"
               max="100"
               onChange={(e) => handleChangeTargetPgVg(e.target.value, "vg")}
