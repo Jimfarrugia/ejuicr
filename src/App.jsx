@@ -13,6 +13,14 @@ function App() {
     pg: 100,
     vg: 0,
   });
+  const [flavors, setFlavors] = useState([
+    {
+      name: "Flavor 1",
+      pg: 100,
+      vg: 0,
+      percentage: 10,
+    },
+  ]);
 
   const parseNumberInput = (value) => {
     // Remove leading zeros to allow valid inputs like 0.5
@@ -38,11 +46,13 @@ function App() {
   };
 
   const handleChangeTargetNicStrength = (value) => {
+    if (value < 0) return setTargetNicStrength(0);
     const parsedValue = parseNumberInput(value);
     setTargetNicStrength(roundToTwoDecimalPlaces(parsedValue));
   };
 
   const handleChangeTargetAmount = (value) => {
+    if (value < 0) return setTargetNicStrength(0);
     const parsedValue = parseNumberInput(value);
     setTargetAmount(roundToTwoDecimalPlaces(parsedValue));
   };
@@ -68,9 +78,30 @@ function App() {
   };
 
   const handleChangeNicConfigStrength = (value) => {
+    if (value < 0) return setNicConfig({ ...nicConfig, strength: 0 });
     const parsedValue = parseNumberInput(value);
     const roundedValue = Math.round(parsedValue);
     setNicConfig({ ...nicConfig, strength: roundedValue });
+  };
+
+  const handleChangeFlavorName = (value) => {
+    const updatedFlavors = [...flavors];
+    updatedFlavors[0].name = value;
+    setFlavors(updatedFlavors);
+  };
+
+  const handleChangeFlavorPercentage = (value) => {
+    const updatedFlavors = [...flavors];
+    const parsedValue = parseNumberInput(value);
+    updatedFlavors[0].percentage =
+      parsedValue < 0 ? 0 : roundToTwoDecimalPlaces(parsedValue);
+    setFlavors(updatedFlavors);
+  };
+
+  const handleRemoveFlavor = (index) => {
+    const updatedFlavors = [...flavors];
+    updatedFlavors.splice(index, 1);
+    setFlavors(updatedFlavors);
   };
 
   return (
@@ -91,6 +122,10 @@ function App() {
         setNicConfig={setNicConfig}
         handleChangeNicConfigStrength={handleChangeNicConfigStrength}
         handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
+        flavors={flavors}
+        handleChangeFlavorName={handleChangeFlavorName}
+        handleChangeFlavorPercentage={handleChangeFlavorPercentage}
+        handleRemoveFlavor={handleRemoveFlavor}
       />
     </div>
   );

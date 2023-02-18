@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { DeleteButtonStyled } from "./styled/DeleteButton.styled";
 
-const DeleteButton = () => {
+const DeleteButton = ({ index, handler }) => {
   return (
-    <DeleteButtonStyled>
+    <DeleteButtonStyled onClick={() => handler(index)}>
       <FontAwesomeIcon icon={faTrash} />
     </DeleteButtonStyled>
   );

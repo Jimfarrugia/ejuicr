@@ -13,6 +13,10 @@ const Ingredients = ({
   setNicConfig,
   handleChangeNicConfigStrength,
   handleChangeNicConfigPgVg,
+  flavors,
+  handleChangeFlavorName,
+  handleChangeFlavorPercentage,
+  handleRemoveFlavor,
 }) => {
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
   const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
@@ -86,26 +90,44 @@ const Ingredients = ({
           <span>15.62g</span>
         </div>
       </div>
+      {/* Flavor Section */}
       <div className="row flavor">
         <div>
           <ConfigButton toggle={toggleFlavorConfigOpen} />
           <div className="input-border">
-            <input type="text" defaultValue="Flavor 1" />
+            <input
+              type="text"
+              maxLength="60"
+              value={flavors[0].name}
+              onChange={(e) => handleChangeFlavorName(e.target.value)}
+            />
           </div>
         </div>
         <div>
           <div className="input-border">
-            <input type="number" defaultValue="10" />
+            <input
+              type="number"
+              value={flavors[0].percentage.toString()}
+              min="0"
+              max="100"
+              onChange={(e) => handleChangeFlavorPercentage(e.target.value)}
+            />
           </div>
           <span className="label-right">%</span>
         </div>
         <div>
-          <NumberControls />
-          <DeleteButton />
+          <NumberControls
+            value={flavors[0].percentage}
+            handler={handleChangeFlavorPercentage}
+            step={0.5}
+            min={0}
+          />
+          <DeleteButton index={0} handler={handleRemoveFlavor} />
         </div>
       </div>
       {flavorConfigOpen && <FlavorConfig />}
       <hr />
+      {/* /Flavor Section */}
       <button type="button" className="add-ingredient-btn">
         <FontAwesomeIcon icon={faPlus} />
         <span>Add Ingredient</span>
