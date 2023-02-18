@@ -31,17 +31,21 @@ function App() {
     return isNaN(parsedValue) ? 0 : parsedValue;
   };
 
-  const handleChangeTargetPgVg = (value, ingredient = "pg") => {
+  const validatePgVgValue = (value) => {
     // enforce min 0 / max 100, change "" to 0 and force integer values
-    const newValue = Math.round(
+    return Math.round(
       value > 100 ? 100 : value < 0 || value === "" ? 0 : value
     );
+  };
+
+  const handleChangeTargetPgVg = (value, ingredient = "pg") => {
+    const validatedValue = validatePgVgValue(value);
     if (ingredient === "vg") {
-      setTargetVg(newValue);
-      setTargetPg(100 - newValue);
+      setTargetVg(validatedValue);
+      setTargetPg(100 - validatedValue);
     } else {
-      setTargetPg(newValue);
-      setTargetVg(100 - newValue);
+      setTargetPg(validatedValue);
+      setTargetVg(100 - validatedValue);
     }
   };
 
@@ -58,21 +62,18 @@ function App() {
   };
 
   const handleChangeNicConfigPgVg = (value, ingredient = "pg") => {
-    // enforce min 0 / max 100, change "" to 0 and force integer values
-    const newValue = Math.round(
-      value > 100 ? 100 : value < 0 || value === "" ? 0 : value
-    );
+    const validatedValue = validatePgVgValue(value);
     if (ingredient === "vg") {
       setNicConfig({
         ...nicConfig,
-        pg: 100 - newValue,
-        vg: newValue,
+        pg: 100 - validatedValue,
+        vg: validatedValue,
       });
     } else {
       setNicConfig({
         ...nicConfig,
-        pg: newValue,
-        vg: 100 - newValue,
+        pg: validatedValue,
+        vg: 100 - validatedValue,
       });
     }
   };
@@ -99,18 +100,15 @@ function App() {
   };
 
   const handleChangeFlavorPgVg = (index, value, ingredient = "pg") => {
-    // enforce min 0 / max 100, change "" to 0 and force integer values
-    const newValue = Math.round(
-      value > 100 ? 100 : value < 0 || value === "" ? 0 : value
-    );
+    const validatedValue = validatePgVgValue(value);
     const updatedFlavors = [...flavors];
     if (ingredient === "vg") {
-      updatedFlavors[index].vg = newValue;
-      updatedFlavors[index].pg = 100 - newValue;
+      updatedFlavors[index].vg = validatedValue;
+      updatedFlavors[index].pg = 100 - validatedValue;
       setFlavors(updatedFlavors);
     } else {
-      updatedFlavors[index].pg = newValue;
-      updatedFlavors[index].vg = 100 - newValue;
+      updatedFlavors[index].pg = validatedValue;
+      updatedFlavors[index].vg = 100 - validatedValue;
       setFlavors(updatedFlavors);
     }
   };
