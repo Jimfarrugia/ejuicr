@@ -4,13 +4,20 @@ import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { roundToTwoDecimalPlaces } from "../helpers";
 import { NumberControlsStyled } from "./styled/NumberControls.styled";
 
-const NumberControls = ({ value, handler, step, min }) => {
-  const increment = () => handler(roundToTwoDecimalPlaces(+value + step));
+const NumberControls = ({ value, handler, step, min, index = null }) => {
+  const increment = () => {
+    return index !== (undefined || null)
+      ? handler(index, roundToTwoDecimalPlaces(+value + step))
+      : handler(roundToTwoDecimalPlaces(+value + step));
+  };
   const decrement = () => {
     if (min !== (undefined || null) && +value - step < min) {
-      return handler(min);
+      // if there is a minimum and value is less than minimum
+      return index !== (undefined || null) ? handler(index, min) : handler(min);
     }
-    handler(roundToTwoDecimalPlaces(+value - step));
+    return index !== (undefined || null)
+      ? handler(index, roundToTwoDecimalPlaces(+value - step))
+      : handler(roundToTwoDecimalPlaces(+value - step));
   };
 
   return (
