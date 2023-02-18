@@ -17,6 +17,7 @@ const Ingredients = ({
   handleChangeFlavorName,
   handleChangeFlavorPercentage,
   handleRemoveFlavor,
+  handleAddFlavor,
 }) => {
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
   const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
@@ -135,9 +136,13 @@ const Ingredients = ({
           <hr />
         </React.Fragment>
       ))}
-      <button type="button" className="add-ingredient-btn">
+      <button
+        type="button"
+        className="add-ingredient-btn"
+        onClick={handleAddFlavor}
+      >
         <FontAwesomeIcon icon={faPlus} />
-        <span>Add Ingredient</span>
+        <span>Add Flavor</span>
       </button>
       <hr />
     </IngredientsStyled>

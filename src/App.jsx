@@ -110,6 +110,17 @@ function App() {
     setFlavors(updatedFlavors);
   };
 
+  const handleAddFlavor = () => {
+    const name = `Flavor ${flavors.length + 1}`;
+    const newFlavor = {
+      name,
+      pg: 100,
+      vg: 0,
+      percentage: 0,
+    };
+    setFlavors([...flavors, newFlavor]);
+  };
+
   return (
     <div className="calculator">
       <TargetEjuice
@@ -132,6 +143,7 @@ function App() {
         handleChangeFlavorName={handleChangeFlavorName}
         handleChangeFlavorPercentage={handleChangeFlavorPercentage}
         handleRemoveFlavor={handleRemoveFlavor}
+        handleAddFlavor={handleAddFlavor}
       />
     </div>
   );
