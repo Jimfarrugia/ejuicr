@@ -1,80 +1,23 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import NicConfig from "./NicConfig";
+import FlavorConfig from "./FlavorConfig";
 import ConfigButton from "./ConfigButton";
 import DeleteButton from "./DeleteButton";
 import NumberControls from "./NumberControls";
 import { IngredientsStyled } from "./styled/IngredientsStyled";
 
-const Ingredients = () => {
+const Ingredients = ({
+  nicConfig,
+  setNicConfig,
+  handleChangeNicConfigStrength,
+}) => {
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
   const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
 
   const toggleNicConfigOpen = () => setNicConfigOpen(!nicConfigOpen);
   const toggleFlavorConfigOpen = () => setFlavorConfigOpen(!flavorConfigOpen);
-
-  const NicConfig = () => {
-    return (
-      <div className="config-wrapper">
-        <div className="row">
-          <div>
-            <span>PG/VG ratio</span>
-          </div>
-          <div>
-            <div className="input-border">
-              <input type="number" defaultValue="0" />
-            </div>
-            <span className="label-between">/</span>
-            <div className="input-border">
-              <input type="number" defaultValue="100" />
-            </div>
-          </div>
-          <div>
-            <NumberControls />
-          </div>
-        </div>
-        <hr />
-        <div className="row">
-          <div>
-            <span>Strength</span>
-          </div>
-          <div>
-            <div className="input-border">
-              <input type="number" defaultValue="50" />
-            </div>
-            <span className="label-right">mg/mL</span>
-          </div>
-          <div>
-            <NumberControls />
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const FlavorConfig = () => {
-    return (
-      <div className="config-wrapper">
-        <div className="row">
-          <div>
-            <span>PG/VG ratio</span>
-          </div>
-          <div>
-            <div className="input-border">
-              <input type="number" defaultValue="0" />
-            </div>
-            <span className="label-between">/</span>
-            <div className="input-border">
-              <input type="number" defaultValue="100" />
-            </div>
-          </div>
-          <div>
-            <NumberControls />
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <IngredientsStyled>
@@ -95,7 +38,13 @@ const Ingredients = () => {
           <span>12.48g</span>
         </div>
       </div>
-      {nicConfigOpen && <NicConfig />}
+      {nicConfigOpen && (
+        <NicConfig
+          nicConfig={nicConfig}
+          setNicConfig={setNicConfig}
+          handleChangeNicConfigStrength={handleChangeNicConfigStrength}
+        />
+      )}
       <hr />
       <div className="row">
         <div>

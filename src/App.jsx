@@ -8,6 +8,11 @@ function App() {
   const [targetVg, setTargetVg] = useState(70);
   const [targetNicStrength, setTargetNicStrength] = useState(6);
   const [targetAmount, setTargetAmount] = useState(150);
+  const [nicConfig, setNicConfig] = useState({
+    strength: 100,
+    pg: 100,
+    vg: 0,
+  });
 
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
     // enforce min 0 / max 100, change "" to 0 and force integer values
@@ -48,6 +53,13 @@ function App() {
       : setTargetAmount(roundToTwoDecimalPlaces(parsedValue));
   };
 
+  const handleChangeNicConfigStrength = (value) => {
+    setNicConfig({
+      ...nicConfig,
+      strength: value,
+    });
+  };
+
   return (
     <div className="calculator">
       <TargetEjuice
@@ -61,7 +73,11 @@ function App() {
         setTargetAmount={setTargetAmount}
         handleChangeTargetAmount={handleChangeTargetAmount}
       />
-      <Ingredients />
+      <Ingredients
+        nicConfig={nicConfig}
+        setNicConfig={setNicConfig}
+        handleChangeNicConfigStrength={handleChangeNicConfigStrength}
+      />
     </div>
   );
 }
