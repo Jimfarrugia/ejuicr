@@ -20,11 +20,17 @@ function App() {
       vg: 0,
       percentage: 10,
     },
+    {
+      name: "Flavor 2",
+      pg: 100,
+      vg: 0,
+      percentage: 5,
+    },
   ]);
 
   const parseNumberInput = (value) => {
     // Remove leading zeros to allow valid inputs like 0.5
-    const strippedValue = value.replace(/^0+(?=\d)/, "");
+    const strippedValue = value.toString().replace(/^0+(?=\d)/, "");
     // Use parseFloat to validate and normalize the input value
     const parsedValue = parseFloat(strippedValue, 10);
     // Return 0 if the parsed value is not a number
@@ -84,16 +90,16 @@ function App() {
     setNicConfig({ ...nicConfig, strength: roundedValue });
   };
 
-  const handleChangeFlavorName = (value) => {
+  const handleChangeFlavorName = (index, value) => {
     const updatedFlavors = [...flavors];
-    updatedFlavors[0].name = value;
+    updatedFlavors[index].name = value;
     setFlavors(updatedFlavors);
   };
 
-  const handleChangeFlavorPercentage = (value) => {
+  const handleChangeFlavorPercentage = (index, value) => {
     const updatedFlavors = [...flavors];
     const parsedValue = parseNumberInput(value);
-    updatedFlavors[0].percentage =
+    updatedFlavors[index].percentage =
       parsedValue < 0 ? 0 : roundToTwoDecimalPlaces(parsedValue);
     setFlavors(updatedFlavors);
   };

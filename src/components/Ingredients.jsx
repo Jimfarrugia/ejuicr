@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import NicConfig from "./NicConfig";
@@ -82,52 +82,59 @@ const Ingredients = ({
         </div>
       </div>
       <hr />
-      <div className="row flavor-results">
-        <div>
-          <span>15mL</span>
-        </div>
-        <div>
-          <span>15.62g</span>
-        </div>
-      </div>
-      {/* Flavor Section */}
-      <div className="row flavor">
-        <div>
-          <ConfigButton toggle={toggleFlavorConfigOpen} />
-          <div className="input-border">
-            <input
-              type="text"
-              maxLength="60"
-              value={flavors[0].name}
-              onChange={(e) => handleChangeFlavorName(e.target.value)}
-            />
+      {flavors.map((flavor, index) => (
+        <React.Fragment key={index}>
+          <div className="row flavor-results">
+            <div>
+              <span>15mL</span>
+            </div>
+            <div>
+              <span>15.62g</span>
+            </div>
           </div>
-        </div>
-        <div>
-          <div className="input-border">
-            <input
-              type="number"
-              value={flavors[0].percentage.toString()}
-              min="0"
-              max="100"
-              onChange={(e) => handleChangeFlavorPercentage(e.target.value)}
-            />
+          <div className="row flavor">
+            <div>
+              <ConfigButton toggle={toggleFlavorConfigOpen} />
+              <div className="input-border">
+                <input
+                  type="text"
+                  maxLength="60"
+                  value={flavor.name}
+                  onChange={(e) =>
+                    handleChangeFlavorName(index, e.target.value)
+                  }
+                />
+              </div>
+            </div>
+            <div>
+              <div className="input-border">
+                <input
+                  type="number"
+                  value={flavor.percentage.toString()}
+                  min="0"
+                  max="100"
+                  onChange={(e) =>
+                    handleChangeFlavorPercentage(index, e.target.value)
+                  }
+                />
+              </div>
+              <span className="label-right">%</span>
+            </div>
+            <div>
+              <NumberControls
+                value={flavor.percentage}
+                handler={handleChangeFlavorPercentage}
+                step={0.5}
+                min={0}
+                index={index}
+              />
+              <DeleteButton index={index} handler={handleRemoveFlavor} />
+            </div>
           </div>
-          <span className="label-right">%</span>
-        </div>
-        <div>
-          <NumberControls
-            value={flavors[0].percentage}
-            handler={handleChangeFlavorPercentage}
-            step={0.5}
-            min={0}
-          />
-          <DeleteButton index={0} handler={handleRemoveFlavor} />
-        </div>
-      </div>
-      {flavorConfigOpen && <FlavorConfig />}
-      <hr />
-      {/* /Flavor Section */}
+          {flavorConfigOpen && <FlavorConfig />}
+          <hr />
+        </React.Fragment>
+      ))}
       <button type="button" className="add-ingredient-btn">
         <FontAwesomeIcon icon={faPlus} />
         <span>Add Ingredient</span>
