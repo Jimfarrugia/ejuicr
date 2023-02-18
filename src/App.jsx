@@ -54,10 +54,25 @@ function App() {
   };
 
   const handleChangeNicConfigStrength = (value) => {
-    setNicConfig({
-      ...nicConfig,
-      strength: value,
-    });
+    if (value === "" || value < 0)
+      return setNicConfig({
+        ...nicConfig,
+        strength: 0,
+      });
+    // Remove leading zeros to allow valid inputs like 0.5
+    const strippedValue = value.replace(/^0+(?=\d)/, "");
+    // Use parseFloat to validate and normalize the input value
+    const parsedValue = parseFloat(strippedValue, 10);
+    // Check if the parsed value is NaN and update the state accordingly
+    isNaN(parsedValue)
+      ? setNicConfig({
+          ...nicConfig,
+          strength: 0,
+        })
+      : setNicConfig({
+          ...nicConfig,
+          strength: Math.round(parsedValue),
+        });
   };
 
   return (

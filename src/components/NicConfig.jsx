@@ -41,7 +41,7 @@ const NicConfig = ({
             <input
               type="number"
               className="wide"
-              value={nicConfig.strength}
+              value={nicConfig.strength.toString()}
               min="0"
               onChange={(e) => handleChangeNicConfigStrength(e.target.value)}
             />
