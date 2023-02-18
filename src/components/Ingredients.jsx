@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import Flavor from "./Flavor";
 import NicConfig from "./NicConfig";
-import FlavorConfig from "./FlavorConfig";
 import ConfigButton from "./ConfigButton";
-import DeleteButton from "./DeleteButton";
-import NumberControls from "./NumberControls";
 import { IngredientsStyled } from "./styled/IngredientsStyled";
 
 const Ingredients = ({
@@ -20,10 +18,8 @@ const Ingredients = ({
   handleAddFlavor,
 }) => {
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
-  const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
 
   const toggleNicConfigOpen = () => setNicConfigOpen(!nicConfigOpen);
-  const toggleFlavorConfigOpen = () => setFlavorConfigOpen(!flavorConfigOpen);
 
   return (
     <IngredientsStyled>
@@ -84,57 +80,14 @@ const Ingredients = ({
       </div>
       <hr />
       {flavors.map((flavor, index) => (
-        <React.Fragment key={index}>
-          <div className="row flavor-results">
-            <div>
-              <span>15mL</span>
-            </div>
-            <div>
-              <span>15.62g</span>
-            </div>
-          </div>
-          <div className="row flavor">
-            <div>
-              <ConfigButton toggle={toggleFlavorConfigOpen} />
-              <div className="input-border">
-                <input
-                  type="text"
-                  maxLength="60"
-                  value={flavor.name}
-                  onChange={(e) =>
-                    handleChangeFlavorName(index, e.target.value)
-                  }
-                />
-              </div>
-            </div>
-            <div>
-              <div className="input-border">
-                <input
-                  type="number"
-                  value={flavor.percentage.toString()}
-                  min="0"
-                  max="100"
-                  onChange={(e) =>
-                    handleChangeFlavorPercentage(index, e.target.value)
-                  }
-                />
-              </div>
-              <span className="label-right">%</span>
-            </div>
-            <div>
-              <NumberControls
-                value={flavor.percentage}
-                handler={handleChangeFlavorPercentage}
-                step={0.5}
-                min={0}
-                index={index}
-              />
-              <DeleteButton index={index} handler={handleRemoveFlavor} />
-            </div>
-          </div>
-          {flavorConfigOpen && <FlavorConfig />}
-          <hr />
-        </React.Fragment>
+        <Flavor
+          key={index}
+          index={index}
+          flavor={flavor}
+          handleChangeFlavorName={handleChangeFlavorName}
+          handleChangeFlavorPercentage={handleChangeFlavorPercentage}
+          handleRemoveFlavor={handleRemoveFlavor}
+        />
       ))}
       <button
         type="button"
