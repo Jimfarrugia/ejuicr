@@ -47,6 +47,26 @@ function App() {
     setTargetAmount(roundToTwoDecimalPlaces(parsedValue));
   };
 
+  const handleChangeNicConfigPgVg = (value, ingredient = "pg") => {
+    // enforce min 0 / max 100, change "" to 0 and force integer values
+    const newValue = Math.round(
+      value > 100 ? 100 : value < 0 || value === "" ? 0 : value
+    );
+    if (ingredient === "vg") {
+      setNicConfig({
+        ...nicConfig,
+        pg: 100 - newValue,
+        vg: newValue,
+      });
+    } else {
+      setNicConfig({
+        ...nicConfig,
+        pg: newValue,
+        vg: 100 - newValue,
+      });
+    }
+  };
+
   const handleChangeNicConfigStrength = (value) => {
     const parsedValue = parseNumberInput(value);
     const roundedValue = Math.round(parsedValue);
@@ -70,6 +90,7 @@ function App() {
         nicConfig={nicConfig}
         setNicConfig={setNicConfig}
         handleChangeNicConfigStrength={handleChangeNicConfigStrength}
+        handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
       />
     </div>
   );

@@ -12,6 +12,7 @@ const Ingredients = ({
   nicConfig,
   setNicConfig,
   handleChangeNicConfigStrength,
+  handleChangeNicConfigPgVg,
 }) => {
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
   const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
@@ -43,6 +44,7 @@ const Ingredients = ({
           nicConfig={nicConfig}
           setNicConfig={setNicConfig}
           handleChangeNicConfigStrength={handleChangeNicConfigStrength}
+          handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
         />
       )}
       <hr />
