@@ -14,6 +14,7 @@ const Ingredients = ({
   flavors,
   handleChangeFlavorName,
   handleChangeFlavorPercentage,
+  handleChangeFlavorPgVg,
   handleRemoveFlavor,
   handleAddFlavor,
 }) => {
@@ -86,6 +87,7 @@ const Ingredients = ({
           flavor={flavor}
           handleChangeFlavorName={handleChangeFlavorName}
           handleChangeFlavorPercentage={handleChangeFlavorPercentage}
+          handleChangeFlavorPgVg={handleChangeFlavorPgVg}
           handleRemoveFlavor={handleRemoveFlavor}
         />
       ))}

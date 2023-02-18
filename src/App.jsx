@@ -20,12 +20,6 @@ function App() {
       vg: 0,
       percentage: 10,
     },
-    {
-      name: "Flavor 2",
-      pg: 100,
-      vg: 0,
-      percentage: 5,
-    },
   ]);
 
   const parseNumberInput = (value) => {
@@ -104,6 +98,23 @@ function App() {
     setFlavors(updatedFlavors);
   };
 
+  const handleChangeFlavorPgVg = (index, value, ingredient = "pg") => {
+    // enforce min 0 / max 100, change "" to 0 and force integer values
+    const newValue = Math.round(
+      value > 100 ? 100 : value < 0 || value === "" ? 0 : value
+    );
+    const updatedFlavors = [...flavors];
+    if (ingredient === "vg") {
+      updatedFlavors[index].vg = newValue;
+      updatedFlavors[index].pg = 100 - newValue;
+      setFlavors(updatedFlavors);
+    } else {
+      updatedFlavors[index].pg = newValue;
+      updatedFlavors[index].vg = 100 - newValue;
+      setFlavors(updatedFlavors);
+    }
+  };
+
   const handleRemoveFlavor = (index) => {
     const updatedFlavors = [...flavors];
     updatedFlavors.splice(index, 1);
@@ -142,6 +153,7 @@ function App() {
         flavors={flavors}
         handleChangeFlavorName={handleChangeFlavorName}
         handleChangeFlavorPercentage={handleChangeFlavorPercentage}
+        handleChangeFlavorPgVg={handleChangeFlavorPgVg}
         handleRemoveFlavor={handleRemoveFlavor}
         handleAddFlavor={handleAddFlavor}
       />

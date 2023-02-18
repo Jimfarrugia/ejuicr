@@ -9,6 +9,7 @@ const Flavor = ({
   flavor,
   handleChangeFlavorName,
   handleChangeFlavorPercentage,
+  handleChangeFlavorPgVg,
   handleRemoveFlavor,
 }) => {
   const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
@@ -62,7 +63,13 @@ const Flavor = ({
           <DeleteButton index={index} handler={handleRemoveFlavor} />
         </div>
       </div>
-      {flavorConfigOpen && <FlavorConfig />}
+      {flavorConfigOpen && (
+        <FlavorConfig
+          index={index}
+          flavor={flavor}
+          handleChangeFlavorPgVg={handleChangeFlavorPgVg}
+        />
+      )}
       <hr />
     </>
   );

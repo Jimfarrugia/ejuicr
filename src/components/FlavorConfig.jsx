@@ -1,6 +1,6 @@
 import NumberControls from "./NumberControls";
 
-const FlavorConfig = () => {
+const FlavorConfig = ({ index, flavor, handleChangeFlavorPgVg }) => {
   return (
     <div className="config-wrapper">
       <div className="row">
@@ -9,15 +9,36 @@ const FlavorConfig = () => {
         </div>
         <div>
           <div className="input-border">
-            <input type="number" defaultValue="0" />
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={parseFloat(flavor.pg).toString()}
+              onChange={(e) =>
+                handleChangeFlavorPgVg(index, e.target.value, "pg")
+              }
+            />
           </div>
           <span className="label-between">/</span>
           <div className="input-border">
-            <input type="number" defaultValue="100" />
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={parseFloat(flavor.vg).toString()}
+              onChange={(e) =>
+                handleChangeFlavorPgVg(index, e.target.value, "vg")
+              }
+            />
           </div>
         </div>
         <div>
-          <NumberControls />
+          <NumberControls
+            index={index}
+            value={flavor.pg}
+            handler={handleChangeFlavorPgVg}
+            step={5}
+          />
         </div>
       </div>
     </div>
