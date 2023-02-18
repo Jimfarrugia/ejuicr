@@ -14,12 +14,20 @@ function App() {
     vg: 0,
   });
 
+  const parseNumberInput = (value) => {
+    // Remove leading zeros to allow valid inputs like 0.5
+    const strippedValue = value.replace(/^0+(?=\d)/, "");
+    // Use parseFloat to validate and normalize the input value
+    const parsedValue = parseFloat(strippedValue, 10);
+    // Return 0 if the parsed value is not a number
+    return isNaN(parsedValue) ? 0 : parsedValue;
+  };
+
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
     // enforce min 0 / max 100, change "" to 0 and force integer values
     const newValue = Math.round(
       value > 100 ? 100 : value < 0 || value === "" ? 0 : value
     );
-
     if (ingredient === "vg") {
       setTargetVg(newValue);
       setTargetPg(100 - newValue);
@@ -30,49 +38,19 @@ function App() {
   };
 
   const handleChangeTargetNicStrength = (value) => {
-    if (value === "" || value < 0) return setTargetNicStrength(0);
-    // Remove leading zeros to allow valid inputs like 0.5
-    const strippedValue = value.replace(/^0+(?=\d)/, "");
-    // Use parseFloat to validate and normalize the input value
-    const parsedValue = parseFloat(strippedValue, 10);
-    // Check if the parsed value is NaN and update the state accordingly
-    isNaN(parsedValue)
-      ? setTargetNicStrength(0)
-      : setTargetNicStrength(roundToTwoDecimalPlaces(parsedValue));
+    const parsedValue = parseNumberInput(value);
+    setTargetNicStrength(roundToTwoDecimalPlaces(parsedValue));
   };
 
   const handleChangeTargetAmount = (value) => {
-    if (value === "" || value < 0) return setTargetAmount(0);
-    // Remove leading zeros to allow valid inputs like 0.5
-    const strippedValue = value.replace(/^0+(?=\d)/, "");
-    // Use parseFloat to validate and normalize the input value
-    const parsedValue = parseFloat(strippedValue, 10);
-    // Check if the parsed value is NaN and update the state accordingly
-    isNaN(parsedValue)
-      ? setTargetAmount(0)
-      : setTargetAmount(roundToTwoDecimalPlaces(parsedValue));
+    const parsedValue = parseNumberInput(value);
+    setTargetAmount(roundToTwoDecimalPlaces(parsedValue));
   };
 
   const handleChangeNicConfigStrength = (value) => {
-    if (value === "" || value < 0)
-      return setNicConfig({
-        ...nicConfig,
-        strength: 0,
-      });
-    // Remove leading zeros to allow valid inputs like 0.5
-    const strippedValue = value.replace(/^0+(?=\d)/, "");
-    // Use parseFloat to validate and normalize the input value
-    const parsedValue = parseFloat(strippedValue, 10);
-    // Check if the parsed value is NaN and update the state accordingly
-    isNaN(parsedValue)
-      ? setNicConfig({
-          ...nicConfig,
-          strength: 0,
-        })
-      : setNicConfig({
-          ...nicConfig,
-          strength: Math.round(parsedValue),
-        });
+    const parsedValue = parseNumberInput(value);
+    const roundedValue = Math.round(parsedValue);
+    setNicConfig({ ...nicConfig, strength: roundedValue });
   };
 
   return (
