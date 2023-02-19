@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
-import { roundToTwoDecimalPlaces } from "./helpers";
+import { roundToTwoDecimalPlaces, totalFlavorPercentage } from "./helpers";
 
 function App() {
   const [targetPg, setTargetPg] = useState(30);
@@ -21,6 +21,9 @@ function App() {
       percentage: 10,
     },
   ]);
+
+  // TODO - also subtract nicotine percentage
+  const availablePercentage = 100 - totalFlavorPercentage(flavors);
 
   const parseNumberInput = (value) => {
     // Remove leading zeros to allow valid inputs like 0.5
