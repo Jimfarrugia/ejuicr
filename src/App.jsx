@@ -1,7 +1,12 @@
 import { useState } from "react";
 import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
-import { roundToTwoDecimalPlaces, totalFlavorPercentage } from "./helpers";
+import {
+  roundToTwoDecimalPlaces,
+  totalFlavorPercentage,
+  parseNumberInput,
+  validatePgVgValue,
+} from "./helpers";
 
 function App() {
   const [targetPg, setTargetPg] = useState(30);
@@ -24,22 +29,6 @@ function App() {
 
   // TODO - also subtract nicotine percentage
   const availablePercentage = 100 - totalFlavorPercentage(flavors);
-
-  const parseNumberInput = (value) => {
-    // Remove leading zeros to allow valid inputs like 0.5
-    const strippedValue = value.toString().replace(/^0+(?=\d)/, "");
-    // Use parseFloat to validate and normalize the input value
-    const parsedValue = parseFloat(strippedValue, 10);
-    // Return 0 if the parsed value is not a number
-    return isNaN(parsedValue) ? 0 : parsedValue;
-  };
-
-  const validatePgVgValue = (value) => {
-    // enforce min 0 / max 100, change "" to 0 and force integer values
-    return Math.round(
-      value > 100 ? 100 : value < 0 || value === "" ? 0 : value
-    );
-  };
 
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
     const validatedValue = validatePgVgValue(value);
