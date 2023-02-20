@@ -74,6 +74,23 @@ function App() {
     setFlavors(updatedFlavors);
   };
 
+  const updateAllFlavorsResults = (flavors, targetAmount) => {
+    const updatedFlavors = flavors.map((flavor) => {
+      const amount = roundToTwoDecimalPlaces(
+        (flavor.percentage / 100) * targetAmount
+      );
+      const pgAmount = roundToTwoDecimalPlaces((flavor.pg / 100) * amount);
+      const vgAmount = roundToTwoDecimalPlaces((flavor.vg / 100) * amount);
+      return {
+        ...flavor,
+        amount,
+        pgAmount,
+        vgAmount,
+      };
+    });
+    setFlavors(updatedFlavors);
+  };
+
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
     const validatedValue = validatePgVgValue(value);
     if (ingredient === "vg") {
@@ -97,9 +114,7 @@ function App() {
     const roundedValue = roundToTwoDecimalPlaces(parsedValue);
     setTargetAmount(roundedValue);
     updateNicResults(targetNicStrength, roundedValue, nicConfig);
-    flavors.forEach((flavor, index) => {
-      updateFlavorResults(index, flavors, roundedValue);
-    });
+    updateAllFlavorsResults(flavors, roundedValue);
   };
 
   const handleChangeNicConfigPgVg = (value, ingredient = "pg") => {
