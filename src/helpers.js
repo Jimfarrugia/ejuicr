@@ -5,6 +5,8 @@ export function roundToTwoDecimalPlaces(num) {
 
 // Parse the input of target values
 export const parseNumberInput = (value) => {
+  // Enforce minimum of 0
+  if (value < 0) return 0;
   // Remove leading zeros to allow valid inputs like 0.5
   const strippedValue = value.toString().replace(/^0+(?=\d)/, "");
   // Use parseFloat to validate and normalize the input value
@@ -13,7 +15,7 @@ export const parseNumberInput = (value) => {
   return isNaN(parsedValue) ? 0 : parsedValue;
 };
 
-// Validate inputs for PG/VG values
+// Validate inputs for PG/VG ratio values
 export const validatePgVgValue = (value) => {
   // enforce min 0 / max 100, change "" to 0 and force integer values
   return Math.round(value > 100 ? 100 : value < 0 || value === "" ? 0 : value);
