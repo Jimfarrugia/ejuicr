@@ -12,6 +12,10 @@ const Ingredients = ({
   nicResults,
   handleChangeNicConfigStrength,
   handleChangeNicConfigPgVg,
+  targetPg,
+  targetVg,
+  pgRequired,
+  vgRequired,
   flavors,
   handleChangeFlavorName,
   handleChangeFlavorPercentage,
@@ -60,13 +64,13 @@ const Ingredients = ({
           <span className="base-ingredient">PG</span>
         </div>
         <div>
-          <span>20%</span>
+          <span>{`${targetPg}%`}</span>
         </div>
         <div>
-          <span>60mL</span>
+          <span>{`${pgRequired}mL`}</span>
         </div>
         <div>
-          <span>62.4g</span>
+          <span>{`${roundToTwoDecimalPlaces(pgRequired * 1.036)}g`}</span>
         </div>
       </div>
       <hr />
@@ -75,13 +79,13 @@ const Ingredients = ({
           <span className="base-ingredient">VG</span>
         </div>
         <div>
-          <span>66%</span>
+          <span>{`${targetVg}%`}</span>
         </div>
         <div>
-          <span>198mL</span>
+          <span>{`${vgRequired}mL`}</span>
         </div>
         <div>
-          <span>249.48g</span>
+          <span>{`${roundToTwoDecimalPlaces(pgRequired * 1.26)}g`}</span>
         </div>
       </div>
       <hr />

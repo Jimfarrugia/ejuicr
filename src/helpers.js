@@ -27,3 +27,17 @@ export const totalFlavorPercentage = (flavors) => {
     return acc + flavor.percentage;
   }, 0);
 };
+
+// Return the sum of all pgAmount values of objects in an array
+export const totalFlavorPg = (flavors) => {
+  return flavors.reduce((acc, flavor) => {
+    return acc + flavor.pgAmount;
+  }, 0);
+};
+
+// Return the sum of all vgAmount values of objects in an array
+export const totalFlavorVg = (flavors) => {
+  return flavors.reduce((acc, flavor) => {
+    return acc + flavor.vgAmount;
+  }, 0);
+};

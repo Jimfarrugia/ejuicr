@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
 import {
@@ -6,6 +6,8 @@ import {
   totalFlavorPercentage,
   parseNumberInput,
   validatePgVgValue,
+  totalFlavorPg,
+  totalFlavorVg,
 } from "./helpers";
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
       vgAmount: 0, // mL
     },
   ]);
+  const [pgRequired, setPgRequired] = useState(21);
+  const [vgRequired, setVgRequired] = useState(105);
 
   const availablePercentage =
     100 - totalFlavorPercentage(flavors) - nicResults.percentage;
@@ -91,15 +95,35 @@ function App() {
     setFlavors(updatedFlavors);
   };
 
+  const updatePgVgRequired = (
+    targetPg,
+    targetVg,
+    targetAmount,
+    nicResults,
+    flavors
+  ) => {
+    const totalPg = (targetPg / 100) * targetAmount;
+    const totalVg = (targetVg / 100) * targetAmount;
+    setPgRequired(
+      roundToTwoDecimalPlaces(totalPg - nicResults.pg - totalFlavorPg(flavors))
+    );
+    setVgRequired(
+      roundToTwoDecimalPlaces(totalVg - nicResults.vg - totalFlavorVg(flavors))
+    );
+  };
+
+  useEffect(() => {
+    updatePgVgRequired(targetPg, targetVg, targetAmount, nicResults, flavors);
+  }, [targetPg, targetVg, targetAmount, nicResults, flavors]);
+
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
     const validatedValue = validatePgVgValue(value);
-    if (ingredient === "vg") {
-      setTargetVg(validatedValue);
-      setTargetPg(100 - validatedValue);
-    } else {
-      setTargetPg(validatedValue);
-      setTargetVg(100 - validatedValue);
-    }
+    const updatedPg =
+      ingredient === "vg" ? 100 - validatedValue : validatedValue;
+    const updatedVg =
+      ingredient === "vg" ? validatedValue : 100 - validatedValue;
+    setTargetPg(updatedPg);
+    setTargetVg(updatedVg);
   };
 
   const handleChangeTargetNicStrength = (value) => {
@@ -205,6 +229,10 @@ function App() {
         nicResults={nicResults}
         handleChangeNicConfigStrength={handleChangeNicConfigStrength}
         handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
+        targetPg={targetPg}
+        targetVg={targetVg}
+        pgRequired={pgRequired}
+        vgRequired={vgRequired}
         flavors={flavors}
         handleChangeFlavorName={handleChangeFlavorName}
         handleChangeFlavorPercentage={handleChangeFlavorPercentage}
