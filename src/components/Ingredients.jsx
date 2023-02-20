@@ -5,9 +5,11 @@ import Flavor from "./Flavor";
 import NicConfig from "./NicConfig";
 import ConfigButton from "./ConfigButton";
 import { IngredientsStyled } from "./styled/IngredientsStyled";
+import { roundToTwoDecimalPlaces } from "../helpers";
 
 const Ingredients = ({
   nicConfig,
+  nicResults,
   handleChangeNicConfigStrength,
   handleChangeNicConfigPgVg,
   flavors,
@@ -28,16 +30,21 @@ const Ingredients = ({
       <div className="row">
         <div>
           <ConfigButton toggle={toggleNicConfigOpen} />
-          <span>Nic. (50mg, 0/100)</span>
+          <span>
+            Nic. ({`${nicConfig.strength}mg, ${nicConfig.pg}/${nicConfig.vg}`})
+          </span>
         </div>
         <div>
-          <span>10%</span>
+          <span>{`${nicResults.percentage}%`}</span>
         </div>
         <div>
-          <span>12mL</span>
+          <span>{`${nicResults.amount}mL`}</span>
         </div>
         <div>
-          <span>12.48g</span>
+          {/*// TODO - Adjust the weight per mL based on pg/vg ratio */}
+          <span>{`${roundToTwoDecimalPlaces(
+            nicResults.amount * 1.036
+          )}g`}</span>
         </div>
       </div>
       {nicConfigOpen && (

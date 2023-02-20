@@ -163,6 +163,7 @@ function App() {
       />
       <Ingredients
         nicConfig={nicConfig}
+        nicResults={nicResults}
         handleChangeNicConfigStrength={handleChangeNicConfigStrength}
         handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
         flavors={flavors}
