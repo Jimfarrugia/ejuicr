@@ -8,7 +8,6 @@ import { IngredientsStyled } from "./styled/IngredientsStyled";
 
 const Ingredients = ({
   nicConfig,
-  setNicConfig,
   handleChangeNicConfigStrength,
   handleChangeNicConfigPgVg,
   flavors,
@@ -44,7 +43,6 @@ const Ingredients = ({
       {nicConfigOpen && (
         <NicConfig
           nicConfig={nicConfig}
-          setNicConfig={setNicConfig}
           handleChangeNicConfigStrength={handleChangeNicConfigStrength}
           handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
         />

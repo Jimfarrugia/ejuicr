@@ -18,6 +18,12 @@ function App() {
     pg: 100,
     vg: 0,
   });
+  const [nicResults, setNicResults] = useState({
+    amount: 9,
+    percentage: 6,
+    pg: 9,
+    vg: 0,
+  });
   const [flavors, setFlavors] = useState([
     {
       name: "Flavor 1",
@@ -27,8 +33,8 @@ function App() {
     },
   ]);
 
-  // TODO - also subtract nicotine percentage
-  const availablePercentage = 100 - totalFlavorPercentage(flavors);
+  const availablePercentage =
+    100 - totalFlavorPercentage(flavors) - nicResults.percentage;
 
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
     const validatedValue = validatePgVgValue(value);
@@ -41,40 +47,62 @@ function App() {
     }
   };
 
+  const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
+    if (nicConfig.strength <= 0 || nicConfig.strength < targetNicStrength) {
+      return setNicResults({
+        amount: 0,
+        percentage: 0,
+        pg: 0,
+        vg: 0,
+      });
+    }
+    const amount = roundToTwoDecimalPlaces(
+      (targetNicStrength * targetAmount) / nicConfig.strength
+    );
+    const percentage = roundToTwoDecimalPlaces((amount / targetAmount) * 100);
+    const pg = roundToTwoDecimalPlaces((nicConfig.pg / 100) * amount);
+    const vg = roundToTwoDecimalPlaces((nicConfig.vg / 100) * amount);
+    setNicResults({ amount, percentage, pg, vg });
+  };
+
   const handleChangeTargetNicStrength = (value) => {
-    if (value < 0) return setTargetNicStrength(0);
     const parsedValue = parseNumberInput(value);
-    setTargetNicStrength(roundToTwoDecimalPlaces(parsedValue));
+    const roundedValue = roundToTwoDecimalPlaces(parsedValue);
+    setTargetNicStrength(roundedValue);
+    updateNicResults(roundedValue, targetAmount, nicConfig);
   };
 
   const handleChangeTargetAmount = (value) => {
-    if (value < 0) return setTargetNicStrength(0);
     const parsedValue = parseNumberInput(value);
-    setTargetAmount(roundToTwoDecimalPlaces(parsedValue));
+    const roundedValue = roundToTwoDecimalPlaces(parsedValue);
+    setTargetAmount(roundedValue);
+    updateNicResults(targetNicStrength, roundedValue, nicConfig);
   };
 
   const handleChangeNicConfigPgVg = (value, ingredient = "pg") => {
     const validatedValue = validatePgVgValue(value);
-    if (ingredient === "vg") {
-      setNicConfig({
-        ...nicConfig,
-        pg: 100 - validatedValue,
-        vg: validatedValue,
-      });
-    } else {
-      setNicConfig({
-        ...nicConfig,
-        pg: validatedValue,
-        vg: 100 - validatedValue,
-      });
-    }
+    const updatedNicConfig =
+      ingredient === "vg"
+        ? {
+            ...nicConfig,
+            pg: 100 - validatedValue,
+            vg: validatedValue,
+          }
+        : {
+            ...nicConfig,
+            pg: validatedValue,
+            vg: 100 - validatedValue,
+          };
+    setNicConfig(updatedNicConfig);
+    updateNicResults(targetNicStrength, targetAmount, updatedNicConfig);
   };
 
   const handleChangeNicConfigStrength = (value) => {
-    if (value < 0) return setNicConfig({ ...nicConfig, strength: 0 });
     const parsedValue = parseNumberInput(value);
     const roundedValue = Math.round(parsedValue);
-    setNicConfig({ ...nicConfig, strength: roundedValue });
+    const updatedNicConfig = { ...nicConfig, strength: roundedValue };
+    setNicConfig(updatedNicConfig);
+    updateNicResults(targetNicStrength, targetAmount, updatedNicConfig);
   };
 
   const handleChangeFlavorName = (index, value) => {
@@ -129,15 +157,12 @@ function App() {
         targetVg={targetVg}
         handleChangeTargetPgVg={handleChangeTargetPgVg}
         targetNicStrength={targetNicStrength}
-        setTargetNicStrength={setTargetNicStrength}
         handleChangeTargetNicStrength={handleChangeTargetNicStrength}
         targetAmount={targetAmount}
-        setTargetAmount={setTargetAmount}
         handleChangeTargetAmount={handleChangeTargetAmount}
       />
       <Ingredients
         nicConfig={nicConfig}
-        setNicConfig={setNicConfig}
         handleChangeNicConfigStrength={handleChangeNicConfigStrength}
         handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
         flavors={flavors}

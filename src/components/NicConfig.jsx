@@ -2,17 +2,9 @@ import NumberControls from "./NumberControls";
 
 const NicConfig = ({
   nicConfig,
-  setNicConfig,
   handleChangeNicConfigStrength,
   handleChangeNicConfigPgVg,
 }) => {
-  const handleStepNicConfigStrength = (value) => {
-    setNicConfig({
-      ...nicConfig,
-      strength: value,
-    });
-  };
-
   return (
     <div className="config-wrapper">
       <div className="row">
@@ -68,7 +60,7 @@ const NicConfig = ({
         <div>
           <NumberControls
             value={nicConfig.strength}
-            handler={handleStepNicConfigStrength}
+            handler={handleChangeNicConfigStrength}
             step={5}
             min={0}
           />

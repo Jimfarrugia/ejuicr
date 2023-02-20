@@ -5,10 +5,8 @@ const TargetEjuice = ({
   targetVg,
   handleChangeTargetPgVg,
   targetNicStrength,
-  setTargetNicStrength,
   handleChangeTargetNicStrength,
   targetAmount,
-  setTargetAmount,
   handleChangeTargetAmount,
 }) => {
   return (
@@ -61,7 +59,7 @@ const TargetEjuice = ({
         </div>
         <NumberControls
           value={targetNicStrength}
-          handler={setTargetNicStrength}
+          handler={handleChangeTargetNicStrength}
           step={1}
           min={0}
         />
@@ -83,7 +81,7 @@ const TargetEjuice = ({
         </div>
         <NumberControls
           value={targetAmount}
-          handler={setTargetAmount}
+          handler={handleChangeTargetAmount}
           step={10}
           min={0}
         />
