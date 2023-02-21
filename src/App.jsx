@@ -161,7 +161,7 @@ function App() {
 
   const handleChangeNicConfigStrength = (value) => {
     const parsedValue = parseNumberInput(value);
-    const roundedValue = Math.round(parsedValue);
+    const roundedValue = parsedValue > 1000 ? 1000 : Math.round(parsedValue);
     const updatedNicConfig = { ...nicConfig, strength: roundedValue };
     setNicConfig(updatedNicConfig);
     updateNicResults(targetNicStrength, targetAmount, updatedNicConfig);
