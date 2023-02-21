@@ -44,7 +44,11 @@ function App() {
     100 - totalFlavorPercentage(flavors) - nicResults.percentage;
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
-    if (nicConfig.strength <= 0 || nicConfig.strength < targetNicStrength) {
+    if (
+      nicConfig.strength <= 0 ||
+      nicConfig.strength < targetNicStrength ||
+      targetAmount <= 0
+    ) {
       return setNicResults({
         amount: 0,
         percentage: 0,
