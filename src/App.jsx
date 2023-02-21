@@ -14,33 +14,33 @@ function App() {
   const [targetPg, setTargetPg] = useState(30);
   const [targetVg, setTargetVg] = useState(70);
   const [targetNicStrength, setTargetNicStrength] = useState(6);
-  const [targetAmount, setTargetAmount] = useState(150);
+  const [targetAmount, setTargetAmount] = useState(30);
   const [nicConfig, setNicConfig] = useState({
     strength: 100,
     pg: 100,
     vg: 0,
   });
   const [nicResults, setNicResults] = useState({
-    amount: 9, // mL
+    amount: 1.8, // mL
     percentage: 6,
-    pg: 9, // mL
+    pg: 1.8, // mL
     vg: 0, // mL
-    weight: 9.324, // g
+    weight: 1.86, // g
   });
   const [flavors, setFlavors] = useState([
     {
       name: "Flavor 1",
       pg: 100, // %
       vg: 0, // %
-      percentage: 10,
-      amount: 15, // mL
-      pgAmount: 15, // mL
+      percentage: 5,
+      amount: 1.5, // mL
+      pgAmount: 1.5, // mL
       vgAmount: 0, // mL
-      weight: 15.54, // g
+      weight: 1.55, // g
     },
   ]);
-  const [pgRequired, setPgRequired] = useState(21);
-  const [vgRequired, setVgRequired] = useState(105);
+  const [pgRequired, setPgRequired] = useState(5.7);
+  const [vgRequired, setVgRequired] = useState(21);
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
     if (
