@@ -41,3 +41,15 @@ export const totalFlavorVg = (flavors) => {
     return acc + flavor.vgAmount;
   }, 0);
 };
+
+// Calculate the weight of a liquid mixed from PG and/or VG
+export const calculateWeight = (totalVolume, pgPercentage, vgPercentage) => {
+  const pgDensity = 1.036; // g/mL
+  const vgDensity = 1.26; // g/mL
+  const pgVolume = (pgPercentage / 100) * totalVolume;
+  const vgVolume = (vgPercentage / 100) * totalVolume;
+  const pgWeight = pgVolume * pgDensity;
+  const vgWeight = vgVolume * vgDensity;
+  const totalWeight = pgWeight + vgWeight;
+  return totalWeight;
+};
