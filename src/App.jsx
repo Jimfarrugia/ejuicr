@@ -113,6 +113,10 @@ function App() {
   };
 
   useEffect(() => {
+    updateNicResults(targetNicStrength, targetAmount, nicConfig);
+  }, [targetNicStrength, targetAmount, nicConfig]);
+
+  useEffect(() => {
     updatePgVgRequired(targetPg, targetVg, targetAmount, nicResults, flavors);
   }, [targetPg, targetVg, targetAmount, nicResults, flavors]);
 
@@ -130,14 +134,12 @@ function App() {
     const parsedValue = parseNumberInput(value);
     const roundedValue = roundToTwoDecimalPlaces(parsedValue);
     setTargetNicStrength(roundedValue);
-    updateNicResults(roundedValue, targetAmount, nicConfig);
   };
 
   const handleChangeTargetAmount = (value) => {
     const parsedValue = parseNumberInput(value);
     const roundedValue = roundToTwoDecimalPlaces(parsedValue);
     setTargetAmount(roundedValue);
-    updateNicResults(targetNicStrength, roundedValue, nicConfig);
     updateAllFlavorsResults(flavors, roundedValue);
   };
 
@@ -156,7 +158,6 @@ function App() {
             vg: 100 - validatedValue,
           };
     setNicConfig(updatedNicConfig);
-    updateNicResults(targetNicStrength, targetAmount, updatedNicConfig);
   };
 
   const handleChangeNicConfigStrength = (value) => {
@@ -164,7 +165,6 @@ function App() {
     const roundedValue = parsedValue > 1000 ? 1000 : Math.round(parsedValue);
     const updatedNicConfig = { ...nicConfig, strength: roundedValue };
     setNicConfig(updatedNicConfig);
-    updateNicResults(targetNicStrength, targetAmount, updatedNicConfig);
   };
 
   const handleChangeFlavorName = (index, value) => {
