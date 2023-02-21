@@ -85,7 +85,7 @@ const Ingredients = ({
           <span>{`${vgRequired}mL`}</span>
         </div>
         <div>
-          <span>{`${roundToTwoDecimalPlaces(pgRequired * 1.26)}g`}</span>
+          <span>{`${roundToTwoDecimalPlaces(vgRequired * 1.26)}g`}</span>
         </div>
       </div>
       <hr />
