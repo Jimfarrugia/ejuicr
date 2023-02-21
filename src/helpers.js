@@ -42,6 +42,11 @@ export const totalFlavorVg = (flavors) => {
   }, 0);
 };
 
+// Return true if results are invalid (below 0) else return false.
+export const isResultsInvalid = (percentage, volume, weight) => {
+  return percentage < 0 || volume < 0 || weight < 0 ? true : false;
+};
+
 // Calculate the weight of a liquid mixed from PG and/or VG
 export const calculateWeight = (totalVolume, pgPercentage, vgPercentage) => {
   const pgDensity = 1.036; // g/mL

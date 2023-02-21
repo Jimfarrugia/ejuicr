@@ -3,6 +3,7 @@ import FlavorConfig from "./FlavorConfig";
 import ConfigButton from "./ConfigButton";
 import DeleteButton from "./DeleteButton";
 import NumberControls from "./NumberControls";
+import { isResultsInvalid } from "../helpers";
 
 const Flavor = ({
   index,
@@ -16,14 +17,18 @@ const Flavor = ({
 
   const toggleFlavorConfigOpen = () => setFlavorConfigOpen(!flavorConfigOpen);
 
+  const { amount, weight, name, percentage } = flavor;
+
+  const isInvalid = isResultsInvalid(percentage, amount, weight);
+
   return (
     <>
-      <div className="row flavor-results">
+      <div className={`row flavor-results ${isInvalid ? "red" : ""}`}>
         <div>
-          <span>{`${flavor.amount}mL`}</span>
+          <span>{`${amount}mL`}</span>
         </div>
         <div>
-          <span>{`${flavor.weight}g`}</span>
+          <span>{`${weight}g`}</span>
         </div>
       </div>
       <div className="row flavor">
@@ -33,7 +38,7 @@ const Flavor = ({
             <input
               type="text"
               maxLength="60"
-              value={flavor.name}
+              value={name}
               onChange={(e) => handleChangeFlavorName(index, e.target.value)}
             />
           </div>
@@ -42,7 +47,7 @@ const Flavor = ({
           <div className="input-border">
             <input
               type="number"
-              value={flavor.percentage.toString()}
+              value={percentage.toString()}
               min="0"
               max="100"
               onChange={(e) =>
@@ -54,7 +59,7 @@ const Flavor = ({
         </div>
         <div>
           <NumberControls
-            value={flavor.percentage}
+            value={percentage}
             handler={handleChangeFlavorPercentage}
             step={0.5}
             min={0}

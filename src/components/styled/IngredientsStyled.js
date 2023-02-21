@@ -1,9 +1,13 @@
 import styled from "styled-components";
-// import { colors } from "../../constants";
+import { colors } from "../../constants";
 
 export const IngredientsStyled = styled.div`
   & > h3 {
     margin-top: 1em;
+  }
+
+  & .red {
+    color: ${colors.red};
   }
 
   & > .row {

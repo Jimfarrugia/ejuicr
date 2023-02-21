@@ -5,7 +5,7 @@ import Flavor from "./Flavor";
 import NicConfig from "./NicConfig";
 import ConfigButton from "./ConfigButton";
 import { IngredientsStyled } from "./styled/IngredientsStyled";
-import { roundToTwoDecimalPlaces } from "../helpers";
+import { roundToTwoDecimalPlaces, isResultsInvalid } from "../helpers";
 
 const Ingredients = ({
   nicConfig,
@@ -30,11 +30,27 @@ const Ingredients = ({
   const pgWeight = roundToTwoDecimalPlaces(pgRequired * 1.036);
   const vgWeight = roundToTwoDecimalPlaces(vgRequired * 1.26);
 
+  const isNicInvalid = isResultsInvalid(
+    nicResults.percentage,
+    nicResults.amount,
+    nicResults.weight
+  )
+    ? true
+    : false;
+
+  const isPgInvalid = isResultsInvalid(targetPg, pgRequired, pgWeight)
+    ? true
+    : false;
+
+  const isVgInvalid = isResultsInvalid(targetVg, vgRequired, vgWeight)
+    ? true
+    : false;
+
   return (
     <IngredientsStyled>
       <h3>Ingredients</h3>
       <hr />
-      <div className="row">
+      <div className={`row ${isNicInvalid ? "red" : ""}`}>
         <div>
           <ConfigButton toggle={toggleNicConfigOpen} />
           <span>
@@ -59,7 +75,7 @@ const Ingredients = ({
         />
       )}
       <hr />
-      <div className="row">
+      <div className={`row ${isPgInvalid ? "red" : ""}`}>
         <div>
           <span className="base-ingredient">PG</span>
         </div>
@@ -74,7 +90,7 @@ const Ingredients = ({
         </div>
       </div>
       <hr />
-      <div className="row">
+      <div className={`row ${isVgInvalid ? "red" : ""}`}>
         <div>
           <span className="base-ingredient">VG</span>
         </div>
