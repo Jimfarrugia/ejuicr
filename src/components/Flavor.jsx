@@ -3,7 +3,6 @@ import FlavorConfig from "./FlavorConfig";
 import ConfigButton from "./ConfigButton";
 import DeleteButton from "./DeleteButton";
 import NumberControls from "./NumberControls";
-import { roundToTwoDecimalPlaces } from "../helpers";
 
 const Flavor = ({
   index,
@@ -24,8 +23,7 @@ const Flavor = ({
           <span>{`${flavor.amount}mL`}</span>
         </div>
         <div>
-          {/*// TODO - Adjust the weight per mL based on pg/vg ratio */}
-          <span>{`${roundToTwoDecimalPlaces(flavor.amount * 1.036)}g`}</span>
+          <span>{`${flavor.weight}g`}</span>
         </div>
       </div>
       <div className="row flavor">

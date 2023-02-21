@@ -27,6 +27,9 @@ const Ingredients = ({
 
   const toggleNicConfigOpen = () => setNicConfigOpen(!nicConfigOpen);
 
+  const pgWeight = roundToTwoDecimalPlaces(pgRequired * 1.036);
+  const vgWeight = roundToTwoDecimalPlaces(vgRequired * 1.26);
+
   return (
     <IngredientsStyled>
       <h3>Ingredients</h3>
@@ -45,10 +48,7 @@ const Ingredients = ({
           <span>{`${nicResults.amount}mL`}</span>
         </div>
         <div>
-          {/*// TODO - Adjust the weight per mL based on pg/vg ratio */}
-          <span>{`${roundToTwoDecimalPlaces(
-            nicResults.amount * 1.036
-          )}g`}</span>
+          <span>{`${nicResults.weight}g`}</span>
         </div>
       </div>
       {nicConfigOpen && (
@@ -70,7 +70,7 @@ const Ingredients = ({
           <span>{`${pgRequired}mL`}</span>
         </div>
         <div>
-          <span>{`${roundToTwoDecimalPlaces(pgRequired * 1.036)}g`}</span>
+          <span>{`${pgWeight}g`}</span>
         </div>
       </div>
       <hr />
@@ -85,7 +85,7 @@ const Ingredients = ({
           <span>{`${vgRequired}mL`}</span>
         </div>
         <div>
-          <span>{`${roundToTwoDecimalPlaces(vgRequired * 1.26)}g`}</span>
+          <span>{`${vgWeight}g`}</span>
         </div>
       </div>
       <hr />

@@ -8,6 +8,7 @@ import {
   validatePgVgValue,
   totalFlavorPg,
   totalFlavorVg,
+  calculateWeight,
 } from "./helpers";
 
 function App() {
@@ -21,10 +22,11 @@ function App() {
     vg: 0,
   });
   const [nicResults, setNicResults] = useState({
-    amount: 9,
+    amount: 9, // mL
     percentage: 6,
-    pg: 9,
-    vg: 0,
+    pg: 9, // mL
+    vg: 0, // mL
+    weight: 9.324, // g
   });
   const [flavors, setFlavors] = useState([
     {
@@ -32,9 +34,10 @@ function App() {
       pg: 100, // %
       vg: 0, // %
       percentage: 10,
-      amount: 15,
+      amount: 15, // mL
       pgAmount: 15, // mL
       vgAmount: 0, // mL
+      weight: 15.54, // g
     },
   ]);
   const [pgRequired, setPgRequired] = useState(21);
@@ -54,6 +57,7 @@ function App() {
         percentage: 0,
         pg: 0,
         vg: 0,
+        weight: 0,
       });
     }
     const amount = roundToTwoDecimalPlaces(
@@ -62,7 +66,10 @@ function App() {
     const percentage = roundToTwoDecimalPlaces((amount / targetAmount) * 100);
     const pg = roundToTwoDecimalPlaces((nicConfig.pg / 100) * amount);
     const vg = roundToTwoDecimalPlaces((nicConfig.vg / 100) * amount);
-    setNicResults({ amount, percentage, pg, vg });
+    const weight = roundToTwoDecimalPlaces(
+      calculateWeight(amount, nicConfig.pg, nicConfig.vg)
+    );
+    setNicResults({ amount, percentage, pg, vg, weight });
   };
 
   const updateFlavorResults = (index, flavors, targetAmount) => {
@@ -72,12 +79,16 @@ function App() {
     );
     const pgAmount = roundToTwoDecimalPlaces((flavor.pg / 100) * amount);
     const vgAmount = roundToTwoDecimalPlaces((flavor.vg / 100) * amount);
+    const weight = roundToTwoDecimalPlaces(
+      calculateWeight(amount, flavor.pg, flavor.vg)
+    );
     const updatedFlavors = [...flavors];
     updatedFlavors[index] = {
       ...updatedFlavors[index],
       amount,
       pgAmount,
       vgAmount,
+      weight,
     };
     setFlavors(updatedFlavors);
   };
@@ -89,11 +100,15 @@ function App() {
       );
       const pgAmount = roundToTwoDecimalPlaces((flavor.pg / 100) * amount);
       const vgAmount = roundToTwoDecimalPlaces((flavor.vg / 100) * amount);
+      const weight = roundToTwoDecimalPlaces(
+        calculateWeight(amount, flavor.pg, flavor.vg)
+      );
       return {
         ...flavor,
         amount,
         pgAmount,
         vgAmount,
+        weight,
       };
     });
     setFlavors(updatedFlavors);
@@ -213,6 +228,7 @@ function App() {
       amount: 0,
       pgAmount: 0,
       vgAmount: 0,
+      weight: 0,
     };
     setFlavors([...flavors, newFlavor]);
   };
