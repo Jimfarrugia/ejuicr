@@ -13,8 +13,7 @@ const Ingredients = ({
   targetNicStrength,
   handleChangeNicConfigStrength,
   handleChangeNicConfigPgVg,
-  targetPg,
-  targetVg,
+  targetAmount,
   pgRequired,
   vgRequired,
   flavors,
@@ -29,6 +28,13 @@ const Ingredients = ({
 
   const toggleNicConfigOpen = () => setNicConfigOpen(!nicConfigOpen);
 
+  const pgPercentage = roundToTwoDecimalPlaces(
+    (pgRequired / targetAmount) * 100
+  );
+  const vgPercentage = roundToTwoDecimalPlaces(
+    (vgRequired / targetAmount) * 100
+  );
+
   const pgWeight = roundToTwoDecimalPlaces(pgRequired * 1.036);
   const vgWeight = roundToTwoDecimalPlaces(vgRequired * 1.26);
 
@@ -40,11 +46,11 @@ const Ingredients = ({
     ? true
     : false;
 
-  const isPgInvalid = isResultsInvalid(targetPg, pgRequired, pgWeight)
+  const isPgInvalid = isResultsInvalid(pgPercentage, pgRequired, pgWeight)
     ? true
     : false;
 
-  const isVgInvalid = isResultsInvalid(targetVg, vgRequired, vgWeight)
+  const isVgInvalid = isResultsInvalid(vgPercentage, vgRequired, vgWeight)
     ? true
     : false;
 
@@ -102,7 +108,7 @@ const Ingredients = ({
           <span className="base-ingredient">PG</span>
         </div>
         <div>
-          <span>{`${targetPg}%`}</span>
+          <span>{`${pgPercentage}%`}</span>
         </div>
         <div>
           <span>{`${pgRequired}mL`}</span>
@@ -117,7 +123,7 @@ const Ingredients = ({
           <span className="base-ingredient">VG</span>
         </div>
         <div>
-          <span>{`${targetVg}%`}</span>
+          <span>{`${vgPercentage}%`}</span>
         </div>
         <div>
           <span>{`${vgRequired}mL`}</span>

@@ -246,8 +246,7 @@ function App() {
         targetNicStrength={targetNicStrength}
         handleChangeNicConfigStrength={handleChangeNicConfigStrength}
         handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
-        targetPg={targetPg}
-        targetVg={targetVg}
+        targetAmount={targetAmount}
         pgRequired={pgRequired}
         vgRequired={vgRequired}
         flavors={flavors}
