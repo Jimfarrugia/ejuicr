@@ -19,7 +19,7 @@ const Flavor = ({
 
   const { amount, weight, name, percentage } = flavor;
 
-  const isInvalid = isResultsInvalid(percentage, amount, weight);
+  const isInvalid = isResultsInvalid(percentage, amount, weight); // ? maybe unnecessary
 
   return (
     <>

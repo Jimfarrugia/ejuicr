@@ -3,7 +3,6 @@ import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
 import {
   roundToTwoDecimalPlaces,
-  totalFlavorPercentage,
   parseNumberInput,
   validatePgVgValue,
   totalFlavorPg,
@@ -42,9 +41,6 @@ function App() {
   ]);
   const [pgRequired, setPgRequired] = useState(21);
   const [vgRequired, setVgRequired] = useState(105);
-
-  const availablePercentage =
-    100 - totalFlavorPercentage(flavors) - nicResults.percentage;
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
     if (
@@ -247,6 +243,7 @@ function App() {
       <Ingredients
         nicConfig={nicConfig}
         nicResults={nicResults}
+        targetNicStrength={targetNicStrength}
         handleChangeNicConfigStrength={handleChangeNicConfigStrength}
         handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
         targetPg={targetPg}

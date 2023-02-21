@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Flavor from "./Flavor";
@@ -10,6 +10,7 @@ import { roundToTwoDecimalPlaces, isResultsInvalid } from "../helpers";
 const Ingredients = ({
   nicConfig,
   nicResults,
+  targetNicStrength,
   handleChangeNicConfigStrength,
   handleChangeNicConfigPgVg,
   targetPg,
@@ -23,6 +24,7 @@ const Ingredients = ({
   handleRemoveFlavor,
   handleAddFlavor,
 }) => {
+  const [error, setError] = useState("");
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
 
   const toggleNicConfigOpen = () => setNicConfigOpen(!nicConfigOpen);
@@ -46,10 +48,30 @@ const Ingredients = ({
     ? true
     : false;
 
+  useEffect(() => {
+    if (isNicInvalid || isPgInvalid || isVgInvalid) {
+      setError(
+        "The formula is not possible with the current values you have entered."
+      );
+    } else if (nicConfig.strength < targetNicStrength) {
+      setError(
+        `Your desired strength of ${targetNicStrength}mg is not possible with this nicotine base. You will need to use a nicotine base liquid with a higher strength.`
+      );
+    } else {
+      setError("");
+    }
+  }, [nicResults, pgRequired, vgRequired, flavors]);
+
   return (
     <IngredientsStyled>
       <h3>Ingredients</h3>
       <hr />
+      {error && (
+        <>
+          <div className="error-message">{error}</div>
+          <hr />
+        </>
+      )}
       <div className={`row ${isNicInvalid ? "red" : ""}`}>
         <div>
           <ConfigButton toggle={toggleNicConfigOpen} />
