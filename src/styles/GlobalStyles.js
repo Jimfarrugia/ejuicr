@@ -61,6 +61,17 @@ const GlobalStyles = createGlobalStyle`
 
   p {
     line-height: 1.35;
+    margin: 1.5em 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0 0 0 1em;
+    
+    & > li {
+      margin-bottom: 0.375em;
+      line-height: 1.35;
+    }
   }
 
   button {
