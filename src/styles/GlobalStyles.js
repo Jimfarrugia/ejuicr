@@ -60,7 +60,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   p {
-    line-height: 1.35;
+    line-height: 1.5;
     margin: 1.5em 0;
   }
 
@@ -100,6 +100,11 @@ const GlobalStyles = createGlobalStyle`
     & > span {
       margin-left: 0.5em;
     }
+  }
+
+  .subtitle {
+    padding: 0 2em;
+    text-align: center;
   }
 
   /* hide default up/down buttons (Chrome, Safari, Edge, Opera) */

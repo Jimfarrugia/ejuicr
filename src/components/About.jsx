@@ -5,6 +5,10 @@ const About = () => {
     <>
       <h3>About ejuicr</h3>
       <hr />
+      <p className="subtitle">
+        The goal of ejuicr is to a vaper's fist choice for a convenient and
+        easy-to-use ejuice calculator.
+      </p>
       <h4>Use it Anywhere</h4>
       <hr />
       <p>If it can load a web page, it can run ejuicr.</p>
