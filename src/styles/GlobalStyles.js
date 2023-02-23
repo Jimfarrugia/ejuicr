@@ -33,9 +33,19 @@ const GlobalStyles = createGlobalStyle`
 
   h3 {
     font-family: "Bebas Neue";
-    font-size: 2rem;
+    font-size: 2.25rem;
     margin: 0 auto;
     width: fit-content;
+    background: ${colors.yellowPink};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  h4 { 
+    font-family: "Bebas Neue";
+    font-size: 1.75rem;
+    width: fit-content;
+    margin: 2.5em 0 0;
     background: ${colors.yellowPink};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -47,6 +57,10 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     line-height: 35px;
     vertical-align: middle;
+  }
+
+  p {
+    line-height: 1.35;
   }
 
   button {

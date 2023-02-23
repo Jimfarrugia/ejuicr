@@ -4,6 +4,7 @@ import { colors } from "../../constants";
 export const FooterStyled = styled.footer`
   background: ${colors.black};
   padding: 2em 1em;
+  margin-top: 2em;
 
   & > .container {
     display: flex;
