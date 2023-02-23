@@ -31,30 +31,32 @@ const Sidemenu = ({ toggleMenu }) => {
       {(showLoginMenu && (
         <>
           <h3>Login</h3>
-          <p>
-            <button type="button">
-              <FontAwesomeIcon icon={faGoogle} />
-              Sign in with Google
-            </button>
-          </p>
-          <p>
-            <button type="button">
-              <FontAwesomeIcon icon={faTwitter} />
-              Sign in with Twitter
-            </button>
-          </p>
-          <p>
-            <button type="button">
-              <FontAwesomeIcon icon={faEnvelope} />
-              Sign in with Email
-            </button>
-          </p>
-          <p>
-            <button type="button">
-              <FontAwesomeIcon icon={faEnvelope} />
-              Sign up with Email
-            </button>
-          </p>
+          <ul>
+            <li>
+              <button type="button">
+                <FontAwesomeIcon icon={faGoogle} />
+                Sign in with Google
+              </button>
+            </li>
+            <li>
+              <button type="button">
+                <FontAwesomeIcon icon={faTwitter} />
+                Sign in with Twitter
+              </button>
+            </li>
+            <li>
+              <button type="button">
+                <FontAwesomeIcon icon={faEnvelope} />
+                Sign in with Email
+              </button>
+            </li>
+            <li>
+              <button type="button">
+                <FontAwesomeIcon icon={faEnvelope} />
+                Sign up with Email
+              </button>
+            </li>
+          </ul>
         </>
       )) || (
         <>

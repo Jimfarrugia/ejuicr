@@ -39,20 +39,16 @@ export const SidemenuStyled = styled.nav`
   }
 
   & li {
-    margin-bottom: 1em;
-  }
-
-  & h3 {
-    margin: 0.5em auto;
-  }
-
-  & p {
-    margin: 0 0 1.5em;
+    margin-bottom: 1.5em;
 
     & button > svg {
       margin-right: 0.5em;
       margin-bottom: -0.0725em;
       font-size: 1rem;
     }
+  }
+
+  & h3 {
+    margin: 0.5em auto;
   }
 `;
