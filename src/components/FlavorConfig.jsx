@@ -10,6 +10,7 @@ const FlavorConfig = ({ index, flavor, handleChangeFlavorPgVg }) => {
         <div>
           <div className="input-border">
             <input
+              data-testid={`flavor${index + 1}ConfigPgInput`}
               type="number"
               min="0"
               max="100"
@@ -22,6 +23,7 @@ const FlavorConfig = ({ index, flavor, handleChangeFlavorPgVg }) => {
           <span className="label-between">/</span>
           <div className="input-border">
             <input
+              data-testid={`flavor${index + 1}ConfigVgInput`}
               type="number"
               min="0"
               max="100"
@@ -34,6 +36,8 @@ const FlavorConfig = ({ index, flavor, handleChangeFlavorPgVg }) => {
         </div>
         <div>
           <NumberControls
+            incrementTestId={`flavor${index + 1}ConfigPgIncBtn`}
+            decrementTestId={`flavor${index + 1}ConfigPgDecBtn`}
             index={index}
             value={flavor.pg}
             handler={handleChangeFlavorPgVg}

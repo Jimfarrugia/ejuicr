@@ -33,9 +33,13 @@ const Flavor = ({
       </div>
       <div className="row flavor">
         <div>
-          <ConfigButton toggle={toggleFlavorConfigOpen} />
+          <ConfigButton
+            testId={`flavor${index + 1}ConfigBtn`}
+            toggle={toggleFlavorConfigOpen}
+          />
           <div className="input-border">
             <input
+              data-testid={`flavor${index + 1}NameInput`}
               type="text"
               maxLength="60"
               value={name}
@@ -46,6 +50,7 @@ const Flavor = ({
         <div>
           <div className="input-border">
             <input
+              data-testid={`flavor${index + 1}PercentInput`}
               type="number"
               value={percentage.toString()}
               min="0"
@@ -59,13 +64,19 @@ const Flavor = ({
         </div>
         <div>
           <NumberControls
+            incrementTestId={`flavor${index + 1}PercentIncBtn`}
+            decrementTestId={`flavor${index + 1}PercentDecBtn`}
             value={percentage}
             handler={handleChangeFlavorPercentage}
             step={0.5}
             min={0}
             index={index}
           />
-          <DeleteButton index={index} handler={handleRemoveFlavor} />
+          <DeleteButton
+            testId={`flavor${index + 1}DeleteBtn`}
+            index={index}
+            handler={handleRemoveFlavor}
+          />
         </div>
       </div>
       {flavorConfigOpen && (

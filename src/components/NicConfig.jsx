@@ -14,6 +14,7 @@ const NicConfig = ({
         <div>
           <div className="input-border">
             <input
+              data-testid="nicConfigPgInput"
               type="number"
               value={parseFloat(nicConfig.pg).toString()}
               min="0"
@@ -24,6 +25,7 @@ const NicConfig = ({
           <span className="label-between">/</span>
           <div className="input-border">
             <input
+              data-testid="nicConfigVgInput"
               type="number"
               value={parseFloat(nicConfig.vg).toString()}
               min="0"
@@ -34,6 +36,8 @@ const NicConfig = ({
         </div>
         <div>
           <NumberControls
+            incrementTestId="nicConfigPgIncBtn"
+            decrementTestId="nicConfigPgDecBtn"
             value={nicConfig.pg}
             handler={handleChangeNicConfigPgVg}
             step={5}
@@ -48,6 +52,7 @@ const NicConfig = ({
         <div>
           <div className="input-border">
             <input
+              data-testid="nicConfigStrengthInput"
               type="number"
               className="wide"
               value={nicConfig.strength.toString()}
@@ -59,6 +64,8 @@ const NicConfig = ({
         </div>
         <div>
           <NumberControls
+            incrementTestId="nicConfigStrengthIncBtn"
+            decrementTestId="nicConfigStrengthDecBtn"
             value={nicConfig.strength}
             handler={handleChangeNicConfigStrength}
             step={5}

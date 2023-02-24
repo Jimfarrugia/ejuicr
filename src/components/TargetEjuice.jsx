@@ -19,6 +19,7 @@ const TargetEjuice = ({
           <span className="label-left">PG/VG</span>
           <div className="input-border">
             <input
+              data-testid="targetPgInput"
               type="number"
               value={parseFloat(targetPg, 10).toString()}
               min="0"
@@ -29,6 +30,7 @@ const TargetEjuice = ({
           <span className="label-between">/</span>
           <div className="input-border">
             <input
+              data-testid="targetVgInput"
               type="number"
               value={parseFloat(targetVg, 10).toString()}
               min="0"
@@ -49,6 +51,7 @@ const TargetEjuice = ({
         <div>
           <div className="input-border">
             <input
+              data-testid="targetNicStrengthInput"
               type="number"
               value={targetNicStrength.toString()}
               min="0"
@@ -70,6 +73,7 @@ const TargetEjuice = ({
         <div>
           <div className="input-border">
             <input
+              data-testid="targetAmountInput"
               type="number"
               className="wide"
               value={targetAmount.toString()}

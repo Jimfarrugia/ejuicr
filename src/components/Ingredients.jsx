@@ -74,13 +74,15 @@ const Ingredients = ({
       <hr />
       {error && (
         <>
-          <div className="error-message">{error}</div>
+          <div data-testid="errorMessage" className="error-message">
+            {error}
+          </div>
           <hr />
         </>
       )}
       <div className={`row ${isNicInvalid ? "red" : ""}`}>
         <div>
-          <ConfigButton toggle={toggleNicConfigOpen} />
+          <ConfigButton testId="nicConfigBtn" toggle={toggleNicConfigOpen} />
           <span>
             Nic. ({`${nicConfig.strength}mg, ${nicConfig.pg}/${nicConfig.vg}`})
           </span>
@@ -145,6 +147,7 @@ const Ingredients = ({
         />
       ))}
       <button
+        data-testid="flavorAddBtn"
         type="button"
         className="add-ingredient-btn"
         onClick={handleAddFlavor}
