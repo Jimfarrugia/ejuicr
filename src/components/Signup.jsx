@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { API_URL } from "../constants";
 
-const Signup = ({ cancel, handleClickLoginWithEmail }) => {
+const Signup = ({ handleClickBack, handleClickLoginWithEmail }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -21,8 +23,17 @@ const Signup = ({ cancel, handleClickLoginWithEmail }) => {
     return true;
   };
 
-  const handleSubmit = (e) => {
+  const registerUser = async (userData) => {
+    const response = await axios.post(`${API_URL}/user`, userData);
+    if (response.data) {
+      localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    return response.data;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     if (!validateEmail(email)) {
       return setError("Email is invalid.");
     }
@@ -32,8 +43,15 @@ const Signup = ({ cancel, handleClickLoginWithEmail }) => {
     if (password !== passwordConfirm) {
       return setError("Passwords do not match.");
     }
-    console.log(email, password);
-    console.log("submitted");
+    try {
+      await registerUser({ email, password });
+    } catch (error) {
+      setError(
+        error.response.data.message || "Failed to register new account."
+      );
+      return console.log(error);
+    }
+    handleClickBack();
   };
 
   return (
@@ -72,7 +90,7 @@ const Signup = ({ cancel, handleClickLoginWithEmail }) => {
           </div>
         </div>
         <div className="sidemenu-form-row">
-          <button type="button" className="red" onClick={cancel}>
+          <button type="button" className="red" onClick={handleClickBack}>
             Cancel
           </button>
           <button type="submit" className="green">
