@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const Login = ({ cancel }) => {
+const Signup = ({ cancel }) => {
   return (
     <>
-      <h3>Login</h3>
+      <h3>Signup</h3>
       <div className="sidemenu-form-row">
         <div className="input-border">
           <input type="email" placeholder="Email" />
@@ -15,25 +15,25 @@ const Login = ({ cancel }) => {
         </div>
       </div>
       <div className="sidemenu-form-row">
+        <div className="input-border">
+          <input type="password" placeholder="Confirm Password" />
+        </div>
+      </div>
+      <div className="sidemenu-form-row">
         <button type="button" className="red" onClick={cancel}>
           Cancel
         </button>
         <button type="button" className="green">
-          Sign In
+          Sign Up
         </button>
       </div>
       <p>
-        Need an account?
+        Already have an account?
         <br />
-        <Link>Sign up instead</Link>.
-      </p>
-      <p>
-        Forgot your password?
-        <br />
-        <Link>Reset it here</Link>.
+        <Link>Sign in instead</Link>.
       </p>
     </>
   );
 };
 
-export default Login;
+export default Signup;

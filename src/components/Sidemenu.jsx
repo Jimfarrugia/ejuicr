@@ -8,16 +8,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Login from "./Login";
+import Signup from "./Signup";
 import FooterMenu from "./FooterMenu";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
 
 const Sidemenu = ({ toggleMenu }) => {
   const [showLoginMenu, setShowLoginMenu] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showSignupForm, setShowSignupForm] = useState(false);
 
   const handleClickBack = () => {
-    setShowLoginMenu(false);
+    setShowLoginMenu(!showLoginMenu);
     setShowLoginForm(false);
+    setShowSignupForm(false);
   };
 
   const handleClickLoginWithEmail = () => {
@@ -25,10 +28,15 @@ const Sidemenu = ({ toggleMenu }) => {
     setShowLoginForm(true);
   };
 
+  const handleClickSignupWithEmail = () => {
+    setShowLoginMenu(false);
+    setShowSignupForm(true);
+  };
+
   return (
     <SidemenuStyled>
       <div className="controls">
-        {((showLoginMenu || showLoginForm) && (
+        {((showLoginMenu || showLoginForm || showSignupForm) && (
           <button type="button">
             <FontAwesomeIcon icon={faArrowLeft} onClick={handleClickBack} />
           </button>
@@ -60,7 +68,7 @@ const Sidemenu = ({ toggleMenu }) => {
               </button>
             </li>
             <li>
-              <button type="button">
+              <button type="button" onClick={handleClickSignupWithEmail}>
                 <FontAwesomeIcon icon={faEnvelope} />
                 Sign up with Email
               </button>
@@ -68,7 +76,8 @@ const Sidemenu = ({ toggleMenu }) => {
           </ul>
         </>
       )) ||
-        (showLoginForm && <Login />) || (
+        (showLoginForm && <Login cancel={handleClickBack} />) ||
+        (showSignupForm && <Signup cancel={handleClickBack} />) || (
           <>
             <Link className="logo" to="/" onClick={toggleMenu}>
               <img src="logo.svg" alt="ejuicr logo" />
