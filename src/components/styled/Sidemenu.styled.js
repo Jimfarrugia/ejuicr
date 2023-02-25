@@ -57,6 +57,15 @@ export const SidemenuStyled = styled.nav`
     font-size: 0.9rem;
   }
 
+  .user-data {
+    color: ${colors.blue};
+
+    & svg {
+      margin-right: 0.25em;
+      margin-bottom: -0.125em;
+    }
+  }
+
   .error-message {
     font-size: 0.9rem;
     margin: 0 1.25em 1.5em;

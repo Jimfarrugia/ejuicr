@@ -18,6 +18,7 @@ const Sidemenu = ({ toggleMenu }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showSignupForm, setShowSignupForm] = useState(false);
   const [showResetPasswordForm, setShowResetPasswordForm] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleClickBack = () => {
     setShowLoginMenu(!showLoginMenu);
@@ -58,37 +59,49 @@ const Sidemenu = ({ toggleMenu }) => {
           <FontAwesomeIcon icon={faClose} onClick={toggleMenu} />
         </button>
       </div>
-      {(showLoginMenu && (
-        <>
-          <h3>Login</h3>
-          <ul>
-            <li>
-              <button type="button">
-                <FontAwesomeIcon icon={faGoogle} />
-                Sign in with Google
-              </button>
-            </li>
-            <li>
-              <button type="button">
-                <FontAwesomeIcon icon={faTwitter} />
-                Sign in with Twitter
-              </button>
-            </li>
-            <li>
-              <button type="button" onClick={handleClickLoginWithEmail}>
-                <FontAwesomeIcon icon={faEnvelope} />
-                Sign in with Email
-              </button>
-            </li>
-            <li>
-              <button type="button" onClick={handleClickSignupWithEmail}>
-                <FontAwesomeIcon icon={faEnvelope} />
-                Sign up with Email
-              </button>
-            </li>
-          </ul>
-        </>
+      {(user && (
+        <div className="user-data">
+          <Link className="logo" to="/" onClick={toggleMenu}>
+            <img src="logo.svg" alt="ejuicr logo" />
+          </Link>
+          <p>You are signed in as:</p>
+          <p>
+            <FontAwesomeIcon icon={faEnvelope} />
+            {user.email}
+          </p>
+        </div>
       )) ||
+        (showLoginMenu && (
+          <>
+            <h3>Login</h3>
+            <ul>
+              <li>
+                <button type="button">
+                  <FontAwesomeIcon icon={faGoogle} />
+                  Sign in with Google
+                </button>
+              </li>
+              <li>
+                <button type="button">
+                  <FontAwesomeIcon icon={faTwitter} />
+                  Sign in with Twitter
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={handleClickLoginWithEmail}>
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  Sign in with Email
+                </button>
+              </li>
+              <li>
+                <button type="button" onClick={handleClickSignupWithEmail}>
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  Sign up with Email
+                </button>
+              </li>
+            </ul>
+          </>
+        )) ||
         (showLoginForm && (
           <Login
             cancel={handleClickBack}
@@ -98,7 +111,7 @@ const Sidemenu = ({ toggleMenu }) => {
         )) ||
         (showSignupForm && (
           <Signup
-            cancel={handleClickBack}
+            handleClickBack={handleClickBack}
             handleClickLoginWithEmail={handleClickLoginWithEmail}
           />
         )) ||
