@@ -9,6 +9,7 @@ import {
 import { faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Login from "./Login";
 import Signup from "./Signup";
+import ResetPassword from "./ResetPassword";
 import FooterMenu from "./FooterMenu";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
 
@@ -16,27 +17,39 @@ const Sidemenu = ({ toggleMenu }) => {
   const [showLoginMenu, setShowLoginMenu] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showSignupForm, setShowSignupForm] = useState(false);
+  const [showResetPasswordForm, setShowResetPasswordForm] = useState(false);
 
   const handleClickBack = () => {
     setShowLoginMenu(!showLoginMenu);
     setShowLoginForm(false);
     setShowSignupForm(false);
+    setShowResetPasswordForm(false);
   };
 
   const handleClickLoginWithEmail = () => {
     setShowLoginMenu(false);
+    setShowSignupForm(false);
     setShowLoginForm(true);
   };
 
   const handleClickSignupWithEmail = () => {
     setShowLoginMenu(false);
+    setShowLoginForm(false);
     setShowSignupForm(true);
+  };
+
+  const handleClickResetPassword = () => {
+    setShowLoginForm(false);
+    setShowResetPasswordForm(true);
   };
 
   return (
     <SidemenuStyled>
       <div className="controls">
-        {((showLoginMenu || showLoginForm || showSignupForm) && (
+        {((showLoginMenu ||
+          showLoginForm ||
+          showSignupForm ||
+          showResetPasswordForm) && (
           <button type="button">
             <FontAwesomeIcon icon={faArrowLeft} onClick={handleClickBack} />
           </button>
@@ -76,8 +89,22 @@ const Sidemenu = ({ toggleMenu }) => {
           </ul>
         </>
       )) ||
-        (showLoginForm && <Login cancel={handleClickBack} />) ||
-        (showSignupForm && <Signup cancel={handleClickBack} />) || (
+        (showLoginForm && (
+          <Login
+            cancel={handleClickBack}
+            handleClickResetPassword={handleClickResetPassword}
+            handleClickSignupWithEmail={handleClickSignupWithEmail}
+          />
+        )) ||
+        (showSignupForm && (
+          <Signup
+            cancel={handleClickBack}
+            handleClickLoginWithEmail={handleClickLoginWithEmail}
+          />
+        )) ||
+        (showResetPasswordForm && (
+          <ResetPassword cancel={handleClickBack} />
+        )) || (
           <>
             <Link className="logo" to="/" onClick={toggleMenu}>
               <img src="logo.svg" alt="ejuicr logo" />

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Signup = ({ cancel }) => {
+const Signup = ({ cancel, handleClickLoginWithEmail }) => {
   return (
     <>
       <h3>Signup</h3>
@@ -30,7 +30,10 @@ const Signup = ({ cancel }) => {
       <p>
         Already have an account?
         <br />
-        <Link>Sign in instead</Link>.
+        <Link to="#" onClick={handleClickLoginWithEmail}>
+          Sign in instead
+        </Link>
+        .
       </p>
     </>
   );

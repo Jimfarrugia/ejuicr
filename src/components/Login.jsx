@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Login = ({ cancel }) => {
+const Login = ({
+  cancel,
+  handleClickResetPassword,
+  handleClickSignupWithEmail,
+}) => {
   return (
     <>
       <h3>Login</h3>
@@ -25,12 +29,18 @@ const Login = ({ cancel }) => {
       <p>
         Need an account?
         <br />
-        <Link>Sign up instead</Link>.
+        <Link to="#" onClick={handleClickSignupWithEmail}>
+          Sign up instead
+        </Link>
+        .
       </p>
       <p>
         Forgot your password?
         <br />
-        <Link>Reset it here</Link>.
+        <Link to="#" onClick={handleClickResetPassword}>
+          Reset it here
+        </Link>
+        .
       </p>
     </>
   );
