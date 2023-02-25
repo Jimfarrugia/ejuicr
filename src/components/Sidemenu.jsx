@@ -112,7 +112,7 @@ const Sidemenu = ({ toggleMenu }) => {
         )) ||
         (showLoginForm && (
           <Login
-            cancel={handleClickBack}
+            handleClickBack={handleClickBack}
             handleClickResetPassword={handleClickResetPassword}
             handleClickSignupWithEmail={handleClickSignupWithEmail}
           />
