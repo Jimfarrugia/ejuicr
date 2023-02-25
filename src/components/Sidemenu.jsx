@@ -20,6 +20,11 @@ const Sidemenu = ({ toggleMenu }) => {
   const [showResetPasswordForm, setShowResetPasswordForm] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.reload();
+  };
+
   const handleClickBack = () => {
     setShowLoginMenu(!showLoginMenu);
     setShowLoginForm(false);
@@ -69,6 +74,9 @@ const Sidemenu = ({ toggleMenu }) => {
             <FontAwesomeIcon icon={faEnvelope} />
             {user.email}
           </p>
+          <Link to="#" onClick={handleLogout}>
+            Logout
+          </Link>
         </div>
       )) ||
         (showLoginMenu && (
