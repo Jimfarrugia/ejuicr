@@ -7,21 +7,30 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import Login from "./Login";
 import FooterMenu from "./FooterMenu";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
 
 const Sidemenu = ({ toggleMenu }) => {
   const [showLoginMenu, setShowLoginMenu] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
+
+  const handleClickBack = () => {
+    setShowLoginMenu(false);
+    setShowLoginForm(false);
+  };
+
+  const handleClickLoginWithEmail = () => {
+    setShowLoginMenu(false);
+    setShowLoginForm(true);
+  };
 
   return (
     <SidemenuStyled>
       <div className="controls">
-        {(showLoginMenu && (
+        {((showLoginMenu || showLoginForm) && (
           <button type="button">
-            <FontAwesomeIcon
-              icon={faArrowLeft}
-              onClick={() => setShowLoginMenu(false)}
-            />
+            <FontAwesomeIcon icon={faArrowLeft} onClick={handleClickBack} />
           </button>
         )) || <div />}
         <button type="button">
@@ -45,7 +54,7 @@ const Sidemenu = ({ toggleMenu }) => {
               </button>
             </li>
             <li>
-              <button type="button">
+              <button type="button" onClick={handleClickLoginWithEmail}>
                 <FontAwesomeIcon icon={faEnvelope} />
                 Sign in with Email
               </button>
@@ -58,16 +67,17 @@ const Sidemenu = ({ toggleMenu }) => {
             </li>
           </ul>
         </>
-      )) || (
-        <>
-          <Link className="logo" to="/" onClick={toggleMenu}>
-            <img src="logo.svg" alt="ejuicr logo" />
-          </Link>
-          <Link to="#" onClick={() => setShowLoginMenu(true)}>
-            Login/Signup
-          </Link>
-        </>
-      )}
+      )) ||
+        (showLoginForm && <Login />) || (
+          <>
+            <Link className="logo" to="/" onClick={toggleMenu}>
+              <img src="logo.svg" alt="ejuicr logo" />
+            </Link>
+            <Link to="#" onClick={() => setShowLoginMenu(true)}>
+              Login/Signup
+            </Link>
+          </>
+        )}
       <hr />
       <FooterMenu toggleMenu={toggleMenu} />
     </SidemenuStyled>

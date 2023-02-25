@@ -51,4 +51,23 @@ export const SidemenuStyled = styled.nav`
   & h3 {
     margin: 0.5em auto;
   }
+
+  p {
+    margin: 0 0 1.5em;
+    font-size: 0.9rem;
+  }
+
+  .sidemenu-form-row {
+    margin-bottom: 1.5em;
+
+    & > button {
+      width: calc(50% - 2em);
+      height: 35px;
+      font-size: 0.95rem;
+
+      &:first-child {
+        margin-right: 1.5em;
+      }
+    }
+  }
 `;

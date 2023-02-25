@@ -92,9 +92,24 @@ const GlobalStyles = createGlobalStyle`
 
     &.red {
       background: ${colors.red};
+
+      &:hover {
+        background: ${colors.pinkPurple};
+      }
+      &:active {
+        background: ${colors.pink};
+      }
     }
+
     &.green {
       background: ${colors.cyanGreen};
+
+      &:hover {
+        background: ${colors.pinkPurple};
+      }
+      &:active {
+        background: ${colors.pink};
+      }
     }
 
     & > span {
@@ -134,7 +149,11 @@ const GlobalStyles = createGlobalStyle`
     outline: none;
   }
 
-  input[type="text"] {
+  ::placeholder {
+    color: ${colors.blue};
+  }
+
+  input[type="text"], input[type="email"], input[type="password"] {
     height: 27px;
     width: calc(100% - 12px);
     padding: 2px 6px;
