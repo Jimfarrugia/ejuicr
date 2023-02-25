@@ -16,3 +16,5 @@ export const colors = {
   yellowPink: `linear-gradient(135deg, #f1fa8c, #ff79c6)`,
   cyanGreen: `linear-gradient(135deg, #8be9fd, #50fa7b)`,
 };
+
+export const API_URL = process.env.REACT_APP_API_URL;
