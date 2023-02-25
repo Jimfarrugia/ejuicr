@@ -2,26 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../constants";
+import { validateEmail, validatePassword } from "../helpers";
 
 const Signup = ({ handleClickBack, handleClickLoginWithEmail }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
-
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // Return true if email is valid, false otherwise
-    return regex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    if (password.length < 6)
-      return "Password is too short.  It must be at least 6 characters.";
-    if (password.length > 250)
-      return "Password is too long.  It must not be more than 250 characters.";
-    return true;
-  };
 
   const registerUser = async (userData) => {
     const response = await axios.post(`${API_URL}/user`, userData);

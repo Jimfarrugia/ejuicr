@@ -58,3 +58,19 @@ export const calculateWeight = (totalVolume, pgPercentage, vgPercentage) => {
   const totalWeight = pgWeight + vgWeight;
   return totalWeight;
 };
+
+// Check that email address is valid
+export const validateEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Return true if email is valid, false otherwise
+  return regex.test(email);
+};
+
+// Check that password is valid
+export const validatePassword = (password) => {
+  if (password.length < 6)
+    return "Password is too short.  It must be at least 6 characters.";
+  if (password.length > 250)
+    return "Password is too long.  It must not be more than 250 characters.";
+  return true;
+};
