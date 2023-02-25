@@ -172,6 +172,15 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  .error-message {
+    background: ${colors.red};
+    color: ${colors.black};
+    font-size: 1rem;
+    padding: 1em;
+    margin: 0 0.5em 1em;
+    border-radius: 3px;
+  }
+
   .row {
     display: flex;
     justify-content: space-between;

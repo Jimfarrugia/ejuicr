@@ -6,14 +6,6 @@ export const IngredientsStyled = styled.div`
     margin-top: 1em;
   }
 
-  & .error-message {
-    background: ${colors.red};
-    color: ${colors.black};
-    margin: 0 0.5em 1em;
-    padding: 1em;
-    border-radius: 3px;
-  }
-
   & .red {
     color: ${colors.red};
   }

@@ -57,6 +57,11 @@ export const SidemenuStyled = styled.nav`
     font-size: 0.9rem;
   }
 
+  .error-message {
+    font-size: 0.9rem;
+    margin: 0 1.25em 1.5em;
+  }
+
   .sidemenu-form-row {
     margin-bottom: 1.5em;
 
