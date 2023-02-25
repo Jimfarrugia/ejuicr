@@ -60,6 +60,10 @@ export const SidemenuStyled = styled.nav`
   .user-data {
     color: ${colors.blue};
 
+    & a {
+      font-size: 1rem;
+    }
+
     & svg {
       margin-right: 0.25em;
       margin-bottom: -0.125em;
