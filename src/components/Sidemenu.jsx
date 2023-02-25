@@ -55,11 +55,12 @@ const Sidemenu = ({ toggleMenu }) => {
         {((showLoginMenu ||
           showLoginForm ||
           showSignupForm ||
-          showResetPasswordForm) && (
-          <button type="button">
-            <FontAwesomeIcon icon={faArrowLeft} onClick={handleClickBack} />
-          </button>
-        )) || <div />}
+          showResetPasswordForm) &&
+          !user && (
+            <button type="button">
+              <FontAwesomeIcon icon={faArrowLeft} onClick={handleClickBack} />
+            </button>
+          )) || <div />}
         <button type="button">
           <FontAwesomeIcon icon={faClose} onClick={toggleMenu} />
         </button>
@@ -74,9 +75,17 @@ const Sidemenu = ({ toggleMenu }) => {
             <FontAwesomeIcon icon={faEnvelope} />
             {user.email}
           </p>
-          <Link to="#" onClick={handleLogout}>
-            Logout
-          </Link>
+          <p>
+            <Link to="#">Saved Recipes</Link>
+          </p>
+          <p>
+            <Link to="#">Settings</Link>
+          </p>
+          <p>
+            <Link to="#" onClick={handleLogout}>
+              Logout
+            </Link>
+          </p>
         </div>
       )) ||
         (showLoginMenu && (
