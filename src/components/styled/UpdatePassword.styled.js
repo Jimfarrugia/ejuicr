@@ -10,4 +10,9 @@ export const UpdatePasswordStyled = styled.div`
   button {
     font-size: 1rem;
   }
+
+  .error-message,
+  .success-message {
+    text-align: center;
+  }
 `;

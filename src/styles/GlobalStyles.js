@@ -179,6 +179,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 1em;
     margin: 0 0.5em 1em;
     border-radius: 3px;
+    line-height: 1.5;
   }
 
   .success-message {
