@@ -70,7 +70,8 @@ export const SidemenuStyled = styled.nav`
     }
   }
 
-  .error-message {
+  .error-message,
+  .success-message {
     font-size: 0.9rem;
     margin: 0 1.25em 1.5em;
   }

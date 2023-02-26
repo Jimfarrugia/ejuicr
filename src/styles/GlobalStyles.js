@@ -172,13 +172,17 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  .error-message {
+  .error-message, .success-message {
     background: ${colors.red};
     color: ${colors.black};
     font-size: 1rem;
     padding: 1em;
     margin: 0 0.5em 1em;
     border-radius: 3px;
+  }
+
+  .success-message {
+    background: ${colors.green};
   }
 
   .row {
