@@ -12,7 +12,7 @@ import Signup from "./Signup";
 import ResetPassword from "./ResetPassword";
 import FooterMenu from "./FooterMenu";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
-import logoImg from "../../public/logo.svg";
+import logoImg from "../assets/logo.svg";
 
 const Sidemenu = ({ toggleMenu }) => {
   const [showLoginMenu, setShowLoginMenu] = useState(false);

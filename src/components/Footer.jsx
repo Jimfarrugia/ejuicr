@@ -1,6 +1,6 @@
 import FooterMenu from "./FooterMenu";
 import { FooterStyled } from "./styled/Footer.styled";
-import logoGrayImg from "../../public/logo-gray.svg";
+import logoGrayImg from "../assets/logo-gray.svg";
 
 const Footer = () => {
   return (
