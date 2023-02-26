@@ -1,5 +1,6 @@
 import FooterMenu from "./FooterMenu";
 import { FooterStyled } from "./styled/Footer.styled";
+import logoGrayImg from "../../public/logo-gray.svg";
 
 const Footer = () => {
   return (
@@ -7,7 +8,7 @@ const Footer = () => {
       <div className="container">
         <FooterMenu />
         <div>
-          <img src="logo-gray.svg" alt="ejuicr logo" />
+          <img src={logoGrayImg} alt="ejuicr logo" />
         </div>
       </div>
     </FooterStyled>

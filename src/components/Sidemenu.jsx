@@ -12,6 +12,7 @@ import Signup from "./Signup";
 import ResetPassword from "./ResetPassword";
 import FooterMenu from "./FooterMenu";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
+import logoImg from "../../public/logo.svg";
 
 const Sidemenu = ({ toggleMenu }) => {
   const [showLoginMenu, setShowLoginMenu] = useState(false);
@@ -68,7 +69,7 @@ const Sidemenu = ({ toggleMenu }) => {
       {(user && (
         <div className="user-data">
           <Link className="logo" to="/" onClick={toggleMenu}>
-            <img src="logo.svg" alt="ejuicr logo" />
+            <img src={logoImg} alt="ejuicr logo" />
           </Link>
           <p>You are signed in as:</p>
           <p>
@@ -137,7 +138,7 @@ const Sidemenu = ({ toggleMenu }) => {
         )) || (
           <>
             <Link className="logo" to="/" onClick={toggleMenu}>
-              <img src="logo.svg" alt="ejuicr logo" />
+              <img src={logoImg} alt="ejuicr logo" />
             </Link>
             <Link to="#" onClick={() => setShowLoginMenu(true)}>
               Login/Signup
