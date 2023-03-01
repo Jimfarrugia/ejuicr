@@ -1,3 +1,5 @@
+import jwtDecode from "jwt-decode";
+
 // Round a number to two decimal places
 export function roundToTwoDecimalPlaces(num) {
   return +(Math.round(num + "e+2") + "e-2");
@@ -73,4 +75,12 @@ export const validatePassword = (password) => {
   if (password.length > 250)
     return "Password is too long.  It must not be more than 250 characters.";
   return true;
+};
+
+// Decode a jasonwebtoken from url-safe base64 format
+export const decodeToken = (encodedToken) => {
+  // Convert token from url-safe base64 to it's original format
+  const token = atob(encodedToken);
+  // Decode and return the token
+  return jwtDecode(token);
 };

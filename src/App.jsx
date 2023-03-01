@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
 import {
@@ -8,9 +9,12 @@ import {
   totalFlavorPg,
   totalFlavorVg,
   calculateWeight,
+  decodeToken,
 } from "./helpers";
 
 function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [targetPg, setTargetPg] = useState(30);
   const [targetVg, setTargetVg] = useState(70);
   const [targetNicStrength, setTargetNicStrength] = useState(6);
@@ -126,6 +130,16 @@ function App() {
       roundToTwoDecimalPlaces(totalVg - nicResults.vg - totalFlavorVg(flavors))
     );
   };
+
+  useEffect(() => {
+    const token = searchParams.get("token");
+    if (token) {
+      const userData = decodeToken(token);
+      const user = { ...userData, token };
+      localStorage.setItem("user", JSON.stringify(user));
+      navigate("/");
+    }
+  }, []);
 
   useEffect(() => {
     updateNicResults(targetNicStrength, targetAmount, nicConfig);
