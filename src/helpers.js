@@ -81,6 +81,11 @@ export const validatePassword = (password) => {
 export const decodeToken = (encodedToken) => {
   // Convert token from url-safe base64 to it's original format
   const token = atob(encodedToken);
-  // Decode and return the token
-  return jwtDecode(token);
+  // Decode and return the token or null if it's invalid
+  try {
+    return jwtDecode(token);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 };

@@ -135,6 +135,11 @@ function App() {
     const token = searchParams.get("token");
     if (token) {
       const userData = decodeToken(token);
+      if (!userData) {
+        console.log("Invalid token.");
+        localStorage.removeItem("user");
+        return navigate("/");
+      }
       const user = { ...userData, token };
       localStorage.setItem("user", JSON.stringify(user));
       navigate("/");
