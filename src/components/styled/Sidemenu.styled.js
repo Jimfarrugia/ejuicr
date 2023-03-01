@@ -54,11 +54,18 @@ export const SidemenuStyled = styled.nav`
 
   p {
     margin: 0 0 1.5em;
-    font-size: 0.9rem;
+
+    &.small {
+      font-size: 0.9rem;
+    }
   }
 
   .user-data {
     color: ${colors.blue};
+
+    & p {
+      font-size: 0.9rem;
+    }
 
     & > p:first-child {
       margin: 0 0 0.5em;

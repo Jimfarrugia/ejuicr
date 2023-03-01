@@ -85,7 +85,7 @@ const Signup = ({ handleClickBack, handleClickLoginWithEmail }) => {
           </button>
         </div>
       </form>
-      <p>
+      <p className="small">
         Already have an account?
         <br />
         <Link to="#" onClick={handleClickLoginWithEmail}>

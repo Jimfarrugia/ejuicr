@@ -75,7 +75,7 @@ const Login = ({
           </button>
         </div>
       </form>
-      <p>
+      <p className="small">
         Need an account?
         <br />
         <Link to="#" onClick={handleClickSignupWithEmail}>
@@ -83,7 +83,7 @@ const Login = ({
         </Link>
         .
       </p>
-      <p>
+      <p className="small">
         Forgot your password?
         <br />
         <Link to="#" onClick={handleClickResetPassword}>
