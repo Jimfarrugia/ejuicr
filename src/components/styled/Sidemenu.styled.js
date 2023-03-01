@@ -60,6 +60,10 @@ export const SidemenuStyled = styled.nav`
   .user-data {
     color: ${colors.blue};
 
+    & > p:first-child {
+      margin: 0 0 0.5em;
+    }
+
     & a {
       font-size: 1rem;
     }
@@ -67,6 +71,21 @@ export const SidemenuStyled = styled.nav`
     & svg {
       margin-right: 0.25em;
       margin-bottom: -0.125em;
+    }
+
+    .user-picture {
+      background: ${colors.purpleCyan};
+      border-radius: 100%;
+      width: fit-content;
+      line-height: 0;
+      margin: 0 auto 0.5em;
+      padding: 3px;
+
+      & > img {
+        border-radius: 100%;
+        max-width: 64px;
+        height: auto;
+      }
     }
   }
 

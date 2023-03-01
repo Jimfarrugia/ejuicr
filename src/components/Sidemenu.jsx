@@ -13,6 +13,7 @@ import ResetPassword from "./ResetPassword";
 import FooterMenu from "./FooterMenu";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
 import logoImg from "../assets/logo.svg";
+import { API_URL } from "../constants";
 
 const Sidemenu = ({ toggleMenu }) => {
   const [showLoginMenu, setShowLoginMenu] = useState(false);
@@ -67,15 +68,32 @@ const Sidemenu = ({ toggleMenu }) => {
         </button>
       </div>
       {(user && (
-        <div className="user-data">
+        <>
           <Link className="logo" to="/" onClick={toggleMenu}>
             <img src={logoImg} alt="ejuicr logo" />
           </Link>
+          <div className="user-data">
           <p>You are signed in as:</p>
+            {(user.authProvider && user.authProvider === "google" && (
+              <>
+                <div className="user-picture">
+                  <img
+                    src={user.picture}
+                    alt={`${user.displayName} google profile picture`}
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <p>
+                  <FontAwesomeIcon icon={faGoogle} />
+                  {user.displayName}
+                </p>
+              </>
+            )) || (
           <p>
             <FontAwesomeIcon icon={faEnvelope} />
             {user.email}
           </p>
+            )}
           <p>
             <Link to="#">Saved Recipes</Link>
           </p>
@@ -88,16 +106,19 @@ const Sidemenu = ({ toggleMenu }) => {
             </Link>
           </p>
         </div>
+        </>
       )) ||
         (showLoginMenu && (
           <>
             <h3>Login</h3>
             <ul>
               <li>
-                <button type="button">
+                <form action={`${API_URL}/auth/google`}>
+                  <button type="submit">
                   <FontAwesomeIcon icon={faGoogle} />
                   Sign in with Google
                 </button>
+                </form>
               </li>
               <li>
                 <button type="button">
