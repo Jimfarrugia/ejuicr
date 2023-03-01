@@ -8,7 +8,7 @@ const ResetPassword = ({ cancel }) => {
   const [success, setSuccess] = useState(false);
 
   const resetPassword = async (email) => {
-    const url = `${API_URL}/user/reset-password`;
+    const url = `${API_URL}/api/user/reset-password`;
     try {
       await axios.post(url, { email });
       return { status: "success" };

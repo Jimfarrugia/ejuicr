@@ -13,7 +13,7 @@ const UpdatePassword = () => {
   const [success, setSuccess] = useState(false);
 
   const changePassword = async (password) => {
-    const url = `${API_URL}/user/reset-password/${token}`;
+    const url = `${API_URL}/api/user/reset-password/${token}`;
     try {
       await axios.post(url, { password });
       return { status: "success" };

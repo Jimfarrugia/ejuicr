@@ -11,7 +11,7 @@ const Signup = ({ handleClickBack, handleClickLoginWithEmail }) => {
   const [error, setError] = useState("");
 
   const registerUser = async (userData) => {
-    const response = await axios.post(`${API_URL}/user`, userData);
+    const response = await axios.post(`${API_URL}/api/user`, userData);
     if (response.data) {
       localStorage.setItem("user", JSON.stringify(response.data));
     }

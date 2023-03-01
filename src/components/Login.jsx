@@ -14,7 +14,7 @@ const Login = ({
   const [error, setError] = useState("");
 
   const login = async (userData) => {
-    const response = await axios.post(`${API_URL}/user/login`, userData);
+    const response = await axios.post(`${API_URL}/api/user/login`, userData);
     if (response.data) {
       localStorage.setItem("user", JSON.stringify(response.data));
     }
