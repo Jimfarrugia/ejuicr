@@ -11,6 +11,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import ResetPassword from "./ResetPassword";
 import FooterMenu from "./FooterMenu";
+import UserProfile from "./UserProfile";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
 import logoImg from "../assets/logo.svg";
 import { API_URL } from "../constants";
@@ -72,28 +73,7 @@ const Sidemenu = ({ toggleMenu }) => {
           <Link className="logo" to="/" onClick={toggleMenu}>
             <img src={logoImg} alt="ejuicr logo" />
           </Link>
-          <div className="user-data">
-          <p>You are signed in as:</p>
-            {(user.authProvider && user.authProvider === "google" && (
-              <>
-                <div className="user-picture">
-                  <img
-                    src={user.picture}
-                    alt={`${user.displayName} google profile picture`}
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                <p>
-                  <FontAwesomeIcon icon={faGoogle} />
-                  {user.displayName}
-                </p>
-              </>
-            )) || (
-          <p>
-            <FontAwesomeIcon icon={faEnvelope} />
-            {user.email}
-          </p>
-            )}
+          <UserProfile user={user} />
           <p>
             <Link to="#">Saved Recipes</Link>
           </p>
@@ -105,7 +85,6 @@ const Sidemenu = ({ toggleMenu }) => {
               Logout
             </Link>
           </p>
-        </div>
         </>
       )) ||
         (showLoginMenu && (
@@ -115,9 +94,9 @@ const Sidemenu = ({ toggleMenu }) => {
               <li>
                 <form action={`${API_URL}/auth/google`}>
                   <button type="submit">
-                  <FontAwesomeIcon icon={faGoogle} />
-                  Sign in with Google
-                </button>
+                    <FontAwesomeIcon icon={faGoogle} />
+                    Sign in with Google
+                  </button>
                 </form>
               </li>
               <li>
