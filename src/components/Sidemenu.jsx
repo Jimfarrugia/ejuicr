@@ -100,10 +100,12 @@ const Sidemenu = ({ toggleMenu }) => {
                 </form>
               </li>
               <li>
-                <button type="button">
-                  <FontAwesomeIcon icon={faTwitter} />
-                  Sign in with Twitter
-                </button>
+                <form action={`${API_URL}/auth/twitter`}>
+                  <button type="submit">
+                    <FontAwesomeIcon icon={faTwitter} />
+                    Sign in with Twitter
+                  </button>
+                </form>
               </li>
               <li>
                 <button type="button" onClick={handleClickLoginWithEmail}>
