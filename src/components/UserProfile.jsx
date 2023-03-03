@@ -1,17 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const UserProfile = ({ user }) => {
+  const authProvider =
+    (user.authProvider && user.authProvider === "google" && "google") ||
+    (user.authProvider && user.authProvider === "twitter" && "twitter") ||
+    null;
+
+  const imgAltText =
+    authProvider === "twitter"
+      ? `${user.handle} ${authProvider} profile picture`
+      : `${user.displayName} ${authProvider} profile picture`;
+
   return (
     <div className="user-data">
       <p>You are signed in as:</p>
-      {(user.authProvider && user.authProvider === "google" && (
+      {(authProvider === "google" && (
         <>
           <div className="user-picture">
             <img
               src={user.picture}
-              alt={`${user.displayName} google profile picture`}
+              alt={imgAltText}
               referrerPolicy="no-referrer"
             />
           </div>
@@ -20,12 +30,22 @@ const UserProfile = ({ user }) => {
             {user.displayName}
           </p>
         </>
-      )) || (
-        <p>
-          <FontAwesomeIcon icon={faEnvelope} />
-          {user.email}
-        </p>
-      )}
+      )) ||
+        (authProvider === "twitter" && (
+          <>
+            <div className="user-picture">
+              <img src={user.picture} alt={imgAltText} />
+            </div>
+            <p>
+              <FontAwesomeIcon icon={faTwitter} />@{user.handle}
+            </p>
+          </>
+        )) || (
+          <p>
+            <FontAwesomeIcon icon={faEnvelope} />
+            {user.email}
+          </p>
+        )}
     </div>
   );
 };
