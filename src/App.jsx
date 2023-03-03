@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
+import SaveRecipe from "./components/SaveRecipe";
 import {
   roundToTwoDecimalPlaces,
   parseNumberInput,
@@ -265,33 +266,36 @@ function App() {
   };
 
   return (
-    <div className="calculator">
-      <TargetEjuice
-        targetPg={targetPg}
-        targetVg={targetVg}
-        handleChangeTargetPgVg={handleChangeTargetPgVg}
-        targetNicStrength={targetNicStrength}
-        handleChangeTargetNicStrength={handleChangeTargetNicStrength}
-        targetAmount={targetAmount}
-        handleChangeTargetAmount={handleChangeTargetAmount}
-      />
-      <Ingredients
-        nicConfig={nicConfig}
-        nicResults={nicResults}
-        targetNicStrength={targetNicStrength}
-        handleChangeNicConfigStrength={handleChangeNicConfigStrength}
-        handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
-        targetAmount={targetAmount}
-        pgRequired={pgRequired}
-        vgRequired={vgRequired}
-        flavors={flavors}
-        handleChangeFlavorName={handleChangeFlavorName}
-        handleChangeFlavorPercentage={handleChangeFlavorPercentage}
-        handleChangeFlavorPgVg={handleChangeFlavorPgVg}
-        handleRemoveFlavor={handleRemoveFlavor}
-        handleAddFlavor={handleAddFlavor}
-      />
-    </div>
+    <>
+      <div className="calculator">
+        <TargetEjuice
+          targetPg={targetPg}
+          targetVg={targetVg}
+          handleChangeTargetPgVg={handleChangeTargetPgVg}
+          targetNicStrength={targetNicStrength}
+          handleChangeTargetNicStrength={handleChangeTargetNicStrength}
+          targetAmount={targetAmount}
+          handleChangeTargetAmount={handleChangeTargetAmount}
+        />
+        <Ingredients
+          nicConfig={nicConfig}
+          nicResults={nicResults}
+          targetNicStrength={targetNicStrength}
+          handleChangeNicConfigStrength={handleChangeNicConfigStrength}
+          handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
+          targetAmount={targetAmount}
+          pgRequired={pgRequired}
+          vgRequired={vgRequired}
+          flavors={flavors}
+          handleChangeFlavorName={handleChangeFlavorName}
+          handleChangeFlavorPercentage={handleChangeFlavorPercentage}
+          handleChangeFlavorPgVg={handleChangeFlavorPgVg}
+          handleRemoveFlavor={handleRemoveFlavor}
+          handleAddFlavor={handleAddFlavor}
+        />
+      </div>
+      <SaveRecipe />
+    </>
   );
 }
 
