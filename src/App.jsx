@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import TargetEjuice from "./components/TargetEjuice";
 import Ingredients from "./components/Ingredients";
 import {
@@ -11,6 +12,7 @@ import {
   calculateWeight,
   decodeToken,
 } from "./helpers";
+import { API_URL } from "./constants";
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -134,15 +136,29 @@ function App() {
   useEffect(() => {
     const token = searchParams.get("token");
     if (token) {
-      const userData = decodeToken(token);
-      if (!userData) {
+      // decode the data from the token
+      const decodedToken = decodeToken(token);
+      if (!decodedToken) {
         console.log("Invalid token.");
         localStorage.removeItem("user");
         return navigate("/");
       }
-      const user = { ...userData, token };
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/");
+      // request user data from server
+      axios
+        .get(`${API_URL}/api/user/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          // store the user data and token in localStorage
+          const user = { ...response.data, token };
+          localStorage.setItem("user", JSON.stringify(user));
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error(error.response.data);
+        });
     }
   }, []);
 
