@@ -4,6 +4,11 @@ import styled from "styled-components";
 export const SaveRecipeStyled = styled.div`
   h3 {
     margin: 1em auto 0;
+    display: none; // hide the login heading
+
+    &:first-child {
+      display: block;
+    }
   }
 
   & button {
@@ -37,6 +42,12 @@ export const SaveRecipeStyled = styled.div`
       & > div:first-child {
         padding-right: 0;
         margin-bottom: 1em;
+
+        & .input-border {
+          max-width: 260px;
+          margin: 0 auto;
+          display: block;
+        }
 
         & input {
           text-align: center;
@@ -95,5 +106,34 @@ export const SaveRecipeStyled = styled.div`
         }
       }
     }
+  }
+
+  // login form
+  .sidemenu-form-row {
+    text-align: center;
+
+    &:first-child {
+      margin-top: 2em;
+    }
+
+    & .input-border {
+      display: block;
+      max-width: 260px;
+      margin: 0 auto 1em;
+    }
+
+    & button {
+      font-size: 1rem;
+      padding: 0.5em 1.25em;
+
+      &:first-child {
+        margin-bottom: 0.5em;
+        margin-right: 1em;
+      }
+    }
+  }
+
+  p.small {
+    display: none;
   }
 `;
