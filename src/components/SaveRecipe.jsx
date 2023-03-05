@@ -29,6 +29,9 @@ const SaveRecipe = ({
   const handleClickSaveRecipe = async () => {
     setError("");
     setSuccess("");
+    if (!recipeTitle) {
+      return setError("Recipe title must not be blank.");
+    }
     const recipe = {
       name: recipeTitle,
       strength: targetNicStrength,
@@ -84,7 +87,7 @@ const SaveRecipe = ({
                 <input
                   type="text"
                   placeholder="Recipe Title"
-                  onChange={(e) => setRecipeTitle(e.target.value)}
+                  onChange={(e) => setRecipeTitle(e.target.value.trim())}
                 />
               </div>
             </div>
