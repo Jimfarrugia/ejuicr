@@ -294,7 +294,14 @@ function App() {
           handleAddFlavor={handleAddFlavor}
         />
       </div>
-      <SaveRecipe />
+      <SaveRecipe
+        targetPg={targetPg}
+        targetVg={targetVg}
+        targetNicStrength={targetNicStrength}
+        targetAmount={targetAmount}
+        nicConfig={nicConfig}
+        flavors={flavors}
+      />
     </>
   );
 }
