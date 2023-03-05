@@ -75,7 +75,9 @@ const Sidemenu = ({ toggleMenu }) => {
           </Link>
           <UserProfile user={user} />
           <p>
-            <Link to="#">Saved Recipes</Link>
+            <Link to="/recipes" onClick={toggleMenu}>
+              Saved Recipes
+            </Link>
           </p>
           <p>
             <Link to="#">Settings</Link>

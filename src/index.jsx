@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "typeface-bebas-neue";
 import App from "./App";
 import Layout from "./components/Layout";
+import Recipes from "./components/Recipes";
 import About from "./components/About";
 import Help from "./components/Help";
 import Contribute from "./components/Contribute";
@@ -18,6 +19,7 @@ root.render(
       <Layout>
         <Routes>
           <Route exact path="/" element={<App />} />
+          <Route path="/recipes" element={<Recipes />} />
           <Route path="/about" element={<About />} />
           <Route path="/help" element={<Help />} />
           <Route path="/contribute" element={<Contribute />} />
