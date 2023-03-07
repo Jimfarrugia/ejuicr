@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import DeleteButton from "./DeleteButton";
 import { RecipesStyled } from "./styled/Recipes.styled";
 import { API_URL } from "../constants";
@@ -54,7 +54,7 @@ const Recipes = () => {
           recipes.map((recipe, index) => (
             <li key={`recipe-${index}`}>
               <div>
-                <span>{recipe.name}</span>
+                <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
               </div>
               <div>{recipe.updatedAt.slice(0, 10)}</div>
               <div>
