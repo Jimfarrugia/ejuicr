@@ -14,6 +14,7 @@ const SaveRecipe = ({
   targetAmount,
   nicConfig,
   flavors,
+  recipe,
 }) => {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [recipeTitle, setRecipeTitle] = useState("");
@@ -22,6 +23,10 @@ const SaveRecipe = ({
 
   const user = JSON.parse(localStorage.getItem("user"));
 
+  const headers = {
+    Authorization: `Bearer ${user.token}`,
+  };
+
   const handleClickLoginWithEmail = () => setShowLoginForm(true);
 
   const handleClickLoginCancel = () => setShowLoginForm(false);
@@ -29,11 +34,11 @@ const SaveRecipe = ({
   const handleClickSaveRecipe = async () => {
     setError("");
     setSuccess("");
-    if (!recipeTitle) {
+    if (!recipe && !recipeTitle.trim()) {
       return setError("Recipe title must not be blank.");
     }
-    const recipe = {
-      name: recipeTitle,
+    const newRecipe = {
+      name: recipeTitle.trim(),
       strength: targetNicStrength,
       base: {
         pg: targetPg,
@@ -58,24 +63,38 @@ const SaveRecipe = ({
         })),
       },
     };
-    await axios
-      .post(`${API_URL}/api/recipes`, recipe, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
-      .then((response) => {
-        setSuccess(`"${response.data.name}" has been saved to your recipes.`);
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(error.response.data.message || "Failed to save recipe.");
-      });
+    if (!recipe) {
+      // create new recipe
+      axios
+        .post(`${API_URL}/api/recipes`, newRecipe, { headers })
+        .then((response) => {
+          setSuccess(`"${response.data.name}" has been saved to your recipes.`);
+        })
+        .catch((error) => {
+          console.error(error);
+          setError(error.response.data.message || "Failed to save recipe.");
+        });
+    } else {
+      // update the recipe
+      axios
+        .put(
+          `${API_URL}/api/recipes/${recipe._id}`,
+          { ...newRecipe, name: recipe.name },
+          { headers }
+        )
+        .then((response) => {
+          setSuccess(`"${response.data.name}" has been updated.`);
+        })
+        .catch((error) => {
+          console.error(error);
+          setError(error.response.data.message || "Failed to update recipe.");
+        });
+    }
   };
 
   return (
     <SaveRecipeStyled>
-      <h3>Save Recipe</h3>
+      <h3>Save {recipe ? "Changes" : "Recipe"}</h3>
       <hr />
       {error && <div className="error-message">{error}</div>}
       {success && <div className="success-message">{success}</div>}
@@ -87,7 +106,8 @@ const SaveRecipe = ({
                 <input
                   type="text"
                   placeholder="Recipe Title"
-                  onChange={(e) => setRecipeTitle(e.target.value.trim())}
+                  value={(recipe && recipe.name) || recipeTitle}
+                  onChange={(e) => !recipe && setRecipeTitle(e.target.value)}
                 />
               </div>
             </div>
