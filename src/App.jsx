@@ -15,7 +15,7 @@ import {
 } from "./helpers";
 import { API_URL } from "./constants";
 
-function App() {
+function App({ recipe }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const [targetPg, setTargetPg] = useState(30);
@@ -164,6 +164,28 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (recipe) {
+      const { base, ingredients, strength, amount } = recipe;
+      const recipeFlavors = ingredients.flavors.map((flavor) => ({
+        name: flavor.name,
+        pg: flavor.base.pg,
+        vg: flavor.base.vg,
+        percentage: flavor.percentage,
+      }));
+      setTargetAmount(amount);
+      setTargetPg(base.pg);
+      setTargetVg(base.vg);
+      setTargetNicStrength(strength);
+      setNicConfig({
+        strength: ingredients.nicotine.strength,
+        pg: ingredients.nicotine.base.pg,
+        vg: ingredients.nicotine.base.vg,
+      });
+      updateAllFlavorsResults(recipeFlavors, amount);
+    }
+  }, [recipe]);
+
+  useEffect(() => {
     updateNicResults(targetNicStrength, targetAmount, nicConfig);
   }, [targetNicStrength, targetAmount, nicConfig]);
 
@@ -268,6 +290,12 @@ function App() {
   return (
     <>
       <div className="calculator">
+        {recipe && (
+          <div className="recipe-header">
+            <h2>{recipe.name}</h2>
+            <hr />
+          </div>
+        )}
         <TargetEjuice
           targetPg={targetPg}
           targetVg={targetVg}
@@ -301,6 +329,7 @@ function App() {
         targetAmount={targetAmount}
         nicConfig={nicConfig}
         flavors={flavors}
+        recipe={recipe}
       />
     </>
   );

@@ -31,9 +31,8 @@ const GlobalStyles = createGlobalStyle`
     border-right: none;
   }
 
-  h3 {
+  h2, h3, h4 {
     font-family: "Bebas Neue";
-    font-size: 2.25rem;
     margin: 0 auto;
     width: fit-content;
     background: ${colors.yellowPink};
@@ -41,14 +40,17 @@ const GlobalStyles = createGlobalStyle`
     -webkit-text-fill-color: transparent;
   }
 
+  h2 {
+    font-size: 2.75rem;
+  }
+
+  h3 {
+    font-size: 2.25rem;
+  }
+
   h4 { 
-    font-family: "Bebas Neue";
     font-size: 1.75rem;
-    width: fit-content;
     margin: 2.5em 0 0;
-    background: ${colors.yellowPink};
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
 
   h5 {
@@ -234,6 +236,13 @@ const GlobalStyles = createGlobalStyle`
       margin: 0 1em;
     }
 
+  }
+
+  .recipe-header {
+    h2 { text-align: center; }
+    & hr {
+      margin-bottom: 2em;
+    }
   }
 `;
 
