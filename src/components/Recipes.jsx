@@ -52,6 +52,7 @@ const Recipes = () => {
         {recipes &&
           recipes.map((recipe, index) => (
             <RecipeListItem
+              key={`recipe-${index}`}
               recipe={recipe}
               index={index}
               handleConfirmDelete={handleConfirmDelete}
@@ -71,7 +72,7 @@ const RecipeListItem = ({ recipe, index, handleConfirmDelete }) => {
 
   return (
     <>
-      <li key={`recipe-${index}`}>
+      <li>
         <div>
           <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
         </div>
