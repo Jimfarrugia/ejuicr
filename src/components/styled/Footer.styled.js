@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../constants";
+import { colors, layoutWidth } from "../../constants";
 
 export const FooterStyled = styled.footer`
   background: ${colors.black};
@@ -9,6 +9,8 @@ export const FooterStyled = styled.footer`
   & > .container {
     display: flex;
     justify-content: space-between;
+    max-width: ${layoutWidth};
+    margin: 0 auto;
 
     & > div {
       position: relative;

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { colors } from "../constants";
+import { colors, layoutWidth } from "../constants";
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -12,6 +12,8 @@ const GlobalStyles = createGlobalStyle`
 
   main {
     padding: 1em;
+    max-width: ${layoutWidth};
+    margin: 0 auto;
   }
 
   a:link, a:visited {

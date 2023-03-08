@@ -17,4 +17,6 @@ export const colors = {
   cyanGreen: `linear-gradient(135deg, #8be9fd, #50fa7b)`,
 };
 
+export const layoutWidth = "800px";
+
 export const API_URL = process.env.REACT_APP_API_URL;
