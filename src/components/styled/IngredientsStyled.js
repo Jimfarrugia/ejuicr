@@ -38,8 +38,27 @@ export const IngredientsStyled = styled.div`
     & > div {
       display: flex;
 
-      &:last-child > button:last-child {
-        margin-left: 1em;
+      &:last-child {
+        // width: 100%;
+
+        & > button:last-child {
+          margin-left: 1em;
+        }
+      }
+
+      @media (min-width: 600px) {
+        &:last-child {
+          width: calc(100% - 1em);
+
+          & > button:last-child {
+            margin-left: auto;
+          }
+        }
+      }
+      @media (min-width: 700px) {
+        &:last-child {
+          width: calc(100% - 2em);
+        }
       }
     }
   }
