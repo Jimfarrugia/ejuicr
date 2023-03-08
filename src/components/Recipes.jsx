@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import DeleteButton from "./DeleteButton";
+import ConfirmDelete from "./ConfirmDelete";
 import { RecipesStyled } from "./styled/Recipes.styled";
 import { API_URL } from "../constants";
 
@@ -27,7 +28,7 @@ const Recipes = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  const handleClickDelete = (index) => {
+  const handleConfirmDelete = (index) => {
     const { _id } = recipes[index];
     axios
       .delete(`${API_URL}/api/recipes/${_id}`, { headers })
@@ -37,8 +38,6 @@ const Recipes = () => {
       })
       .catch((error) => console.error(error));
   };
-
-  // link to recipe calculator
 
   return (
     <RecipesStyled>
@@ -52,18 +51,44 @@ const Recipes = () => {
       <ul>
         {recipes &&
           recipes.map((recipe, index) => (
-            <li key={`recipe-${index}`}>
-              <div>
-                <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
-              </div>
-              <div>{recipe.updatedAt.slice(0, 10)}</div>
-              <div>
-                <DeleteButton handler={handleClickDelete} index={index} />
-              </div>
-            </li>
+            <RecipeListItem
+              recipe={recipe}
+              index={index}
+              handleConfirmDelete={handleConfirmDelete}
+            />
           ))}
       </ul>
     </RecipesStyled>
+  );
+};
+
+const RecipeListItem = ({ recipe, index, handleConfirmDelete }) => {
+  const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
+
+  const handleClickDelete = () => setShowDeleteDialogue(true);
+
+  const handleCancelDelete = () => setShowDeleteDialogue(false);
+
+  return (
+    <>
+      <li key={`recipe-${index}`}>
+        <div>
+          <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
+        </div>
+        <div>{recipe.updatedAt.slice(0, 10)}</div>
+        <div>
+          <DeleteButton handler={handleClickDelete} index={index} />
+        </div>
+      </li>
+      {showDeleteDialogue && (
+        <ConfirmDelete
+          index={index}
+          name={recipe.name}
+          handleCancelDelete={handleCancelDelete}
+          handleConfirmDelete={handleConfirmDelete}
+        />
+      )}
+    </>
   );
 };
 
