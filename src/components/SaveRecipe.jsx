@@ -23,10 +23,6 @@ const SaveRecipe = ({
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const headers = {
-    Authorization: `Bearer ${user.token}`,
-  };
-
   const handleClickLoginWithEmail = () => setShowLoginForm(true);
 
   const handleClickLoginCancel = () => setShowLoginForm(false);
@@ -62,6 +58,9 @@ const SaveRecipe = ({
           },
         })),
       },
+    };
+    const headers = {
+      Authorization: `Bearer ${user.token}`,
     };
     if (!recipe) {
       // create new recipe
