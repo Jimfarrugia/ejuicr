@@ -68,6 +68,7 @@ const SaveRecipe = ({
         .post(`${API_URL}/api/recipes`, newRecipe, { headers })
         .then((response) => {
           setSuccess(`"${response.data.name}" has been saved to your recipes.`);
+          localStorage.removeItem("calculator");
         })
         .catch((error) => {
           console.error(error);

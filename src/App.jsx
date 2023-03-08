@@ -18,36 +18,55 @@ import { API_URL } from "./constants";
 function App({ recipe }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [targetPg, setTargetPg] = useState(30);
-  const [targetVg, setTargetVg] = useState(70);
-  const [targetNicStrength, setTargetNicStrength] = useState(6);
-  const [targetAmount, setTargetAmount] = useState(30);
-  const [nicConfig, setNicConfig] = useState({
-    strength: 100,
-    pg: 100,
-    vg: 0,
-  });
-  const [nicResults, setNicResults] = useState({
-    amount: 1.8, // mL
-    percentage: 6,
-    pg: 1.8, // mL
-    vg: 0, // mL
-    weight: 1.86, // g
-  });
-  const [flavors, setFlavors] = useState([
-    {
-      name: "Flavor 1",
-      pg: 100, // %
-      vg: 0, // %
-      percentage: 5,
-      amount: 1.5, // mL
-      pgAmount: 1.5, // mL
-      vgAmount: 0, // mL
-      weight: 1.55, // g
-    },
-  ]);
-  const [pgRequired, setPgRequired] = useState(5.7);
-  const [vgRequired, setVgRequired] = useState(21);
+  const savedValues = JSON.parse(localStorage.getItem("calculator"));
+  const [targetPg, setTargetPg] = useState(
+    (savedValues && savedValues.targetPg) || 30
+  );
+  const [targetVg, setTargetVg] = useState(
+    (savedValues && savedValues.targetVg) || 70
+  );
+  const [targetNicStrength, setTargetNicStrength] = useState(
+    (savedValues && savedValues.targetNicStrength) || 6
+  );
+  const [targetAmount, setTargetAmount] = useState(
+    (savedValues && savedValues.targetAmount) || 30
+  );
+  const [nicConfig, setNicConfig] = useState(
+    (savedValues && savedValues.nicConfig) || {
+      strength: 100,
+      pg: 100,
+      vg: 0,
+    }
+  );
+  const [nicResults, setNicResults] = useState(
+    (savedValues && savedValues.nicResults) || {
+      amount: 1.8, // mL
+      percentage: 6,
+      pg: 1.8, // mL
+      vg: 0, // mL
+      weight: 1.86, // g
+    }
+  );
+  const [flavors, setFlavors] = useState(
+    (savedValues && savedValues.flavors) || [
+      {
+        name: "Flavor 1",
+        pg: 100, // %
+        vg: 0, // %
+        percentage: 5,
+        amount: 1.5, // mL
+        pgAmount: 1.5, // mL
+        vgAmount: 0, // mL
+        weight: 1.55, // g
+      },
+    ]
+  );
+  const [pgRequired, setPgRequired] = useState(
+    (savedValues && savedValues.pgRequired) || 5.7
+  );
+  const [vgRequired, setVgRequired] = useState(
+    (savedValues && savedValues.vgRequired) || 21
+  );
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
     if (
@@ -192,6 +211,35 @@ function App({ recipe }) {
   useEffect(() => {
     updatePgVgRequired(targetPg, targetVg, targetAmount, nicResults, flavors);
   }, [targetPg, targetVg, targetAmount, nicResults, flavors]);
+
+  useEffect(() => {
+    // Maintain calculator values in local storage
+    if (!recipe) {
+      console.log("!recipe", recipe);
+      const values = {
+        targetPg,
+        targetVg,
+        targetNicStrength,
+        targetAmount,
+        nicConfig,
+        nicResults,
+        flavors,
+        pgRequired,
+        vgRequired,
+      };
+      localStorage.setItem("calculator", JSON.stringify(values));
+    }
+  }, [
+    targetPg,
+    targetVg,
+    targetNicStrength,
+    targetAmount,
+    nicConfig,
+    nicResults,
+    flavors,
+    pgRequired,
+    vgRequired,
+  ]);
 
   const handleChangeTargetPgVg = (value, ingredient = "pg") => {
     const validatedValue = validatePgVgValue(value);
