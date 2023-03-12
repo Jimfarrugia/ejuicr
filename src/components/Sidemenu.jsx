@@ -80,7 +80,9 @@ const Sidemenu = ({ toggleMenu }) => {
             </Link>
           </p>
           <p>
-            <Link to="#">Settings</Link>
+            <Link to="/settings" onClick={toggleMenu}>
+              Settings
+            </Link>
           </p>
           <p>
             <Link to="#" onClick={handleLogout}>
