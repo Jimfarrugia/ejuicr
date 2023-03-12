@@ -215,7 +215,6 @@ function App({ recipe }) {
   useEffect(() => {
     // Maintain calculator values in local storage
     if (!recipe) {
-      console.log("!recipe", recipe);
       const values = {
         targetPg,
         targetVg,
