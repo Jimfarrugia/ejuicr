@@ -19,27 +19,26 @@ function App({ recipe }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const savedValues = JSON.parse(localStorage.getItem("calculator"));
-  const [targetPg, setTargetPg] = useState(
-    (savedValues && savedValues.targetPg) || 30
-  );
-  const [targetVg, setTargetVg] = useState(
-    (savedValues && savedValues.targetVg) || 70
-  );
+  const savedValue = (key) => {
+    savedValues?.[key] !== undefined ? savedValues[key] : null;
+  };
+  const [targetPg, setTargetPg] = useState(savedValue("targetPg") || 30);
+  const [targetVg, setTargetVg] = useState(savedValue("targetVg") || 70);
   const [targetNicStrength, setTargetNicStrength] = useState(
-    (savedValues && savedValues.targetNicStrength) || 6
+    savedValue("targetNicStrength") || 6
   );
   const [targetAmount, setTargetAmount] = useState(
-    (savedValues && savedValues.targetAmount) || 30
+    savedValue("targetAmount") || 30
   );
   const [nicConfig, setNicConfig] = useState(
-    (savedValues && savedValues.nicConfig) || {
+    savedValue("nicConfig") || {
       strength: 100,
       pg: 100,
       vg: 0,
     }
   );
   const [nicResults, setNicResults] = useState(
-    (savedValues && savedValues.nicResults) || {
+    savedValue("nicResults") || {
       amount: 1.8, // mL
       percentage: 6,
       pg: 1.8, // mL
@@ -48,7 +47,7 @@ function App({ recipe }) {
     }
   );
   const [flavors, setFlavors] = useState(
-    (savedValues && savedValues.flavors) || [
+    savedValue("flavors") || [
       {
         name: "Flavor 1",
         pg: 100, // %
@@ -61,12 +60,8 @@ function App({ recipe }) {
       },
     ]
   );
-  const [pgRequired, setPgRequired] = useState(
-    (savedValues && savedValues.pgRequired) || 5.7
-  );
-  const [vgRequired, setVgRequired] = useState(
-    (savedValues && savedValues.vgRequired) || 21
-  );
+  const [pgRequired, setPgRequired] = useState(savedValue("pgRequired") || 5.7);
+  const [vgRequired, setVgRequired] = useState(savedValue("vgRequired") || 21);
   const [zeroNicotineMode, setZeroNicotineMode] = useState(false);
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {

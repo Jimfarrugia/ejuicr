@@ -1,11 +1,18 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 
 const { getByTestId, getByText } = screen;
 
+const app = (
+  <Router>
+    <App />
+  </Router>
+);
+
 describe("App", () => {
   test("renders the Target Ejuice form correctly", () => {
-    render(<App />);
+    render(app);
     const baseLabel = getByText(/Base:/i);
     const strengthLabel = getByText(/Strength:/i);
     const amountLabel = getByText(/Amount:/i);
@@ -27,7 +34,7 @@ describe("App", () => {
   });
 
   test("renders the Ingredeints section correctly", () => {
-    render(<App />);
+    render(app);
     const nicLabel = getByText("Nic. (100mg, 100/0)");
     const pgLabel = getByText("PG");
     const vgLabel = getByText("VG");
@@ -57,13 +64,13 @@ describe("App", () => {
 
 describe("Nicotine config", () => {
   test("toggle renders", () => {
-    render(<App />);
+    render(app);
     const nicConfigBtn = getByTestId("nicConfigBtn");
     expect(nicConfigBtn).toBeInTheDocument();
   });
 
   test("button click renders nicConfig component", () => {
-    render(<App />);
+    render(app);
     const nicConfigBtn = getByTestId("nicConfigBtn");
     fireEvent.click(nicConfigBtn);
     const nicConfigStrengthInput = getByTestId("nicConfigStrengthInput");
@@ -72,7 +79,7 @@ describe("Nicotine config", () => {
   });
 
   test("ratio number controls work correctly", () => {
-    render(<App />);
+    render(app);
     const nicConfigBtn = getByTestId("nicConfigBtn");
     fireEvent.click(nicConfigBtn);
     const nicConfigPgIncBtn = getByTestId("nicConfigPgIncBtn");
@@ -88,7 +95,7 @@ describe("Nicotine config", () => {
   });
 
   test("strength number controls work correctly", () => {
-    render(<App />);
+    render(app);
     const nicConfigBtn = getByTestId("nicConfigBtn");
     fireEvent.click(nicConfigBtn);
     const nicConfigStrengthIncBtn = getByTestId("nicConfigStrengthIncBtn");
@@ -103,13 +110,13 @@ describe("Nicotine config", () => {
 
 describe("Flavor config", () => {
   it("toggle renders", () => {
-    render(<App />);
+    render(app);
     const flavorConfigBtn = getByTestId("flavor1ConfigBtn");
     expect(flavorConfigBtn).toBeInTheDocument();
   });
 
   it("button click renders flavorConfig component", () => {
-    render(<App />);
+    render(app);
     const flavorConfigBtn = getByTestId("flavor1ConfigBtn");
     fireEvent.click(flavorConfigBtn);
     const pgInput = getByTestId("flavor1ConfigPgInput");
@@ -119,7 +126,7 @@ describe("Flavor config", () => {
   });
 
   it("ratio number controls work correctly", () => {
-    render(<App />);
+    render(app);
     const flavorConfigBtn = getByTestId("flavor1ConfigBtn");
     fireEvent.click(flavorConfigBtn);
     const flavorConfigPgIncBtn = getByTestId("flavor1ConfigPgIncBtn");
@@ -138,7 +145,7 @@ describe("Flavor config", () => {
 
 describe("Flavor", () => {
   it("number controls work correctly", () => {
-    render(<App />);
+    render(app);
     const flavorPercentInput = getByTestId("flavor1PercentInput");
     const flavorPercentIncBtn = getByTestId("flavor1PercentIncBtn");
     const flavorPercentDecBtn = getByTestId("flavor1PercentDecBtn");
@@ -149,7 +156,7 @@ describe("Flavor", () => {
   });
 
   it("'add' button displays a new flavor row", () => {
-    render(<App />);
+    render(app);
     const flavorAddBtn = getByTestId("flavorAddBtn");
     fireEvent.click(flavorAddBtn);
     const newFlavorNameInput = getByTestId("flavor2NameInput");
@@ -157,7 +164,7 @@ describe("Flavor", () => {
   });
 
   it("'delete' button removes a flavor row", () => {
-    render(<App />);
+    render(app);
     const flavorAddBtn = getByTestId("flavorAddBtn");
     fireEvent.click(flavorAddBtn);
     const flavorDeleteBtn = getByTestId("flavor2DeleteBtn");
@@ -169,7 +176,7 @@ describe("Flavor", () => {
 
 describe("Nicotine", () => {
   it("is calculated correctly", () => {
-    render(<App />);
+    render(app);
     const targetNicStrengthInput = getByTestId("targetNicStrengthInput");
     expect(targetNicStrengthInput).toHaveValue(6);
     fireEvent.change(targetNicStrengthInput, { target: { value: 4 } });
@@ -183,7 +190,7 @@ describe("Nicotine", () => {
 
 describe("Flavor", () => {
   it("is calculated correctly", () => {
-    render(<App />);
+    render(app);
     const flavorPercentInput = getByTestId("flavor1PercentInput");
     expect(flavorPercentInput).toHaveValue(5);
     fireEvent.change(flavorPercentInput, { target: { value: 3 } });
@@ -197,7 +204,7 @@ describe("Flavor", () => {
 
 describe("PG", () => {
   it("is calculated correctly from target base ratio", () => {
-    render(<App />);
+    render(app);
     const targetPgInput = getByTestId("targetPgInput");
     expect(targetPgInput).toHaveValue(30);
     fireEvent.change(targetPgInput, { target: { value: 50 } });
@@ -209,7 +216,7 @@ describe("PG", () => {
   });
 
   it("is calculated correctly from nicotine ratio", () => {
-    render(<App />);
+    render(app);
     const nicConfigBtn = getByTestId("nicConfigBtn");
     fireEvent.click(nicConfigBtn);
     const pgInput = getByTestId("nicConfigPgInput");
@@ -221,7 +228,7 @@ describe("PG", () => {
   });
 
   it("is calculated correctly from flavor ratio", () => {
-    render(<App />);
+    render(app);
     const flavorConfigBtn = getByTestId("flavor1ConfigBtn");
     fireEvent.click(flavorConfigBtn);
     const pgInput = getByTestId("flavor1ConfigPgInput");
@@ -235,7 +242,7 @@ describe("PG", () => {
 
 describe("VG", () => {
   it("is calculated correctly from target base ratio", () => {
-    render(<App />);
+    render(app);
     const targetVgInput = getByTestId("targetVgInput");
     expect(targetVgInput).toHaveValue(70);
     fireEvent.change(targetVgInput, { target: { value: 30 } });
@@ -247,7 +254,7 @@ describe("VG", () => {
   });
 
   it("is calculated correctly from nicotine ratio", () => {
-    render(<App />);
+    render(app);
     const nicConfigBtn = getByTestId("nicConfigBtn");
     fireEvent.click(nicConfigBtn);
     const vgInput = getByTestId("nicConfigVgInput");
@@ -259,7 +266,7 @@ describe("VG", () => {
   });
 
   it("is calculated correctly from flavor ratio", () => {
-    render(<App />);
+    render(app);
     const flavorConfigBtn = getByTestId("flavor1ConfigBtn");
     fireEvent.click(flavorConfigBtn);
     const vgInput = getByTestId("flavor1ConfigVgInput");
@@ -273,7 +280,7 @@ describe("VG", () => {
 
 describe("Error message", () => {
   it("renders when base nic strength is less than target strength", () => {
-    render(<App />);
+    render(app);
     const nicConfigBtn = getByTestId("nicConfigBtn");
     fireEvent.click(nicConfigBtn);
     const strengthInput = getByTestId("nicConfigStrengthInput");
@@ -283,7 +290,7 @@ describe("Error message", () => {
   });
 
   it("renders when target pg/vg ratio is not possible", () => {
-    render(<App />);
+    render(app);
     const targetPgInput = getByTestId("targetPgInput");
     const targetVgInput = getByTestId("targetVgInput");
     expect(targetPgInput).toHaveValue(30);
