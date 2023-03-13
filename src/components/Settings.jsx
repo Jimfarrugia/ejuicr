@@ -31,22 +31,17 @@ const Settings = () => {
     pg: 100,
     vg: 0,
   });
-  // const [settings, setSettings] = useState(undefined);
-  // const user = JSON.parse(localStorage.getItem("user"));
-  // const headers = {
-  //   Authorization: `Bearer ${user.token}`,
-  // };
+  const user = JSON.parse(localStorage.getItem("user"));
+  const headers = { Authorization: `Bearer ${user.token}` };
 
-  // useEffect(() => {
-  //   console.log(user.token);
-  //   axios
-  //     .get(`${API_URL}/api/settings/`, { headers })
-  //     .then((response) => {
-  //       console.log("success");
-  //       // setSettings(response.data)
-  //     })
-  //     .catch((error) => console.error(error));
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/settings/`, { headers })
+      .then((response) => {
+        localStorage.setItem("settings", JSON.stringify(response.data));
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   const handleChangeTheme = (e) => setTheme(e.target.value);
 
@@ -123,34 +118,45 @@ const Settings = () => {
     setFlavorConfig(updatedFlavorConfig);
   };
 
-  // const handleClickSaveSettings = async () => {
-  //   console.log(settings);
-  //   setError("");
-  //   setSuccess("");
-  //   const newSettings = {};
-  //   axios
-  //     .post(`${API_URL}/api/settings`, newSettings, { headers })
-  //     .then((response) => setSuccess(`Your settings have been saved.`))
-  //     .catch((error) => {
-  //       console.error(error);
-  //       setError(error.response.data.message || "Failed to save settings.");
-  //     });
-  // };
-
-  // const onClickSubmit = () => {
-  //   const _settings = {
-  //     theme,
-  //     mixingUnits,
-  //     targetPg,
-  //     targetVg,
-  //     targetNicStrength,
-  //     targetAmount,
-  //     zeroNicotineMode,
-  //     nicConfig,
-  //     flavorConfig,
-  //   };
-  //   console.log(settings);
-  // };
+  const handleClickSaveSettings = async () => {
+    setError("");
+    setSuccess("");
+    const newSettings = {
+      theme,
+      units: mixingUnits,
+      base: {
+        pg: targetPg,
+        vg: targetVg,
+      },
+      strength: targetNicStrength,
+      amount: targetAmount,
+      zeroNicotineMode: zeroNicotineMode,
+      nicotine: {
+        strength: nicConfig.strength,
+        base: {
+          pg: nicConfig.pg,
+          vg: nicConfig.vg,
+        },
+      },
+      flavor: {
+        percentage: flavorConfig.percentage,
+        base: {
+          pg: flavorConfig.pg,
+          vg: flavorConfig.vg,
+        },
+      },
+    };
+    axios
+      .post(`${API_URL}/api/settings`, newSettings, { headers })
+      .then((response) => {
+        localStorage.setItem("settings", JSON.stringify(response.data));
+        setSuccess(`Your settings have been saved.`);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.response.data.message || "Failed to save settings.");
+      });
+  };
 
   return (
     <SettingsStyled>
@@ -406,14 +412,14 @@ const Settings = () => {
         </div>
       </div>
       <hr />
-      {/* {error && <div className="error-message">{error}</div>}
+      {error && <div className="error-message">{error}</div>}
       {success && <div className="success-message">{success}</div>}
       <div className="button-row">
         <button className="green" onClick={handleClickSaveSettings}>
           <FontAwesomeIcon icon={faSave} />
           Save Settings
         </button>
-      </div> */}
+      </div>
     </SettingsStyled>
   );
 };

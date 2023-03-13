@@ -25,6 +25,7 @@ const Sidemenu = ({ toggleMenu }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("settings");
     window.location.reload();
   };
 
