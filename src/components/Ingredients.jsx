@@ -22,6 +22,7 @@ const Ingredients = ({
   handleChangeFlavorPgVg,
   handleRemoveFlavor,
   handleAddFlavor,
+  zeroNicotineMode,
 }) => {
   const [error, setError] = useState("");
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
@@ -80,31 +81,39 @@ const Ingredients = ({
           <hr />
         </>
       )}
-      <div className={`row ${isNicInvalid ? "red" : ""}`}>
-        <div>
-          <ConfigButton testId="nicConfigBtn" toggle={toggleNicConfigOpen} />
-          <span>
-            Nic. ({`${nicConfig.strength}mg, ${nicConfig.pg}/${nicConfig.vg}`})
-          </span>
-        </div>
-        <div>
-          <span>{`${nicResults.percentage}%`}</span>
-        </div>
-        <div>
-          <span>{`${nicResults.amount}mL`}</span>
-        </div>
-        <div>
-          <span>{`${nicResults.weight}g`}</span>
-        </div>
-      </div>
-      {nicConfigOpen && (
-        <NicConfig
-          nicConfig={nicConfig}
-          handleChangeNicConfigStrength={handleChangeNicConfigStrength}
-          handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
-        />
+      {!zeroNicotineMode && (
+        <>
+          <div className={`row ${isNicInvalid ? "red" : ""}`}>
+            <div>
+              <ConfigButton
+                testId="nicConfigBtn"
+                toggle={toggleNicConfigOpen}
+              />
+              <span>
+                Nic. (
+                {`${nicConfig.strength}mg, ${nicConfig.pg}/${nicConfig.vg}`})
+              </span>
+            </div>
+            <div>
+              <span>{`${nicResults.percentage}%`}</span>
+            </div>
+            <div>
+              <span>{`${nicResults.amount}mL`}</span>
+            </div>
+            <div>
+              <span>{`${nicResults.weight}g`}</span>
+            </div>
+          </div>
+          {nicConfigOpen && (
+            <NicConfig
+              nicConfig={nicConfig}
+              handleChangeNicConfigStrength={handleChangeNicConfigStrength}
+              handleChangeNicConfigPgVg={handleChangeNicConfigPgVg}
+            />
+          )}
+          <hr />
+        </>
       )}
-      <hr />
       <div className={`row ${isPgInvalid ? "red" : ""}`}>
         <div>
           <span className="base-ingredient">PG</span>

@@ -67,6 +67,7 @@ function App({ recipe }) {
   const [vgRequired, setVgRequired] = useState(
     (savedValues && savedValues.vgRequired) || 21
   );
+  const [zeroNicotineMode, setZeroNicotineMode] = useState(false);
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
     if (
@@ -183,7 +184,7 @@ function App({ recipe }) {
     }
     // fetch user settings if there's no recipe prop
     const user = JSON.parse(localStorage.getItem("user"));
-    if (user && !recipe) {
+    if (user) {
       const headers = {
         Authorization: `Bearer ${user.token}`,
       };
@@ -192,28 +193,33 @@ function App({ recipe }) {
         .then((response) => {
           // return early if no user settings
           if (!Object.keys(response.data).length) return;
-          // set form values according to settings
-          const { base, strength, amount, nicotine, flavor } = response.data;
-          setTargetPg(base.pg);
-          setTargetVg(base.vg);
-          setTargetNicStrength(strength);
-          setTargetAmount(amount);
-          setNicConfig({
-            strength: nicotine.strength,
-            pg: nicotine.base.pg,
-            vg: nicotine.base.vg,
-          });
-          updateAllFlavorsResults(
-            [
-              {
-                name: "Flavor 1",
-                pg: flavor.base.pg,
-                vg: flavor.base.vg,
-                percentage: flavor.percentage,
-              },
-            ],
-            amount
-          );
+          const { base, strength, amount, nicotine, flavor, zeroNicotineMode } =
+            response.data;
+          // set values for sections to render conditionally
+          setZeroNicotineMode(zeroNicotineMode);
+          if (!recipe) {
+            // set form values according to settings
+            setTargetPg(base.pg);
+            setTargetVg(base.vg);
+            setTargetNicStrength(zeroNicotineMode ? 0 : strength);
+            setTargetAmount(amount);
+            setNicConfig({
+              strength: nicotine.strength,
+              pg: nicotine.base.pg,
+              vg: nicotine.base.vg,
+            });
+            updateAllFlavorsResults(
+              [
+                {
+                  name: "Flavor 1",
+                  pg: flavor.base.pg,
+                  vg: flavor.base.vg,
+                  percentage: flavor.percentage,
+                },
+              ],
+              amount
+            );
+          }
         })
         .catch((error) => console.error(error));
     }
@@ -388,6 +394,7 @@ function App({ recipe }) {
           handleChangeTargetNicStrength={handleChangeTargetNicStrength}
           targetAmount={targetAmount}
           handleChangeTargetAmount={handleChangeTargetAmount}
+          zeroNicotineMode={zeroNicotineMode}
         />
         <Ingredients
           nicConfig={nicConfig}
@@ -404,6 +411,7 @@ function App({ recipe }) {
           handleChangeFlavorPgVg={handleChangeFlavorPgVg}
           handleRemoveFlavor={handleRemoveFlavor}
           handleAddFlavor={handleAddFlavor}
+          zeroNicotineMode={zeroNicotineMode}
         />
       </div>
       <SaveRecipe

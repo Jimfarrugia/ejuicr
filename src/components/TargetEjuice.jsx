@@ -8,6 +8,7 @@ const TargetEjuice = ({
   handleChangeTargetNicStrength,
   targetAmount,
   handleChangeTargetAmount,
+  zeroNicotineMode,
 }) => {
   return (
     <>
@@ -46,28 +47,34 @@ const TargetEjuice = ({
         />
       </div>
       <hr />
-      <div className="row">
-        <h5>Strength:</h5>
-        <div>
-          <div className="input-border">
-            <input
-              data-testid="targetNicStrengthInput"
-              type="number"
-              value={targetNicStrength.toString()}
-              min="0"
-              onChange={(e) => handleChangeTargetNicStrength(e.target.value)}
+      {!zeroNicotineMode && (
+        <>
+          <div className="row">
+            <h5>Strength:</h5>
+            <div>
+              <div className="input-border">
+                <input
+                  data-testid="targetNicStrengthInput"
+                  type="number"
+                  value={targetNicStrength.toString()}
+                  min="0"
+                  onChange={(e) =>
+                    handleChangeTargetNicStrength(e.target.value)
+                  }
+                />
+              </div>
+              <span className="label-right">mg/mL</span>
+            </div>
+            <NumberControls
+              value={targetNicStrength}
+              handler={handleChangeTargetNicStrength}
+              step={1}
+              min={0}
             />
           </div>
-          <span className="label-right">mg/mL</span>
-        </div>
-        <NumberControls
-          value={targetNicStrength}
-          handler={handleChangeTargetNicStrength}
-          step={1}
-          min={0}
-        />
-      </div>
-      <hr />
+          <hr />
+        </>
+      )}
       <div className="row">
         <h5>Amount:</h5>
         <div>
