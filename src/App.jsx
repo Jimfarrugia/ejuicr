@@ -154,6 +154,7 @@ function App({ recipe }) {
   };
 
   useEffect(() => {
+    // handle redirect from server auth
     const token = searchParams.get("token");
     if (token) {
       // decode the data from the token
@@ -179,6 +180,42 @@ function App({ recipe }) {
         .catch((error) => {
           console.error(error.response.data);
         });
+    }
+    // fetch user settings if there's no recipe prop
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && !recipe) {
+      const headers = {
+        Authorization: `Bearer ${user.token}`,
+      };
+      axios
+        .get(`${API_URL}/api/settings`, { headers })
+        .then((response) => {
+          // return early if no user settings
+          if (!Object.keys(response.data).length) return;
+          // set form values according to settings
+          const { base, strength, amount, nicotine, flavor } = response.data;
+          setTargetPg(base.pg);
+          setTargetVg(base.vg);
+          setTargetNicStrength(strength);
+          setTargetAmount(amount);
+          setNicConfig({
+            strength: nicotine.strength,
+            pg: nicotine.base.pg,
+            vg: nicotine.base.vg,
+          });
+          updateAllFlavorsResults(
+            [
+              {
+                name: "Flavor 1",
+                pg: flavor.base.pg,
+                vg: flavor.base.vg,
+                percentage: flavor.percentage,
+              },
+            ],
+            amount
+          );
+        })
+        .catch((error) => console.error(error));
     }
   }, []);
 
