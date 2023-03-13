@@ -12,6 +12,8 @@ import {
 import { API_URL } from "../constants";
 
 const Settings = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const headers = { Authorization: `Bearer ${user.token}` };
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [theme, setTheme] = useState("dark");
@@ -31,14 +33,32 @@ const Settings = () => {
     pg: 100,
     vg: 0,
   });
-  const user = JSON.parse(localStorage.getItem("user"));
-  const headers = { Authorization: `Bearer ${user.token}` };
 
   useEffect(() => {
+    // Get existing settings
     axios
       .get(`${API_URL}/api/settings/`, { headers })
       .then((response) => {
+        if (!Object.keys(response.data).length) return;
         localStorage.setItem("settings", JSON.stringify(response.data));
+        const settings = response.data;
+        setTheme(settings.theme);
+        setMixingUnits(settings.units);
+        setTargetPg(settings.base.pg);
+        setTargetVg(settings.base.vg);
+        setTargetNicStrength(settings.strength);
+        setTargetAmount(settings.amount);
+        setZeroNicotineMode(settings.zeroNicotineMode);
+        setNicConfig({
+          strength: settings.nicotine.strength,
+          pg: settings.nicotine.base.pg,
+          vg: settings.nicotine.base.vg,
+        });
+        setFlavorConfig({
+          percentage: settings.flavor.percentage,
+          pg: settings.flavor.base.pg,
+          vg: settings.flavor.base.vg,
+        });
       })
       .catch((error) => console.error(error));
   }, []);
