@@ -22,6 +22,7 @@ export const FooterStyled = styled.footer`
     margin: 0;
     padding: 0;
     list-style-type: none;
+    z-index: 1;
   }
 
   & li {
