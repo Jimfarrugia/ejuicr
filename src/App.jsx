@@ -19,49 +19,36 @@ function App({ recipe }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const savedValues = JSON.parse(localStorage.getItem("calculator"));
-  const savedValue = (key) => {
-    savedValues?.[key] !== undefined ? savedValues[key] : null;
-  };
-  const [targetPg, setTargetPg] = useState(savedValue("targetPg") || 30);
-  const [targetVg, setTargetVg] = useState(savedValue("targetVg") || 70);
-  const [targetNicStrength, setTargetNicStrength] = useState(
-    savedValue("targetNicStrength") || 6
-  );
-  const [targetAmount, setTargetAmount] = useState(
-    savedValue("targetAmount") || 30
-  );
-  const [nicConfig, setNicConfig] = useState(
-    savedValue("nicConfig") || {
-      strength: 100,
-      pg: 100,
-      vg: 0,
-    }
-  );
-  const [nicResults, setNicResults] = useState(
-    savedValue("nicResults") || {
-      amount: 1.8, // mL
-      percentage: 6,
-      pg: 1.8, // mL
-      vg: 0, // mL
-      weight: 1.86, // g
-    }
-  );
-  const [flavors, setFlavors] = useState(
-    savedValue("flavors") || [
-      {
-        name: "Flavor 1",
-        pg: 100, // %
-        vg: 0, // %
-        percentage: 5,
-        amount: 1.5, // mL
-        pgAmount: 1.5, // mL
-        vgAmount: 0, // mL
-        weight: 1.55, // g
-      },
-    ]
-  );
-  const [pgRequired, setPgRequired] = useState(savedValue("pgRequired") || 5.7);
-  const [vgRequired, setVgRequired] = useState(savedValue("vgRequired") || 21);
+  const [targetPg, setTargetPg] = useState(30);
+  const [targetVg, setTargetVg] = useState(70);
+  const [targetNicStrength, setTargetNicStrength] = useState(6);
+  const [targetAmount, setTargetAmount] = useState(30);
+  const [nicConfig, setNicConfig] = useState({
+    strength: 100,
+    pg: 100,
+    vg: 0,
+  });
+  const [nicResults, setNicResults] = useState({
+    amount: 1.8, // mL
+    percentage: 6,
+    pg: 1.8, // mL
+    vg: 0, // mL
+    weight: 1.86, // g
+  });
+  const [flavors, setFlavors] = useState([
+    {
+      name: "Flavor 1",
+      pg: 100, // %
+      vg: 0, // %
+      percentage: 5,
+      amount: 1.5, // mL
+      pgAmount: 1.5, // mL
+      vgAmount: 0, // mL
+      weight: 1.55, // g
+    },
+  ]);
+  const [pgRequired, setPgRequired] = useState(5.7);
+  const [vgRequired, setVgRequired] = useState(21);
   const [zeroNicotineMode, setZeroNicotineMode] = useState(false);
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
@@ -177,6 +164,21 @@ function App({ recipe }) {
           console.error(error.response.data);
         });
     }
+
+    // Restore calculator values from local storage
+    // ! This causes tests to fail even though the feature is working as intended.
+    if (!recipe && savedValues) {
+      setTargetPg(savedValues.targetPg);
+      setTargetVg(savedValues.targetVg);
+      setTargetNicStrength(savedValues.targetNicStrength);
+      setTargetAmount(savedValues.targetAmount);
+      setNicConfig(savedValues.nicConfig);
+      setNicResults(savedValues.nicResults);
+      setFlavors(savedValues.flavors);
+      setPgRequired(savedValues.pgRequired);
+      setVgRequired(savedValues.vgRequired);
+    }
+
     // fetch user settings if there's no recipe prop
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
