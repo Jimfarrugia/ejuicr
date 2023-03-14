@@ -40,4 +40,4 @@ If it does not open automatically, open the application in your web browser at t
 localhost:4200
 ```
 
-4. Start the server-side application. See [https://github.com/jimfarrugia/ejuicr-server.git](ejuicr-server) and follow the installation instructions there to run the server locally.
+4. Start the server-side application. See [ejuicr-server](https://github.com/jimfarrugia/ejuicr-server.git) and follow the installation instructions there to run the server locally.
