@@ -17,6 +17,10 @@ export const dark = {
   border: {
     main: colors.purpleCyan,
     focus: colors.pinkPurple,
+    solid: {
+      main: colors.cyan,
+      focus: colors.pink,
+    },
   },
 
   text: {
