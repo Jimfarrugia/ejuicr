@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { colors } from "../../constants";
 
 export const SettingsStyled = styled.div`
   .form-row {
@@ -45,29 +44,29 @@ export const SettingsStyled = styled.div`
     }
 
     select {
-      color: ${colors.white};
-      background: ${colors.grayDark};
-      border: 0.125em solid ${colors.cyan};
+      color: ${({ theme }) => theme.text.main};
+      background: ${({ theme }) => theme.background.main};
+      border: 0.125em solid ${({ theme }) => theme.border.solid.main};
       border-radius: 3px;
       font-size: 1rem;
       padding: 0.25em 0.5em;
       outline: none;
 
       &:focus {
-        border-color: ${colors.pink};
+        border-color: ${({ theme }) => theme.border.solid.focus};
       }
     }
 
     .toggle {
       font-size: 2rem;
-      color: ${colors.red};
+      color: ${({ theme }) => theme.error};
       margin-left: 0.25em;
 
       &.on {
-        color: ${colors.green};
+        color: ${({ theme }) => theme.success};
       }
       &.off {
-        color: ${colors.red};
+        color: ${({ theme }) => theme.error};
         transform: rotate(180deg);
       }
     }

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { colors } from "../../constants";
 
 export const IngredientsStyled = styled.div`
   & > h3 {
@@ -7,7 +6,7 @@ export const IngredientsStyled = styled.div`
   }
 
   & .red {
-    color: ${colors.red};
+    color: ${({ theme }) => theme.error};
   }
 
   & > .row {

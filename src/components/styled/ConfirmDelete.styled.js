@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { colors } from "../../constants";
 
 export const ConfirmDeleteStyled = styled.div`
   position: fixed;
@@ -17,14 +16,15 @@ export const ConfirmDeleteStyled = styled.div`
     border-radius: 3px;
     padding: 0.125em;
 
-    background: ${colors.purpleCyan};
+    background: ${({ theme }) => theme.error};
 
     & .inner-wrapper {
       border-radius: 3px;
-      background: ${colors.black};
+      background: ${({ theme }) => theme.background.dark};
       padding: 1.5em 1em;
       text-align: center;
       width: 75vw;
+      max-width: 550px;
 
       & p {
         margin: 0 0 1em;
@@ -35,7 +35,6 @@ export const ConfirmDeleteStyled = styled.div`
 
         &:first-child {
           margin-right: 1em;
-          //   margin-bottom: 1em;
         }
       }
     }

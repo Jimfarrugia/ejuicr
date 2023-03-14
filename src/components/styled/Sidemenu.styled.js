@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { colors } from "../../constants";
 
 export const SidemenuStyled = styled.nav`
-  background: ${colors.black};
+  background: ${({ theme }) => theme.background.dark};
   padding: 1em;
   width: 250px;
   height: calc(100% - 2em);
@@ -15,7 +14,7 @@ export const SidemenuStyled = styled.nav`
 
     & button {
       font-size: 1.35rem;
-      color: ${colors.cyan};
+      color: ${({ theme }) => theme.text.link};
       background: none;
       padding: 0;
     }
@@ -61,7 +60,7 @@ export const SidemenuStyled = styled.nav`
   }
 
   .user-data {
-    color: ${colors.blue};
+    color: ${({ theme }) => theme.text.secondary};
 
     & p {
       font-size: 0.9rem;
@@ -81,7 +80,7 @@ export const SidemenuStyled = styled.nav`
     }
 
     .user-picture {
-      background: ${colors.purpleCyan};
+      background: ${({ theme }) => theme.border.main};
       border-radius: 100%;
       width: fit-content;
       line-height: 0;

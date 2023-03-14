@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { colors, layoutWidth } from "../../constants";
+import { layoutWidth } from "../../constants";
 
 export const FooterStyled = styled.footer`
-  background: ${colors.black};
+  background: ${({ theme }) => theme.background.dark};
   padding: 2em 1em;
   margin-top: 2em;
 

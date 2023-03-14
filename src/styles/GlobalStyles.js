@@ -1,12 +1,12 @@
 import { createGlobalStyle } from "styled-components";
-import { colors, layoutWidth } from "../constants";
+import { layoutWidth } from "../constants";
 
 const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    color: ${colors.white};
-    background: ${colors.grayDark};
+    color: ${({ theme }) => theme.text.main};
+    background:  ${({ theme }) => theme.background.main};
     font-family: sans-serif;
   }
 
@@ -18,16 +18,16 @@ const GlobalStyles = createGlobalStyle`
 
   a:link, a:visited {
     text-decoration: none;
-    color: ${colors.cyan};
+    color: ${({ theme }) => theme.text.link};
   }
 
   a:active, a:hover {
-    color: ${colors.pink};
+    color: ${({ theme }) => theme.text.hover};
   }
 
   hr {
     margin: 1em 0;
-    border-top: 0.125rem dotted ${colors.gray};
+    border-top: 0.125rem dotted ${({ theme }) => theme.hr};
     border-bottom: none;
     border-left: none;
     border-right: none;
@@ -37,7 +37,7 @@ const GlobalStyles = createGlobalStyle`
     font-family: "Bebas Neue";
     margin: 0 auto;
     width: fit-content;
-    background: ${colors.yellowPink};
+    background: ${({ theme }) => theme.heading.main};
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -57,7 +57,7 @@ const GlobalStyles = createGlobalStyle`
 
   h5 {
     font-size: 1rem;
-    color: ${colors.blue};
+    color: ${({ theme }) => theme.heading.secondary};
     margin: 0;
     line-height: 35px;
     vertical-align: middle;
@@ -79,8 +79,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   button {
-    background: ${colors.purpleCyan};
-    color: ${colors.black};
+    background: ${({ theme }) => theme.button.main};
+    color: ${({ theme }) => theme.text.button};
     font-weight: bold;
     border: none;
     border-radius: 2px;
@@ -88,31 +88,31 @@ const GlobalStyles = createGlobalStyle`
     cursor: pointer;
     
     &:hover {
-      background: ${colors.pinkPurple};
+      background: ${({ theme }) => theme.button.hover};
     }
     &:active {
-      background: ${colors.pink};
+      background: ${({ theme }) => theme.button.active};
     }
 
     &.red {
-      background: ${colors.red};
+      background: ${({ theme }) => theme.error};
 
       &:hover {
-        background: ${colors.pinkPurple};
+        background: ${({ theme }) => theme.button.hover};
       }
       &:active {
-        background: ${colors.pink};
+        background: ${({ theme }) => theme.button.active};
       }
     }
 
     &.green {
-      background: ${colors.cyanGreen};
+      background: ${({ theme }) => theme.success};
 
       &:hover {
-        background: ${colors.pinkPurple};
+        background: ${({ theme }) => theme.button.hover};
       }
       &:active {
-        background: ${colors.pink};
+        background: ${({ theme }) => theme.button.active};
       }
     }
 
@@ -135,18 +135,18 @@ const GlobalStyles = createGlobalStyle`
 
   .input-border {
     display: inline-block;
-    background: ${colors.purpleCyan};
+    background: ${({ theme }) => theme.border.main};
     border-radius: 3px;
     padding: 2px;
 
     &:focus-within {
-      background: ${colors.pinkPurple};
+      background: ${({ theme }) => theme.border.focus};
     }
   }
 
   input {
-    background: ${colors.black};
-    color: ${colors.white};
+    background: ${({ theme }) => theme.background.dark};
+    color: ${({ theme }) => theme.text.main};
     border: none;
     border-radius: 3px;
     font-size: 1rem;
@@ -154,7 +154,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ::placeholder {
-    color: ${colors.blue};
+    color: ${({ theme }) => theme.text.placeholder};
   }
 
   input[type="text"], input[type="email"], input[type="password"] {
@@ -177,8 +177,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .error-message, .success-message {
-    background: ${colors.red};
-    color: ${colors.black};
+    background: ${({ theme }) => theme.error};
+    color: ${({ theme }) => theme.text.button};
     font-size: 1rem;
     padding: 1em;
     margin: 0 0.5em 1em;
@@ -187,7 +187,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .success-message {
-    background: ${colors.green};
+    background: ${({ theme }) => theme.success};
   }
 
   .row {
@@ -221,13 +221,13 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .config-wrapper {
-    background: ${colors.black};
+    background: ${({ theme }) => theme.background.dark};
     margin: 1em 0.5em 0;
     border-radius: 3px;
 
 
     & input {
-      background: ${colors.grayDark};
+      background: ${({ theme }) => theme.background.main};
     }
 
     & .row {

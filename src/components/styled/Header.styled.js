@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { colors, layoutWidth } from "../../constants";
+import { layoutWidth } from "../../constants";
 
 export const HeaderStyled = styled.header`
-  background: ${colors.black};
+  background: ${({ theme }) => theme.background.dark};
   padding: 1em 1em;
   margin-bottom: 1em;
 
@@ -15,7 +15,7 @@ export const HeaderStyled = styled.header`
 `;
 
 export const MenuButton = styled.button`
-  color: ${colors.cyan};
+  color: ${({ theme }) => theme.text.link};
   font-size: 1.35rem;
   padding: 0;
   margin: 0;
