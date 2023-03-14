@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { colors } from "../../constants";
 
 export const ConfigButtonStyled = styled.button`
   width: 35px;
