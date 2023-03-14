@@ -10,10 +10,11 @@ import {
   parseNumberInput,
 } from "../helpers";
 import { API_URL } from "../constants";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  const headers = { Authorization: `Bearer ${user.token}` };
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [theme, setTheme] = useState("dark");
@@ -35,7 +36,9 @@ const Settings = () => {
   });
 
   useEffect(() => {
+    if (!user) return navigate("/");
     // Get existing settings
+    const headers = { Authorization: `Bearer ${user.token}` };
     axios
       .get(`${API_URL}/api/settings/`, { headers })
       .then((response) => {
@@ -166,6 +169,7 @@ const Settings = () => {
         },
       },
     };
+    const headers = { Authorization: `Bearer ${user.token}` };
     axios
       .post(`${API_URL}/api/settings`, newSettings, { headers })
       .then((response) => {
