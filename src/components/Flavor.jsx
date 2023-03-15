@@ -12,6 +12,7 @@ const Flavor = ({
   handleChangeFlavorPercentage,
   handleChangeFlavorPgVg,
   handleRemoveFlavor,
+  units,
 }) => {
   const [flavorConfigOpen, setFlavorConfigOpen] = useState(false);
 
@@ -24,12 +25,31 @@ const Flavor = ({
   return (
     <>
       <div className={`row flavor-results ${isInvalid ? "red" : ""}`}>
-        <div>
-          <span>{`${amount}mL`}</span>
-        </div>
-        <div>
-          <span>{`${weight}g`}</span>
-        </div>
+        {(units === "weight" && (
+          <>
+            <div></div>
+            <div>
+              <span>{`${weight}g`}</span>
+            </div>
+          </>
+        )) ||
+          (units === "volume" && (
+            <>
+              <div></div>
+              <div>
+                <span>{`${amount}mL`}</span>
+              </div>
+            </>
+          )) || (
+            <>
+              <div>
+                <span>{`${amount}mL`}</span>
+              </div>
+              <div>
+                <span>{`${weight}g`}</span>
+              </div>
+            </>
+          )}
       </div>
       <div className="row flavor">
         <div>

@@ -50,6 +50,7 @@ function App({ recipe }) {
   const [pgRequired, setPgRequired] = useState(5.7);
   const [vgRequired, setVgRequired] = useState(21);
   const [zeroNicotineMode, setZeroNicotineMode] = useState(false);
+  const [units, setUnits] = useState("both");
 
   const updateNicResults = (targetNicStrength, targetAmount, nicConfig) => {
     if (
@@ -190,10 +191,18 @@ function App({ recipe }) {
         .then((response) => {
           // return early if no user settings
           if (!Object.keys(response.data).length) return;
-          const { base, strength, amount, nicotine, flavor, zeroNicotineMode } =
-            response.data;
+          const {
+            base,
+            strength,
+            amount,
+            nicotine,
+            flavor,
+            zeroNicotineMode,
+            units,
+          } = response.data;
           // set values for sections to render conditionally
           setZeroNicotineMode(zeroNicotineMode);
+          setUnits(units);
           if (!recipe) {
             // set form values according to settings
             setTargetPg(base.pg);
@@ -409,6 +418,7 @@ function App({ recipe }) {
           handleRemoveFlavor={handleRemoveFlavor}
           handleAddFlavor={handleAddFlavor}
           zeroNicotineMode={zeroNicotineMode}
+          units={units}
         />
       </div>
       <SaveRecipe

@@ -23,6 +23,7 @@ const Ingredients = ({
   handleRemoveFlavor,
   handleAddFlavor,
   zeroNicotineMode,
+  units,
 }) => {
   const [error, setError] = useState("");
   const [nicConfigOpen, setNicConfigOpen] = useState(false);
@@ -97,12 +98,31 @@ const Ingredients = ({
             <div>
               <span>{`${nicResults.percentage}%`}</span>
             </div>
-            <div>
-              <span>{`${nicResults.amount}mL`}</span>
-            </div>
-            <div>
-              <span>{`${nicResults.weight}g`}</span>
-            </div>
+            {(units === "weight" && (
+              <>
+                <div></div>
+                <div>
+                  <span>{`${nicResults.weight}g`}</span>
+                </div>
+              </>
+            )) ||
+              (units === "volume" && (
+                <>
+                  <div></div>
+                  <div>
+                    <span>{`${nicResults.amount}mL`}</span>
+                  </div>
+                </>
+              )) || (
+                <>
+                  <div>
+                    <span>{`${nicResults.amount}mL`}</span>
+                  </div>
+                  <div>
+                    <span>{`${nicResults.weight}g`}</span>
+                  </div>
+                </>
+              )}
           </div>
           {nicConfigOpen && (
             <NicConfig
@@ -121,12 +141,31 @@ const Ingredients = ({
         <div>
           <span>{`${pgPercentage}%`}</span>
         </div>
-        <div>
-          <span>{`${pgRequired}mL`}</span>
-        </div>
-        <div>
-          <span>{`${pgWeight}g`}</span>
-        </div>
+        {(units === "weight" && (
+          <>
+            <div></div>
+            <div>
+              <span>{`${pgWeight}g`}</span>
+            </div>
+          </>
+        )) ||
+          (units === "volume" && (
+            <>
+              <div></div>
+              <div>
+                <span>{`${pgRequired}mL`}</span>
+              </div>
+            </>
+          )) || (
+            <>
+              <div>
+                <span>{`${pgRequired}mL`}</span>
+              </div>
+              <div>
+                <span>{`${pgWeight}g`}</span>
+              </div>
+            </>
+          )}
       </div>
       <hr />
       <div className={`row ${isVgInvalid ? "red" : ""}`}>
@@ -136,12 +175,31 @@ const Ingredients = ({
         <div>
           <span>{`${vgPercentage}%`}</span>
         </div>
-        <div>
-          <span>{`${vgRequired}mL`}</span>
-        </div>
-        <div>
-          <span>{`${vgWeight}g`}</span>
-        </div>
+        {(units === "weight" && (
+          <>
+            <div></div>
+            <div>
+              <span>{`${vgWeight}g`}</span>
+            </div>
+          </>
+        )) ||
+          (units === "volume" && (
+            <>
+              <div></div>
+              <div>
+                <span>{`${vgRequired}mL`}</span>
+              </div>
+            </>
+          )) || (
+            <>
+              <div>
+                <span>{`${vgRequired}mL`}</span>
+              </div>
+              <div>
+                <span>{`${vgWeight}g`}</span>
+              </div>
+            </>
+          )}
       </div>
       <hr />
       {flavors.map((flavor, index) => (
@@ -153,6 +211,7 @@ const Ingredients = ({
           handleChangeFlavorPercentage={handleChangeFlavorPercentage}
           handleChangeFlavorPgVg={handleChangeFlavorPgVg}
           handleRemoveFlavor={handleRemoveFlavor}
+          units={units}
         />
       ))}
       <button
