@@ -11,14 +11,12 @@ export const SaveRecipeStyled = styled.div`
   }
 
   & button {
+    font-size: 1rem;
     padding: 0.5em 0.75em;
-    line-height: 1.5;
     height: 100%;
 
     & > svg {
       margin-right: 0.5em;
-      margin-bottom: -0.0725em;
-      font-size: 1rem;
     }
   }
 
