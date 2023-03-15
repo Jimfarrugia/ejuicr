@@ -225,8 +225,8 @@ const Settings = () => {
             onChange={handleChangeMixingUnits}
           >
             <option value="both">Both</option>
-            <option value="volume">Volume</option>
-            <option value="weight">Weight</option>
+            <option value="volume">Volume (mL)</option>
+            <option value="weight">Weight (g)</option>
           </select>
         </div>
       </div>
