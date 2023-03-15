@@ -38,8 +38,6 @@ export const IngredientsStyled = styled.div`
       display: flex;
 
       &:last-child {
-        // width: 100%;
-
         & > button:last-child {
           margin-left: 1em;
         }
