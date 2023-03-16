@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nx exec -- vite",
     "serve": "nx exec -- vite",
-    "build": "nx exec -- vite build",
+    "build": "nx exec -- vite build --outDir dist",
     "test": "nx exec -- vitest"
   },
   "private": true,
