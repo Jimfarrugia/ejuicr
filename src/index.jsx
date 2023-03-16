@@ -14,6 +14,8 @@ import Contribute from "./components/Contribute";
 import UpdatePassword from "./components/UpdatePassword";
 import GlobalStyles from "./styles/GlobalStyles";
 import { light, dark } from "./styles/themes";
+import dotenv from "dotenv";
+dotenv.config();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
