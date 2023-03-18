@@ -1,4 +1,5 @@
 import React from "react";
+import { SUPPORT_EMAIL, FEEDBACK_EMAIL } from "../constants";
 
 const Help = () => {
   return (
@@ -9,9 +10,8 @@ const Help = () => {
       <hr />
       <p>
         If you’re having trouble with ejuicr and would like to reach out you can
-        send an email to{" "}
-        <a href="mailto:help+ejuicr@gmail.com">help+ejuicr@gmail.com</a> and
-        someone will get back to you.
+        send an email to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>{" "}
+        and someone will get back to you.
       </p>
       <p>
         You can also send a tweet or a direct message on Twitter to{" "}
@@ -24,8 +24,7 @@ const Help = () => {
       <hr />
       <p>
         We appreciate any feedback you’d like to share! Please email{" "}
-        <a href="mailto:feedback+ejuicr@gmail.com">feedback+ejuicr@gmail.com</a>{" "}
-        or tweet{" "}
+        <a href={`mailto:${FEEDBACK_EMAIL}`}>{FEEDBACK_EMAIL}</a> or tweet{" "}
         <a href="https://twitter.com/ejuicr" target="_blank">
           @ejuicr
         </a>

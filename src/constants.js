@@ -20,3 +20,9 @@ export const colors = {
 export const layoutWidth = "800px";
 
 export const API_URL = import.meta.env.VITE_API_URL;
+
+export const DONATION_LINK = import.meta.env.VITE_DONATION_LINK;
+
+export const SUPPORT_EMAIL = import.meta.env.VITE_SUPPORT_EMAIL;
+
+export const FEEDBACK_EMAIL = import.meta.env.VITE_FEEDBACK_EMAIL;

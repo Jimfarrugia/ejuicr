@@ -1,6 +1,8 @@
 import React from "react";
+import { FEEDBACK_EMAIL, DONATION_LINK } from "../constants";
 
 const Contribute = () => {
+  console.log(FEEDBACK_EMAIL, DONATION_LINK);
   return (
     <>
       <h3>Contribute</h3>
@@ -9,8 +11,7 @@ const Contribute = () => {
       <hr />
       <p>
         The easiest way to contribute is to send us your feedback by email (
-        <a href="mailto:feedback+ejuicr@gmail.com">feedback+ejuicr@gmail.com</a>
-        ) or twitter (
+        <a href={`mailto:${FEEDBACK_EMAIL}`}>{FEEDBACK_EMAIL}</a>) or twitter (
         <a href="https://twitter.com/ejuicr" target="_blank">
           @ejuicr
         </a>
@@ -64,7 +65,7 @@ const Contribute = () => {
       <hr />
       <p>
         If you’d like to throw a couple bucks our way to help with server costs
-        you can send your donation <a href="#">here</a>.
+        you can send your donation <a href={`${DONATION_LINK}`}>here</a>.
       </p>
     </>
   );
