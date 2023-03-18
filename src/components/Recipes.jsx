@@ -3,11 +3,13 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import DeleteButton from "./DeleteButton";
 import ConfirmDelete from "./ConfirmDelete";
+import Spinner from "./Spinner";
 import { RecipesStyled } from "./styled/Recipes.styled";
 import { API_URL } from "../constants";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -16,6 +18,7 @@ const Recipes = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     if (!user) return navigate("/");
     axios
       .get(`${API_URL}/api/recipes`, { headers })
@@ -24,8 +27,12 @@ const Recipes = () => {
           (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
         );
         setRecipes(sortedRecipes);
+        setIsLoading(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
   }, []);
 
   const handleConfirmDelete = (index) => {
@@ -43,25 +50,27 @@ const Recipes = () => {
     <RecipesStyled>
       <h3>Recipes</h3>
       <hr />
-      {(recipes && recipes.length > 0 && (
-        <>
-          <div className="list-headings">
-            <h5>Title</h5>
-            <h5>Last Updated</h5>
-            <h5></h5>
-          </div>
-          <ul>
-            {recipes.map((recipe, index) => (
-              <RecipeListItem
-                key={`recipe-${index}`}
-                recipe={recipe}
-                index={index}
-                handleConfirmDelete={handleConfirmDelete}
-              />
-            ))}
-          </ul>
-        </>
-      )) || <p>You don't have any saved recipes.</p>}
+      {isLoading && <Spinner />}
+      {!isLoading &&
+        ((recipes && recipes.length > 0 && (
+          <>
+            <div className="list-headings">
+              <h5>Title</h5>
+              <h5>Last Updated</h5>
+              <h5></h5>
+            </div>
+            <ul>
+              {recipes.map((recipe, index) => (
+                <RecipeListItem
+                  key={`recipe-${index}`}
+                  recipe={recipe}
+                  index={index}
+                  handleConfirmDelete={handleConfirmDelete}
+                />
+              ))}
+            </ul>
+          </>
+        )) || <p>You don't have any saved recipes.</p>)}
     </RecipesStyled>
   );
 };
