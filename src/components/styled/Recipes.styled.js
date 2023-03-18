@@ -50,4 +50,8 @@ export const RecipesStyled = styled.div`
       }
     }
   }
+
+  p {
+    text-align: center;
+  }
 `;

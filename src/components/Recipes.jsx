@@ -43,22 +43,25 @@ const Recipes = () => {
     <RecipesStyled>
       <h3>Recipes</h3>
       <hr />
-      <div className="list-headings">
-        <h5>Title</h5>
-        <h5>Last Updated</h5>
-        <h5></h5>
-      </div>
-      <ul>
-        {recipes &&
-          recipes.map((recipe, index) => (
-            <RecipeListItem
-              key={`recipe-${index}`}
-              recipe={recipe}
-              index={index}
-              handleConfirmDelete={handleConfirmDelete}
-            />
-          ))}
-      </ul>
+      {(recipes && recipes.length > 0 && (
+        <>
+          <div className="list-headings">
+            <h5>Title</h5>
+            <h5>Last Updated</h5>
+            <h5></h5>
+          </div>
+          <ul>
+            {recipes.map((recipe, index) => (
+              <RecipeListItem
+                key={`recipe-${index}`}
+                recipe={recipe}
+                index={index}
+                handleConfirmDelete={handleConfirmDelete}
+              />
+            ))}
+          </ul>
+        </>
+      )) || <p>You don't have any saved recipes.</p>}
     </RecipesStyled>
   );
 };
