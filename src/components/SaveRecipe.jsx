@@ -118,7 +118,7 @@ const SaveRecipe = ({
                 onClick={handleClickSaveRecipe}
               >
                 <FontAwesomeIcon icon={faSave} />
-                Save Recipe
+                Save
               </button>
             </div>
           </div>
