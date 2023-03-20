@@ -36,14 +36,19 @@ const Recipes = () => {
   }, []);
 
   const handleConfirmDelete = (index) => {
+    setIsLoading(true);
     const { _id } = recipes[index];
     axios
       .delete(`${API_URL}/api/recipes/${_id}`, { headers })
       .then((response) => {
         const updatedRecipes = recipes.filter((recipe) => recipe._id !== _id);
         setRecipes(updatedRecipes);
+        setIsLoading(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        setIsLoading(false);
+      });
   };
 
   return (
