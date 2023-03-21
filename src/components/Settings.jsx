@@ -46,7 +46,9 @@ const Settings = () => {
     axios
       .get(`${API_URL}/api/settings/`, { headers })
       .then((response) => {
-        if (!Object.keys(response.data).length) return;
+        if (!Object.keys(response.data).length) {
+          return setIsLoading(false);
+        }
         localStorage.setItem("settings", JSON.stringify(response.data));
         const settings = response.data;
         setTheme(settings.theme);
