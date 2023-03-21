@@ -11,10 +11,8 @@ import {
   parseNumberInput,
 } from "../helpers";
 import { API_URL } from "../constants";
-import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
-  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -39,7 +37,6 @@ const Settings = () => {
   });
 
   useEffect(() => {
-    if (!user) return navigate("/");
     setIsLoading(true);
     // Get existing settings
     const headers = { Authorization: `Bearer ${user.token}` };

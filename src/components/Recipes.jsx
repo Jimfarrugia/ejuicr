@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import DeleteButton from "./DeleteButton";
 import ConfirmDelete from "./ConfirmDelete";
@@ -10,7 +10,6 @@ import { API_URL } from "../constants";
 const Recipes = () => {
   const [recipes, setRecipes] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user"));
   const headers = {
@@ -19,7 +18,6 @@ const Recipes = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    if (!user) return navigate("/");
     axios
       .get(`${API_URL}/api/recipes`, { headers })
       .then((response) => {
