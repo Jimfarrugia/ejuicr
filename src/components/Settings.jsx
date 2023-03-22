@@ -201,7 +201,7 @@ const Settings = () => {
         <>
           <h4>Appearance</h4>
           <hr />
-          <div className="form-row">
+          {/* <div className="form-row">
             <div>Theme:</div>
             <div>
               <label htmlFor="light" className="radio-label">
@@ -226,7 +226,7 @@ const Settings = () => {
               </label>
             </div>
           </div>
-          <hr />
+          <hr /> */}
           <div className="form-row">
             <div>
               <label htmlFor="mixing-units">Mixing units:</label>
