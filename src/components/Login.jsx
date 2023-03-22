@@ -32,7 +32,7 @@ const Login = ({
       .then((response) => {
         localStorage.setItem("user", JSON.stringify(response.data));
         setIsLoading(false);
-        handleClickBack();
+        window.location.reload();
       })
       .catch((error) => {
         console.error(error);
