@@ -14,6 +14,8 @@ import Help from "./components/Help";
 import Contribute from "./components/Contribute";
 import UpdatePassword from "./components/UpdatePassword";
 import NotFound from "./components/NotFound";
+import TermsOfService from "./components/TermsOfService";
+import PrivacyPolicy from "./components/PrivacyPolicy";
 import GlobalStyles from "./styles/GlobalStyles";
 import { light, dark } from "./styles/themes";
 
@@ -31,6 +33,8 @@ root.render(
             <Route path="/about" element={<About />} />
             <Route path="/help" element={<Help />} />
             <Route path="/contribute" element={<Contribute />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route
               path="/update-password/:token"
               element={<UpdatePassword />}

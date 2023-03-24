@@ -78,6 +78,16 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  ol {
+    margin: 0;
+    padding: 0 0 0 2em;
+
+    & > li {
+      line-height: 1.35;
+      margin: 0 0 1em;
+    }
+  }
+
   button {
     background: ${({ theme }) => theme.button.main};
     color: ${({ theme }) => theme.text.button};
