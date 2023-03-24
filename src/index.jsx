@@ -13,6 +13,7 @@ import About from "./components/About";
 import Help from "./components/Help";
 import Contribute from "./components/Contribute";
 import UpdatePassword from "./components/UpdatePassword";
+import NotFound from "./components/NotFound";
 import GlobalStyles from "./styles/GlobalStyles";
 import { light, dark } from "./styles/themes";
 
@@ -58,6 +59,7 @@ root.render(
                 </PrivateRoute>
               }
             />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       </ThemeProvider>
