@@ -3,7 +3,7 @@ import { layoutWidth } from "../../constants";
 
 export const FooterStyled = styled.footer`
   background: ${({ theme }) => theme.background.dark};
-  padding: 2em 1em;
+  padding: 2em 1em 0;
   margin-top: 2em;
 
   & > .container {
@@ -38,5 +38,17 @@ export const FooterStyled = styled.footer`
     bottom: 0;
     right: 0;
     width: 150px;
+  }
+
+  & .fine-print {
+    margin: 0;
+    padding: 1em 0;
+    text-align: center;
+    color: ${({ theme }) => theme.hr};
+
+    & > a {
+      font-size: 0.9rem;
+      color: ${({ theme }) => theme.hr};
+    }
   }
 `;
