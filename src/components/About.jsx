@@ -28,22 +28,25 @@ const About = () => {
         speed bumps as possible.
       </p>
       <p>
-        Sign in and save your defaults (nicotine base strength, PG/VG ratio,
-        etc) to make mixing even faster.
+        If you sign in, you can save your defaults (nicotine strength, PG/VG
+        ratio, etc) to make mixing your ejuice even faster.
       </p>
       <h4>No Ads or Trackers - Ever</h4>
       <hr />
+      <p>ejuicr is a labour of love.</p>
+      <p>We don't want your money or your data.</p>
       <p>
-        ejuicr is a labour of love. We don't want your money or your data. If
-        there's anything we want, it's your{" "}
+        If there's anything we want from you, it's your{" "}
         <Link to="/contribute">feedback</Link>.
       </p>
       <h4>No Unnecessary Emails - Ever.</h4>
       <hr />
-      <p>We hate spam.</p>
       <p>
-        Unless you email support or you need to reset your password or something
-        like that, you will never recieve emails from us.
+        We <em>hate</em> spam.
+      </p>
+      <p>
+        You will never recieve emails from us unless you email us for support or
+        request a password reset.
       </p>
     </>
   );
