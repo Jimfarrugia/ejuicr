@@ -2,7 +2,6 @@ import React from "react";
 import { FEEDBACK_EMAIL, DONATION_LINK } from "../constants";
 
 const Contribute = () => {
-  console.log(FEEDBACK_EMAIL, DONATION_LINK);
   return (
     <>
       <h3>Contribute</h3>
