@@ -13,7 +13,7 @@ const Header = ({ toggleMenu }) => {
   };
 
   return (
-    <HeaderStyled>
+    <HeaderStyled id="page-header">
       <div className="container">
         <Link to="/" onClick={handleClick}>
           <img src={logoImg} alt="ejuicr logo" />

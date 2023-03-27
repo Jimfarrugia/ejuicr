@@ -16,6 +16,7 @@ import UpdatePassword from "./components/UpdatePassword";
 import NotFound from "./components/NotFound";
 import TermsOfService from "./components/TermsOfService";
 import PrivacyPolicy from "./components/PrivacyPolicy";
+import ScrollToTop from "./components/ScrollToTop";
 import GlobalStyles from "./styles/GlobalStyles";
 import { light, dark } from "./styles/themes";
 
@@ -23,6 +24,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
+      <ScrollToTop />
       <ThemeProvider
         theme={localStorage.getItem("theme") === "light" ? light : dark}
       >
