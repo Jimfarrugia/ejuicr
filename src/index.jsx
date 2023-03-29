@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import "typeface-bebas-neue";
+import "react-tooltip/dist/react-tooltip.css";
 import PrivateRoute from "./components/PrivateRoute";
 import App from "./App";
 import Layout from "./components/Layout";
