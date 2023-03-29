@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faToggleOn, faSave } from "@fortawesome/free-solid-svg-icons";
+import {
+  faToggleOn,
+  faSave,
+  faCircleQuestion,
+} from "@fortawesome/free-solid-svg-icons";
+import { Tooltip } from "react-tooltip";
 import NumberControls from "./NumberControls";
 import Spinner from "./Spinner";
 import { SettingsStyled } from "./styled/Settings.styled";
@@ -325,7 +330,20 @@ const Settings = () => {
           <h4>Nicotine</h4>
           <hr />
           <div className="form-row">
-            <div>Zero Nicotine Mode:</div>
+            <div>
+              Zero Nicotine Mode:{" "}
+              <Tooltip
+                id="zero-nic-mode-tooltip"
+                className="tooltip"
+                openOnClick
+              />
+              <FontAwesomeIcon
+                icon={faCircleQuestion}
+                data-tooltip-id="zero-nic-mode-tooltip"
+                data-tooltip-content="Removes all nicotine options from the calculator when enabled."
+                data-event="click"
+              />
+            </div>
             <div>
               <span className="label-left">
                 {zeroNicotineMode ? "Enabled" : "Disabled"}

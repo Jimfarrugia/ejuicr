@@ -256,6 +256,14 @@ const GlobalStyles = createGlobalStyle`
       margin-bottom: 2em;
     }
   }
+
+  .tooltip {
+    background: ${({ theme }) => theme.background.dark};
+    max-width: 180px;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    padding: 0.75em;
+  }
 `;
 
 export default GlobalStyles;

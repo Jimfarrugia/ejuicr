@@ -7,6 +7,11 @@ export const SettingsStyled = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    svg {
+      font-size: 1.125rem;
+      color: ${({ theme }) => theme.heading.secondary};
+    }
+
     & > div:last-child {
       display: flex;
       align-items: center;
