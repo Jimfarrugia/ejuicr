@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import DeleteButton from "./DeleteButton";
 import ConfirmDelete from "./ConfirmDelete";
@@ -10,6 +12,7 @@ import { API_URL } from "../constants";
 const Recipes = () => {
   const [recipes, setRecipes] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSortByTitle, setIsSortByTitle] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("user"));
   const headers = {
@@ -49,6 +52,24 @@ const Recipes = () => {
       });
   };
 
+  const handleSortByTitle = () => {
+    const sortedRecipes = [...recipes].sort((a, b) => {
+      if (a.name < b.name) return -1;
+      if (a.name > b.name) return 1;
+      return 0;
+    });
+    setRecipes(sortedRecipes);
+    setIsSortByTitle(true);
+  };
+
+  const handleSortByDate = () => {
+    const sortedRecipes = [...recipes].sort(
+      (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+    );
+    setRecipes(sortedRecipes);
+    setIsSortByTitle(false);
+  };
+
   return (
     <RecipesStyled>
       <h3>Recipes</h3>
@@ -58,8 +79,13 @@ const Recipes = () => {
         ((recipes && recipes.length > 0 && (
           <>
             <div className="list-headings">
-              <h5>Title</h5>
-              <h5>Last Updated</h5>
+              <h5 onClick={handleSortByTitle}>
+                Title {isSortByTitle && <FontAwesomeIcon icon={faSortDown} />}
+              </h5>
+              <h5 onClick={handleSortByDate}>
+                Last Updated{" "}
+                {!isSortByTitle && <FontAwesomeIcon icon={faSortDown} />}
+              </h5>
               <h5></h5>
             </div>
             <ul>
