@@ -8,6 +8,14 @@ export const RecipesStyled = styled.div`
     h5 {
       font-size: 0.9rem;
 
+      & > span {
+        cursor: pointer;
+
+        &:hover {
+          color: ${({ theme }) => theme.text.hover};
+        }
+      }
+
       &:first-child {
         flex-grow: 2;
       }

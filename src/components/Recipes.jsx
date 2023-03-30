@@ -80,11 +80,15 @@ const Recipes = () => {
           <>
             <div className="list-headings">
               <h5 onClick={handleSortByTitle}>
-                Title {isSortByTitle && <FontAwesomeIcon icon={faSortDown} />}
+                <span>
+                  Title {isSortByTitle && <FontAwesomeIcon icon={faSortDown} />}
+                </span>
               </h5>
               <h5 onClick={handleSortByDate}>
-                Last Updated{" "}
-                {!isSortByTitle && <FontAwesomeIcon icon={faSortDown} />}
+                <span>
+                  Last Updated{" "}
+                  {!isSortByTitle && <FontAwesomeIcon icon={faSortDown} />}
+                </span>
               </h5>
               <h5></h5>
             </div>
