@@ -1,7 +1,7 @@
 {
-  "name": "temp-workspace",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "ejuicr",
+  "version": "0.1.0",
+  "license": "ISC",
   "scripts": {
     "start": "nx exec -- vite",
     "serve": "nx exec -- vite",
