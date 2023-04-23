@@ -10,6 +10,7 @@ import Layout from "./components/Layout";
 import Recipes from "./components/Recipes";
 import Recipe from "./components/Recipe";
 import Settings from "./components/Settings";
+import MyAccount from "./components/MyAccount";
 import About from "./components/About";
 import Help from "./components/Help";
 import Contribute from "./components/Contribute";
@@ -63,6 +64,14 @@ root.render(
               element={
                 <PrivateRoute>
                   <Settings />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/myaccount"
+              element={
+                <PrivateRoute>
+                  <MyAccount />
                 </PrivateRoute>
               }
             />

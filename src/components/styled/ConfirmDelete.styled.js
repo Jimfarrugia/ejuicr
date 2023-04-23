@@ -9,6 +9,14 @@ export const ConfirmDeleteStyled = styled.div`
   min-height: 100%;
   background: rgba(0, 0, 0, 0.75);
 
+  ul {
+    margin: 0.5em;
+    li {
+      list-style-type: none;
+      margin-bottom: 1em;
+    }
+  }
+
   & .outer-wrapper {
     position: fixed;
     left: 50%;
