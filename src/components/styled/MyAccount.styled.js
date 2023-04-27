@@ -21,10 +21,17 @@ export const MyAccountStyled = styled.div`
   }
 
   .profile {
+    margin-top: 2em;
     text-align: center;
 
     p {
       font-size: 1.15rem;
+
+      &:last-child {
+        button {
+          margin-top: 0.5em;
+        }
+      }
     }
   }
 
