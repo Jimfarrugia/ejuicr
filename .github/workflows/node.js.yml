@@ -1,0 +1,27 @@
+name: Deploy ejuicr
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm i
+    - run: cp /home/jim/projects/ejuicr/.env /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/
+    - run: npm run build
+    - run: cp -a /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/dist/* /var/www/html/ejuicr.com/
