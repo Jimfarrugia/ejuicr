@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Spinner from "./Spinner";
 import { API_URL } from "../constants";
 import { MyAccountStyled } from "./styled/MyAccount.styled";
@@ -9,7 +12,6 @@ import { ConfirmDeleteStyled } from "./styled/ConfirmDelete.styled";
 
 const MyAccount = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState({});
   const [recipes, setRecipes] = useState([]);
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -19,8 +21,13 @@ const MyAccount = () => {
   const [success, setSuccess] = useState("");
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem("user"));
   const { token } = JSON.parse(localStorage.getItem("user"));
   const headers = { Authorization: `Bearer ${token}` };
+  const authProvider = user.authProvider || null;
+  const imgAltText = `${
+    user.handle || user.displayName
+  } ${authProvider} profile picture`;
 
   const onSubmitChangePassword = (e) => {
     e.preventDefault();
@@ -55,6 +62,12 @@ const MyAccount = () => {
       });
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("settings");
+    window.location.reload();
+  };
+
   const handleClickDeleteAccount = () => setShowDeleteDialogue(true);
   const handleCancelDelete = () => setShowDeleteDialogue(false);
   const handleConfirmDelete = () => {
@@ -70,10 +83,6 @@ const MyAccount = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .get(`${API_URL}/api/user/me`, { headers })
-      .then((response) => setUser(response.data))
-      .catch((error) => console.error(error));
     axios
       .get(`${API_URL}/api/recipes`, { headers })
       .then((response) => {
@@ -96,11 +105,29 @@ const MyAccount = () => {
         <div className="profile">
           {user.picture && (
             <div className="user-picture">
-              <img src={user.picture} alt="" referrerPolicy="no-referrer" />
+              <img
+                src={user.picture}
+                alt={imgAltText}
+                referrerPolicy="no-referrer"
+              />
             </div>
           )}
-          {user.displayName && <p>{user.displayName}</p>}
-          {user.email && <p>{user.email}</p>}
+          {(authProvider === "twitter" && (
+            <p>
+              <FontAwesomeIcon icon={faTwitter} /> @{user.handle}
+            </p>
+          )) ||
+            (authProvider === "google" && (
+              <p>
+                <FontAwesomeIcon icon={faGoogle} /> {user.displayName}
+              </p>
+            ))}
+          {user.email && (
+            <p>
+              {!authProvider && <FontAwesomeIcon icon={faEnvelope} />}{" "}
+              {user.email}
+            </p>
+          )}
           {recipes.length > 0 && (
             <p>
               <Link to="/recipes">
@@ -110,6 +137,11 @@ const MyAccount = () => {
               </Link>
             </p>
           )}
+          <p>
+            <button type="button" onClick={(e) => handleLogout()}>
+              Sign Out
+            </button>
+          </p>
         </div>
         {user.hasPassword && (
           <>
