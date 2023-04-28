@@ -24,6 +24,7 @@ jobs:
     - run: npm install
     - run: cp /home/jim/projects/ejuicr/.env /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/
     - run: npm run build
+    - run: id
     - run: sudo -n rm -rf /var/www/html/ejuicr.com
     - run: sudo cp -a /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/dist /var/www/html
     - run: sudo mv /var/www/html/dist /var/www/html/ejuicr.com
