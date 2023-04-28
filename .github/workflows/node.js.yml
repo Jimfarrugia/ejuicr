@@ -24,7 +24,7 @@ jobs:
     - run: npm install
     - run: cp /home/jim/projects/ejuicr/.env /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/
     - run: npm run build
-    - run: cp -r /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/dist/. /var/www/ejuicr
+    - run: cp -a /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/dist/* /var/www/ejuicr.com
     #- run: id
     #- run: rm -rf /var/www/html/ejuicr.com
     #- run: cp -a /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/dist /var/www/html
