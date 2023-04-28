@@ -24,8 +24,8 @@ jobs:
     - run: npm install
     - run: cp /home/jim/projects/ejuicr/.env /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/
     - run: npm run build
-    - run: rm -rf /var/www/html/ejuicr.com
-    - run: cp -a /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/dist /var/www/html
-    - run: mv /var/www/html/dist /var/www/html/ejuicr.com
-    - run: chown -R www-data:www-data /var/www/html/ejuicr.com
-    - run: systemctl restart nginx
+    - run: sudo rm -rf /var/www/html/ejuicr.com
+    - run: sudo cp -a /home/jim/projects/ejuicr-actions-runner/_work/ejuicr/ejuicr/dist /var/www/html
+    - run: sudo mv /var/www/html/dist /var/www/html/ejuicr.com
+    - run: sudo chown -R www-data:www-data /var/www/html/ejuicr.com
+    - run: sudo systemctl restart nginx
