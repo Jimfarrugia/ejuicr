@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "./Spinner";
 import { API_URL } from "../constants";
@@ -14,6 +14,7 @@ const Login = ({
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +33,8 @@ const Login = ({
       .then((response) => {
         localStorage.setItem("user", JSON.stringify(response.data));
         setIsLoading(false);
-        window.location.reload();
+        navigate("/");
+        handleClickBack();
       })
       .catch((error) => {
         console.error(error);
