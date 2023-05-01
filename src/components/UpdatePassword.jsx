@@ -53,7 +53,7 @@ const UpdatePassword = () => {
       {error && <div className="error-message">{error}</div>}
       {success && <div className="success-message">{success}</div>}
       {isLoading && <Spinner />}
-      {!isLoading && (
+      {!isLoading && !success && (
         <form onSubmit={onSubmit}>
           <div className="form-row">
             <div className="input-border">
