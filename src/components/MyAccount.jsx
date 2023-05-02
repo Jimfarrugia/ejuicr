@@ -9,10 +9,15 @@ import { API_URL } from "../constants";
 import { MyAccountStyled } from "./styled/MyAccount.styled";
 import { validatePassword } from "../helpers";
 import { ConfirmDeleteStyled } from "./styled/ConfirmDelete.styled";
+import googleLogo from "../assets/google-logo.svg";
+import twitterLogo from "../assets/twitter-logo.svg";
 
 const MyAccount = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState({});
   const [recipes, setRecipes] = useState([]);
+  const [authProvider, setAuthProvider] = useState(undefined);
+  const [imgAltText, setImgAltText] = useState(undefined);
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
@@ -21,13 +26,8 @@ const MyAccount = () => {
   const [success, setSuccess] = useState("");
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));
   const { token } = JSON.parse(localStorage.getItem("user"));
   const headers = { Authorization: `Bearer ${token}` };
-  const authProvider = user.authProvider || null;
-  const imgAltText = `${
-    user.handle || user.displayName
-  } ${authProvider} profile picture`;
 
   const onSubmitChangePassword = (e) => {
     e.preventDefault();
@@ -83,6 +83,18 @@ const MyAccount = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    axios
+      .get(`${API_URL}/api/user/me`, { headers })
+      .then((response) => {
+        setUser(response.data);
+        setAuthProvider(response.data.authProvider);
+        setImgAltText(
+          `${response.data.handle || response.data.displayName} ${
+            response.data.authProvider
+          } profile picture`
+        );
+      })
+      .catch((error) => console.error(error));
     axios
       .get(`${API_URL}/api/recipes`, { headers })
       .then((response) => {
@@ -143,6 +155,22 @@ const MyAccount = () => {
             </button>
           </p>
         </div>
+        <h4>Linked Accounts</h4>
+        <hr />
+        {(user.hasTwitterLinked || user.hasGoogleLinked) && (
+          <div className="linked-accounts">
+            {user.hasGoogleLinked && (
+              <div>
+                <img src={googleLogo} alt="Google logo" />
+              </div>
+            )}
+            {user.hasTwitterLinked && (
+              <div>
+                <img src={twitterLogo} alt="Twitter logo" />
+              </div>
+            )}
+          </div>
+        )}
         {user.hasPassword && (
           <>
             <h4>Change Password</h4>

@@ -35,6 +35,27 @@ export const MyAccountStyled = styled.div`
     }
   }
 
+  .linked-accounts {
+    display: flex;
+
+    div {
+      img {
+        width: 48px;
+        height: auto;
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:first-child {
+        img {
+          width: 42px;
+        }
+        padding-right: 1.5em;
+      }
+    }
+  }
+
   .error-message,
   .success-message {
     margin: 0 0 1em;
