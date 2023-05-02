@@ -29,6 +29,37 @@ const MyAccount = () => {
   const { token } = JSON.parse(localStorage.getItem("user"));
   const headers = { Authorization: `Bearer ${token}` };
 
+  const onSubmitSetPassword = (e) => {
+    e.preventDefault();
+    setSuccess("");
+    setError("");
+    setIsLoadingChangePassword(true);
+    if (validatePassword(newPassword) !== true) {
+      setIsLoadingChangePassword(false);
+      return setError(validatePassword(newPassword));
+    }
+    if (newPassword !== newPasswordConfirm) {
+      setIsLoadingChangePassword(false);
+      return setError("Passwords do not match.");
+    }
+    const { email } = user;
+    axios
+      .post(`${API_URL}/api/user/`, { email, password: newPassword })
+      .then((response) => {
+        setSuccess("Your password has been set.");
+        setIsLoadingChangePassword(false);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(
+          error.response.data.message ||
+            "Failed to set the password.  Try again or contact support."
+        );
+        setIsLoadingChangePassword(false);
+      });
+  };
+
   const onSubmitChangePassword = (e) => {
     e.preventDefault();
     setSuccess("");
@@ -190,6 +221,43 @@ const MyAccount = () => {
                 </div>
               )}
             </div>
+          </>
+        )}
+        {!user.hasPassword && (
+          <>
+            <h4>Set Password</h4>
+            <hr />
+            {error && <div className="error-message">{error}</div>}
+            {success && <div className="success-message">{success}</div>}
+            {(isLoadingChangePassword && <Spinner />) || (
+              <form onSubmit={onSubmitSetPassword}>
+                <div className="form-row">
+                  <div className="input-border">
+                    <input
+                      type="password"
+                      autoComplete="off"
+                      placeholder="Password"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="input-border">
+                    <input
+                      type="password"
+                      autoComplete="off"
+                      placeholder="Confirm Password"
+                      value={newPasswordConfirm}
+                      onChange={(e) => setNewPasswordConfirm(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="form-row">
+                  <button type="submit">Set Password</button>
+                </div>
+              </form>
+            )}
           </>
         )}
         {user.hasPassword && (
