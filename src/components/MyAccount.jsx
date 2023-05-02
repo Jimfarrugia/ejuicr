@@ -155,21 +155,42 @@ const MyAccount = () => {
             </button>
           </p>
         </div>
-        <h4>Linked Accounts</h4>
-        <hr />
         {(user.hasTwitterLinked || user.hasGoogleLinked) && (
-          <div className="linked-accounts">
-            {user.hasGoogleLinked && (
-              <div>
-                <img src={googleLogo} alt="Google logo" />
-              </div>
-            )}
-            {user.hasTwitterLinked && (
-              <div>
-                <img src={twitterLogo} alt="Twitter logo" />
-              </div>
-            )}
-          </div>
+          <>
+            <h4>Linked Accounts</h4>
+            <hr />
+            <p>
+              These accounts are linked to your ejuicr account so you can sign
+              in without having to enter a password. You can see the data which
+              has been shared with ejuicr below.
+            </p>
+            <div className="linked-accounts">
+              {user.hasGoogleLinked && (
+                <div>
+                  <div>
+                    <img src={googleLogo} alt="Google logo" />
+                  </div>
+                  <div>
+                    <h5>Google</h5>
+                    <h6>Data Collected:</h6>
+                    <p>Display name, email, profile picture.</p>
+                  </div>
+                </div>
+              )}
+              {user.hasTwitterLinked && (
+                <div>
+                  <div>
+                    <img src={twitterLogo} alt="Twitter logo" />
+                  </div>
+                  <div>
+                    <h5>Twitter</h5>
+                    <h6>Data Collected:</h6>
+                    <p>Handle, display name, email, profile picture.</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </>
         )}
         {user.hasPassword && (
           <>
@@ -221,8 +242,8 @@ const MyAccount = () => {
         <h4>Delete Account</h4>
         <hr />
         <p>
-          Permanently delete your account and personal data from the database as
-          well as all of your saved recipes.{" "}
+          You can permanently delete your ejuicr account and personal data from
+          the database as well as all of your saved recipes.{" "}
           <strong className="red">This can not be undone.</strong>
         </p>
         <button

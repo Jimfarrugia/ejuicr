@@ -36,22 +36,44 @@ export const MyAccountStyled = styled.div`
   }
 
   .linked-accounts {
-    display: flex;
+    @media (min-width: 500px) {
+      display: flex;
+    }
 
-    div {
+    & > div {
+      display: flex;
+
+      &:first-child {
+        padding-bottom: 1.5em;
+      }
+
+      @media (min-width: 500px) {
+        width: 50%;
+
+        &:first-child {
+          padding-right: 1.5em;
+        }
+      }
+
       img {
         width: 48px;
         height: auto;
+        margin-right: 1.25em;
+        margin-top: 1em;
       }
-      display: flex;
-      justify-content: center;
-      align-items: center;
 
-      &:first-child {
-        img {
-          width: 42px;
-        }
-        padding-right: 1.5em;
+      h5 {
+        color: ${({ theme }) => theme.text.main};
+      }
+
+      h6 {
+        margin: 0;
+        font-size: 0.8rem;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.8rem;
       }
     }
   }
