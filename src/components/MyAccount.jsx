@@ -48,6 +48,11 @@ const MyAccount = () => {
       .then((response) => {
         setSuccess("Your password has been set.");
         setIsLoadingChangePassword(false);
+        const user = JSON.parse(localStorage.getItem("user"));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ ...user, hasPassword: true })
+        );
         window.location.reload();
       })
       .catch((error) => {
