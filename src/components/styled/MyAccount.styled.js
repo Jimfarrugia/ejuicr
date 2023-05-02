@@ -52,6 +52,7 @@ export const MyAccountStyled = styled.div`
 
         &:first-child {
           padding-right: 1.5em;
+          padding-bottom: 0;
         }
       }
 
