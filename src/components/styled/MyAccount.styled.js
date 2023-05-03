@@ -75,6 +75,17 @@ export const MyAccountStyled = styled.div`
       p {
         margin: 0;
         font-size: 0.8rem;
+
+        button {
+          background: none;
+          padding: 0.25em 0 0;
+          margin: 0;
+          color: ${({ theme }) => theme.error};
+
+          &:hover {
+            color: ${({ theme }) => theme.text.hover};
+          }
+        }
       }
     }
   }

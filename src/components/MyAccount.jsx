@@ -7,7 +7,7 @@ import { faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Spinner from "./Spinner";
 import { API_URL } from "../constants";
 import { MyAccountStyled } from "./styled/MyAccount.styled";
-import { validatePassword } from "../helpers";
+import { validatePassword, capitalizeFirstLetter } from "../helpers";
 import { ConfirmDeleteStyled } from "./styled/ConfirmDelete.styled";
 import googleLogo from "../assets/google-logo.svg";
 import twitterLogo from "../assets/twitter-logo.svg";
@@ -26,6 +26,9 @@ const MyAccount = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
+  const [showRemoveLinkedAccountDialogue, setShowRemoveLinkedAccountDialogue] =
+    useState(false);
+  const [accountToUnlink, setAccountToUnlink] = useState(undefined);
 
   const { token } = JSON.parse(localStorage.getItem("user"));
   const headers = { Authorization: `Bearer ${token}` };
@@ -114,6 +117,40 @@ const MyAccount = () => {
         localStorage.removeItem("user");
         localStorage.removeItem("settings");
         window.location.reload();
+      })
+      .catch((error) => console.error(error));
+  };
+  const handleClickRemoveLinkedAccount = (authProvider) => {
+    setAccountToUnlink(authProvider);
+    setShowRemoveLinkedAccountDialogue(true);
+  };
+  const handleCancelRemoveLinkedAccount = () => {
+    setAccountToUnlink(undefined);
+    setShowRemoveLinkedAccountDialogue(false);
+  };
+  const handleConfirmRemoveLinkedAccount = (authProvider) => {
+    axios
+      .delete(`${API_URL}/api/user/${authProvider}`, { headers })
+      .then((response) => {
+        console.log(response.data);
+        axios
+          .get(`${API_URL}/api/user/me`, { headers })
+          .then((response) => {
+            const { authProvider } = response.data;
+            setUser(response.data);
+            setAuthProvider(authProvider);
+            setProfilePicSrc(
+              (authProvider === "google" && response.data.googlePicture) ||
+                (authProvider === "twitter" && response.data.twitterPicture) ||
+                "#"
+            );
+            setProfilePicAltText(`Your ${authProvider} profile picture`);
+            localStorage.setItem(
+              "user",
+              JSON.stringify({ ...response.data, token })
+            );
+          })
+          .catch((error) => console.error(error));
       })
       .catch((error) => console.error(error));
   };
@@ -213,6 +250,13 @@ const MyAccount = () => {
                     <h5>Google</h5>
                     <h6>Data Collected:</h6>
                     <p>Display name, email, profile picture.</p>
+                    <p>
+                      <button
+                        onClick={() => handleClickRemoveLinkedAccount("google")}
+                      >
+                        Remove
+                      </button>
+                    </p>
                   </div>
                 </div>
               )}
@@ -225,6 +269,15 @@ const MyAccount = () => {
                     <h5>Twitter</h5>
                     <h6>Data Collected:</h6>
                     <p>Handle, display name, email, profile picture.</p>
+                    <p>
+                      <button
+                        onClick={() =>
+                          handleClickRemoveLinkedAccount("twitter")
+                        }
+                      >
+                        Remove
+                      </button>
+                    </p>
                   </div>
                 </div>
               )}
@@ -330,6 +383,19 @@ const MyAccount = () => {
           Delete Account
         </button>
       </MyAccountStyled>
+      {showRemoveLinkedAccountDialogue && (
+        <ConfirmRemoveLinkedAccount
+          user={user}
+          numberOfLinkedAccounts={
+            0 +
+            ((user.hasGoogleLinked && 1) || 0) +
+            ((user.hasTwitterLinked && 1) || 0)
+          }
+          accountToUnlink={accountToUnlink}
+          handleCancelRemoveLinkedAccount={handleCancelRemoveLinkedAccount}
+          handleConfirmRemoveLinkedAccount={handleConfirmRemoveLinkedAccount}
+        />
+      )}
       {showDeleteDialogue && (
         <ConfirmDelete
           handleCancelDelete={handleCancelDelete}
@@ -337,6 +403,65 @@ const MyAccount = () => {
         />
       )}
     </>
+  );
+};
+
+const ConfirmRemoveLinkedAccount = ({
+  user,
+  accountToUnlink,
+  numberOfLinkedAccounts,
+  handleCancelRemoveLinkedAccount,
+  handleConfirmRemoveLinkedAccount,
+}) => {
+  return (
+    <ConfirmDeleteStyled
+      onClick={(e) => {
+        // trigger handleCancelRemoveLinkedAccount if the backdrop is clicked
+        if (e.target === e.currentTarget) {
+          handleCancelRemoveLinkedAccount();
+        }
+      }}
+    >
+      <div className="outer-wrapper">
+        <div className="inner-wrapper">
+          {!user.hasPassword && numberOfLinkedAccounts < 2 && (
+            <>
+              <p>
+                You must set a password before you can unlink your{" "}
+                {capitalizeFirstLetter(accountToUnlink)} account.
+              </p>
+              <p>You can set a password from the "My Account" page.</p>
+            </>
+          )}
+          {user.hasPassword && (
+            <>
+              <p>
+                Are you sure you want to{" "}
+                <strong>
+                  unlink your {capitalizeFirstLetter(accountToUnlink)} account
+                </strong>{" "}
+                from your ejuicr account?
+              </p>
+              <div>
+                <button type="button" onClick={handleCancelRemoveLinkedAccount}>
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="red"
+                  onClick={(e) => {
+                    handleConfirmRemoveLinkedAccount(accountToUnlink);
+                    handleCancelRemoveLinkedAccount();
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </ConfirmDeleteStyled>
   );
 };
 
