@@ -4,18 +4,20 @@ import { faGoogle, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const UserProfile = ({ user }) => {
   const authProvider = user.authProvider || null;
-  const imgAltText = `${
-    user.handle || user.displayName
-  } ${authProvider} profile picture`;
+  const profilePicAltText = `your ${authProvider} profile picture`;
+  const profilePicSrc =
+    (authProvider === "google" && user.googlePicture) ||
+    (authProvider === "twitter" && user.twitterPicture) ||
+    "#";
 
   return (
     <div className="user-data">
       <p>You are signed in as:</p>
-      {user.picture && (
+      {(user.googlePicture || user.twitterPicture) && (
         <div className="user-picture">
           <img
-            src={user.picture}
-            alt={imgAltText}
+            src={profilePicSrc}
+            alt={profilePicAltText}
             referrerPolicy="no-referrer"
           />
         </div>
@@ -23,12 +25,12 @@ const UserProfile = ({ user }) => {
       {(authProvider === "google" && (
         <p>
           <FontAwesomeIcon icon={faGoogle} />
-          {user.displayName}
+          {user.googleDisplayName}
         </p>
       )) ||
         (authProvider === "twitter" && (
           <p>
-            <FontAwesomeIcon icon={faTwitter} />@{user.handle}
+            <FontAwesomeIcon icon={faTwitter} />@{user.twitterHandle}
           </p>
         )) || (
           <p>

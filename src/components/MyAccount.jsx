@@ -17,7 +17,8 @@ const MyAccount = () => {
   const [user, setUser] = useState({});
   const [recipes, setRecipes] = useState([]);
   const [authProvider, setAuthProvider] = useState(undefined);
-  const [imgAltText, setImgAltText] = useState(undefined);
+  const [profilePicAltText, setProfilePicAltText] = useState(undefined);
+  const [profilePicSrc, setProfilePicSrc] = useState(undefined);
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
@@ -122,13 +123,15 @@ const MyAccount = () => {
     axios
       .get(`${API_URL}/api/user/me`, { headers })
       .then((response) => {
+        const { authProvider } = response.data;
         setUser(response.data);
-        setAuthProvider(response.data.authProvider);
-        setImgAltText(
-          `${response.data.handle || response.data.displayName} ${
-            response.data.authProvider
-          } profile picture`
+        setAuthProvider(authProvider);
+        setProfilePicSrc(
+          (authProvider === "google" && response.data.googlePicture) ||
+            (authProvider === "twitter" && response.data.twitterPicture) ||
+            "#"
         );
+        setProfilePicAltText(`Your ${authProvider} profile picture`);
       })
       .catch((error) => console.error(error));
     axios
@@ -151,23 +154,23 @@ const MyAccount = () => {
         <h3>My Account</h3>
         <hr />
         <div className="profile">
-          {user.picture && (
+          {(user.googlePicture || user.twitterPicture) && (
             <div className="user-picture">
               <img
-                src={user.picture}
-                alt={imgAltText}
+                src={profilePicSrc}
+                alt={profilePicAltText}
                 referrerPolicy="no-referrer"
               />
             </div>
           )}
           {(authProvider === "twitter" && (
             <p>
-              <FontAwesomeIcon icon={faTwitter} /> @{user.handle}
+              <FontAwesomeIcon icon={faTwitter} /> @{user.twitterHandle}
             </p>
           )) ||
             (authProvider === "google" && (
               <p>
-                <FontAwesomeIcon icon={faGoogle} /> {user.displayName}
+                <FontAwesomeIcon icon={faGoogle} /> {user.googleDisplayName}
               </p>
             ))}
           {user.email && (
