@@ -7,6 +7,7 @@ import Login from "./Login";
 import Spinner from "./Spinner";
 import { SaveRecipeStyled } from "./styled/SaveRecipe.styled";
 import { API_URL } from "../constants";
+import googleSignInBtn from "../assets/google-signin-btn.png";
 
 const SaveRecipe = ({
   targetPg,
@@ -148,11 +149,17 @@ const SaveRecipe = ({
                 <div>
                   <ul>
                     <li>
-                      <form action={`${API_URL}/auth/google`}>
+                      <form
+                        action={`${API_URL}/auth/google`}
+                        className="google-form"
+                      >
                         <button type="submit">
+                          <img src={googleSignInBtn} alt="" />
+                        </button>
+                        {/* <button type="submit">
                           <FontAwesomeIcon icon={faGoogle} />
                           Sign in with Google
-                        </button>
+                        </button> */}
                       </form>
                     </li>
                     <li>

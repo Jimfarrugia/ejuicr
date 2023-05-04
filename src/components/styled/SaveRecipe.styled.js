@@ -11,7 +11,7 @@ export const SaveRecipeStyled = styled.div`
   }
 
   & button {
-    font-size: 1rem;
+    font-size: 0.95rem;
     padding: 0.5em 0.75em;
     height: 100%;
 

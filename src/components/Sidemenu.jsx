@@ -14,6 +14,7 @@ import FooterMenu from "./FooterMenu";
 import UserProfile from "./UserProfile";
 import { SidemenuStyled } from "./styled/Sidemenu.styled";
 import logoImg from "../assets/logo.svg";
+import googleSignInBtn from "../assets/google-signin-btn.png";
 import { API_URL } from "../constants";
 
 const Sidemenu = ({ toggleMenu }) => {
@@ -102,11 +103,14 @@ const Sidemenu = ({ toggleMenu }) => {
             <h3>Login</h3>
             <ul>
               <li>
-                <form action={`${API_URL}/auth/google`}>
+                <form action={`${API_URL}/auth/google`} className="google-form">
                   <button type="submit">
+                    <img src={googleSignInBtn} alt="" />
+                  </button>
+                  {/* <button type="submit">
                     <FontAwesomeIcon icon={faGoogle} />
                     Sign in with Google
-                  </button>
+                  </button> */}
                 </form>
               </li>
               <li>

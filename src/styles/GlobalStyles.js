@@ -264,6 +264,15 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.35;
     padding: 0.75em;
   }
+
+  &.google-form {
+    height: 40px;
+
+    button {
+      background: none;
+      padding: 0;
+    }
+  }
 `;
 
 export default GlobalStyles;

@@ -40,10 +40,15 @@ export const SidemenuStyled = styled.nav`
   & li {
     margin-bottom: 1.5em;
 
+    & button {
+      width: 184px;
+      font-size: 0.9rem;
+    }
+
     & button > svg {
       margin-right: 0.5em;
       margin-bottom: -0.0725em;
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
   }
 
