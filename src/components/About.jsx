@@ -45,7 +45,7 @@ const About = () => {
         We <em>hate</em> spam.
       </p>
       <p>
-        You will never recieve emails from us unless you email us for support or
+        You will never receive emails from us unless you email us for support or
         request a password reset.
       </p>
     </>
