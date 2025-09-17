@@ -248,7 +248,7 @@ const MyAccount = () => {
                   </div>
                   <div>
                     <h5>Google</h5>
-                    <h6>Data Collected:</h6>
+                    <h6>Data Shared:</h6>
                     <p>Display name, email, profile picture.</p>
                     <p>
                       <button
@@ -267,7 +267,7 @@ const MyAccount = () => {
                   </div>
                   <div>
                     <h5>Twitter</h5>
-                    <h6>Data Collected:</h6>
+                    <h6>Data Shared:</h6>
                     <p>Handle, display name, email, profile picture.</p>
                     <p>
                       <button
